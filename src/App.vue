@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import SpotifySearch from './components/SpotifySearch/SpotifySearch.vue';
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import TheWelcome from './components/TheWelcome.vue'
 
     <div class="wrapper">
       <HelloWorld msg="Hi Fullstack team!" />
+      <SpotifySearch></SpotifySearch>
     </div>
   </header>
 
