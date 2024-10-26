@@ -1,5 +1,5 @@
 <template>
-    <div class="calender-container">
+    <div class="calender-container card">
         <h1 v-text="month"></h1>
         <div class="calender-item-container">
             <CalenderItem v-for="day in days">
@@ -34,14 +34,8 @@ function getDaysInCurrentMonth(): number {
 </script>
 <style>
 .calender-container {
-    background-color: #f9f9f9; /* Light background color */
-    border: 1px solid #ddd; /* Soft border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Space inside the box */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-family: 'Georgia', serif; /* Elegant font for writing */
-    margin: 20px;
 }
+
 .calender-item-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

@@ -61,6 +61,18 @@ onBeforeMount(() => {
 .home-container {
     display: grid;
     grid-template-columns: 2fr auto;
-    margin: 0 auto;
+    gap: 20px;
+
+    .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .entries-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
 }
 </style>
