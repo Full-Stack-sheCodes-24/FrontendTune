@@ -14,7 +14,7 @@
 
 <style>
 .navbar {
-  background-color: #333;
+  background-color: #cbd9e6;
   padding: 1rem;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .navbar a {
-  color: white;
+  color: #304674;
   text-decoration: none;
 }
 </style>
