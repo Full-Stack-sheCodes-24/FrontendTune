@@ -1,6 +1,8 @@
+
+
 <template>
   <nav class="navbar">
-    <img src = "C:\Users\mohra\Desktop\SLP fullstack project\FrontendTune\src\assets\Moodz_Logo.png">
+    <img src = "@/assets/logo.png">
     <ul>
       <RouterLink to="/login">Login</RouterLink>
       <RouterLink to="/home">Home</RouterLink>
