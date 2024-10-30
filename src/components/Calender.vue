@@ -32,8 +32,10 @@ function getDaysInCurrentMonth(): number {
     return lastDayCurrentMonth.getDate(); // Return the day of the month
 }
 </script>
+
 <style>
 .calender-container {
+    text-align: center;
 }
 
 .calender-item-container {

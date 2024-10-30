@@ -1,9 +1,11 @@
 <template>
     <div class="profile-section-container card">
         <img class="profile-picture" :src="image">
-        <p v-text="text"></p>
-        <p>Birthday</p>
-        <p v-text="birthday?.toString()"></p>
+        <div class ="profile-info">
+            <p class v-text="text"></p>
+            <p>Birthday</p>
+            <p v-text="birthday?.toString()"></p>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -15,10 +17,19 @@ defineProps({
 </script>
 <style>
 .profile-section-container {
+    display: flex;
+}
+.profile-info p {
+    margin: 5px 0 ;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-picture {
     width: 128px;
     height: 128px;
+    margin-right: 20px;
+    border-radius: 50%; /* Makes the picture circular */
 }
+
 </style>
