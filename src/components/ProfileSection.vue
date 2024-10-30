@@ -18,18 +18,18 @@ defineProps({
 <style>
 .profile-section-container {
     display: flex;
-}
-.profile-info p {
-    margin: 5px 0 ;
-    display: flex;
-    flex-direction: column;
-}
+    
+    .profile-picture {
+        width: 128px;
+        height: 128px;
+        margin-right: 20px;
+        border-radius: 50%; /* Makes the picture circular */
+    }
 
-.profile-picture {
-    width: 128px;
-    height: 128px;
-    margin-right: 20px;
-    border-radius: 50%; /* Makes the picture circular */
+    .profile-info p {
+        margin: 5px 0 ;
+        display: flex;
+        flex-direction: column;
+    }
 }
-
 </style>

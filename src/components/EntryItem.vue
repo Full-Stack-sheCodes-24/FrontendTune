@@ -17,11 +17,4 @@ defineProps({
 })
 </script>
 <style>
-.entry-container {
-}
-
-.entry-container:hover {
-    background-color: #f0f0f0; /* Slightly darker on hover */
-    transition: background-color 0.3s; /* Smooth transition */
-}
 </style>

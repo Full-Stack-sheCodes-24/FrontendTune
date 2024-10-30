@@ -36,11 +36,11 @@ function getDaysInCurrentMonth(): number {
 <style>
 .calender-container {
     text-align: center;
-}
 
-.calender-item-container {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    .calender-item-container {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+    }
 }
 </style>

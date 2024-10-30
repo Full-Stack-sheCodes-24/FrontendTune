@@ -26,17 +26,5 @@ main {
 
 .clickable:hover {
   background-color: #f0f0f0; /* Slightly darker on hover */
-  transition: background-color 0.3s; /* Smooth transition */}
-a,
-.green {
-  text-decoration: none;
-  color: #6eb06e;
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+  transition: background-color 0.3s; /* Smooth transition */
 }
