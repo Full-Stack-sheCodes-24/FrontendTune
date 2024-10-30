@@ -7,6 +7,12 @@ main {
   font-weight: normal;
 }
 
+a,
+.green {
+  text-decoration: none;
+  color: #6eb06e;
+  transition: 0.4s;
+  padding: 3px;
 /* Temporarily disable dark-theme from making styling look weird */
 @media (prefers-color-scheme: dark) {
   body {
