@@ -3,7 +3,7 @@
     <img src = "C:\Users\mohra\Desktop\SLP fullstack project\FrontendTune\src\assets\Moodz_Logo.png">
     <ul>
       <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/home">Home</RouterLink>
     </ul>
   </nav>
   <main>
