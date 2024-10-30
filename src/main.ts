@@ -9,6 +9,7 @@ import SpotifyUserLogin from './components/SpotifyUserLogin/SpotifyUserLogin.vue
 import SpotifyCallback from './components/SpotifyUserLogin/SpotifyCallback.vue';
 
 const routes = [
+  { path: '/', redirect: '/login' },
   { path: '/', name: 'Home', component: TheWelcome },
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
   { path: '/callback', name: 'Callback', component: SpotifyCallback }
