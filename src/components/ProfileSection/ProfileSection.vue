@@ -1,3 +1,4 @@
+<style>@import'./ProfileSection.css';</style>
 <template>
     <div class="profile-section-container card">
         <img class="profile-picture" :src="imageSrc">
@@ -43,21 +44,3 @@ async function convertBlobToBase64(blob : Blob) {
   });
 }
 </script>
-<style>
-.profile-section-container {
-    display: flex;
-    
-    .profile-picture {
-        width: 128px;
-        height: 128px;
-        margin-right: 20px;
-        border-radius: 50%; /* Makes the picture circular */
-    }
-
-    .profile-info p {
-        margin: 5px 0 ;
-        display: flex;
-        flex-direction: column;
-    }
-}
-</style>

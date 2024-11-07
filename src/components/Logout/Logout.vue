@@ -1,7 +1,10 @@
+<style>@import'./Logout.css';</style>
 <template>
-    <p>Are you sure you want to logout?</p>
-    <button @click="logout()">Yes</button>
-    <button @click="redirect()">No</button>
+    <div class="logout-container card">
+        <p>Are you sure you want to logout?</p>
+        <button @click="logout()">Yes</button>
+        <button @click="redirect()">No</button>
+    </div>
 </template>
 <script setup lang="ts">
 import { useUserStateStore } from '@/Shared/UserStateStore';
@@ -20,5 +23,3 @@ function redirect() {
     router.push({ name: 'Home' });
 }
 </script>
-<style>
-</style>

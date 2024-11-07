@@ -5,9 +5,5 @@
     </div>
 </template>
 <script setup lang="ts">
-import SpotifySearch from './SpotifySearch/SpotifySearch.vue';
+import SpotifySearch from '@/components/SpotifySearch/SpotifySearch.vue';
 </script>
-<style>
-.create-entry-container {
-}
-</style>

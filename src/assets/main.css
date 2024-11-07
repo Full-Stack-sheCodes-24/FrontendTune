@@ -7,12 +7,12 @@ main {
 }
 
 /* Temporarily disable dark-theme from making styling look weird */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body {
       background-color: #F5EFEB;
       color:#304674;
   }
-}
+} */
 
 .card {
   background-color: #fff; /* #fff2f4#faf5fd Light background color */
@@ -27,4 +27,29 @@ main {
 .clickable:hover {
   background-color: #f0f0f0; /* Slightly darker on hover */
   transition: background-color 0.3s; /* Smooth transition */
+}
+
+.navbar {
+  display: flex;
+  background-color: #C8D9E6;
+  align-items: center;
+  padding: 1rem;
+  font-size: 16px;
+}
+img{
+  height: 40px;
+  margin-right: 1rem;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: #304674;
+  text-decoration: none;
+  padding: 0.5rem 1rem; /* Add padding inside the border */
+  border: 1px solid #304674; /* Border around each link */
+  border-radius: 4px; /* Optional rounded corners */
 }

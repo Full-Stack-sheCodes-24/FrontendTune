@@ -1,25 +1,26 @@
+<style>@import'./Home.css';</style>
 <template>
     <div class="home-container">
         <div class="left-column">
-            <ProfileSection></ProfileSection>
+            <ProfileSection/>
             <div class="entries-container">
-                <CreateEntry></CreateEntry>
+                <CreateEntry/>
                 <div v-for="entry in entries">
                     <EntryItem :entry="entry"></EntryItem>
                 </div>
             </div>
         </div>
         <div class="right-column">
-            <Calender></Calender>
+            <Calender/>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import ProfileSection from './ProfileSection.vue';
-import CreateEntry from './CreateEntry.vue';
-import EntryItem from './EntryItem.vue';
-import Calender from './Calender.vue';
+import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
+import CreateEntry from '@/components/CreateEntry/CreateEntry.vue';
+import EntryItem from '@/components/EntryItem/EntryItem.vue';
+import Calender from '@/components/Calender/Calender.vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
 const entries = ref([] as Entry[]);
@@ -50,22 +51,3 @@ onBeforeMount(() => {
     });
 })
 </script>
-<style>
-.home-container {
-    display: grid;
-    grid-template-columns: 2fr auto;
-    gap: 20px;
-
-    .left-column {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-
-        .entries-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-    }
-}
-</style>

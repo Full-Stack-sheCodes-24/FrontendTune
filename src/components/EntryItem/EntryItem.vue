@@ -1,3 +1,4 @@
+<style>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable">
         <h1 v-text="entry.text"></h1>
@@ -16,5 +17,3 @@ defineProps({
     }
 })
 </script>
-<style>
-</style>
