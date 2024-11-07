@@ -4,10 +4,3 @@
 </template>
 <script setup lang="ts">
 </script>
-<style>
-.calender-item {
-    height: 48px;
-    width: 36px;
-    padding: 0;
-}
-</style>

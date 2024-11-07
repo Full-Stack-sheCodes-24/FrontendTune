@@ -36,5 +36,4 @@ onBeforeMount(() => {
         router.push({ name: 'Home' });
     }
 })
-
 </script>

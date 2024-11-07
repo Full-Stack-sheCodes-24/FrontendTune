@@ -1,3 +1,4 @@
+<style>@import'./Calender.css';</style>
 <template>
     <div class="calender-container card">
         <h1 v-text="month"></h1>
@@ -32,15 +33,3 @@ function getDaysInCurrentMonth(): number {
     return lastDayCurrentMonth.getDate(); // Return the day of the month
 }
 </script>
-
-<style>
-.calender-container {
-    text-align: center;
-
-    .calender-item-container {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
-    }
-}
-</style>

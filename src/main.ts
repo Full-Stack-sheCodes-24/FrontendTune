@@ -3,9 +3,9 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from './components/Home.vue';
-import SpotifyUserLogin from './components/SpotifyUserLogin/SpotifyUserLogin.vue';
-import Logout from './components/Logout.vue';
+import Home from '@/components/Home/Home.vue';
+import SpotifyUserLogin from '@/components/SpotifyUserLogin/SpotifyUserLogin.vue';
+import Logout from '@/components/Logout/Logout.vue';
 import SpotifyCallback from './components/SpotifyUserLogin/SpotifyCallback.vue';
 import { useUserStateStore } from './Shared/UserStateStore';
 
