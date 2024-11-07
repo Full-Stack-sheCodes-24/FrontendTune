@@ -1,11 +1,11 @@
-
-
 <template>
   <nav class="navbar">
     <img src = "@/assets/logo.png">
     <ul>
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/home">Home</RouterLink>
+      <!-- If logged in, do not show login button -->
+      <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink>
+      <RouterLink to="/home" v-if="userStateStore.isLoggedIn">Home</RouterLink>
+      <RouterLink to="/logout" v-if="userStateStore.isLoggedIn">Logout</RouterLink>
     </ul>
   </nav>
   <main>
@@ -13,10 +13,11 @@
   </main>
 </template>
 <script setup lang="ts">
+import { useUserStateStore } from './Shared/UserStateStore';
+
+const userStateStore = useUserStateStore();
 </script>
-
 <style>
-
 .navbar {
   display: flex;
   background-color: #C8D9E6;
