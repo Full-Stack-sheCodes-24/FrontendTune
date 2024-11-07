@@ -2,6 +2,7 @@
 <template>
   <div class="container">
       <header class="page-header">
+          <img src = "@/assets/logo.png">
           <h1 class="title">Welcome to Moodz!</h1>
           <p class="description">A journaling application with Spotify integration. Create a journal entry and attach a song-of-the-day to capture your mood.</p>
           <div class="button-container">

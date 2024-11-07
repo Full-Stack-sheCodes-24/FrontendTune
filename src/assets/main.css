@@ -13,6 +13,12 @@ main {
       color:#304674;
   }
 } */
+body {
+  background: url('@/assets/background.gif') no-repeat center center fixed; /* Use '@' to reference 'src' folder */
+  background-size: cover; /* Ensures the image covers the entire page */
+  margin: 0; /* Removes default margin */
+  height: 100vh; /* Makes sure the body takes up the entire viewport height */
+}
 
 .card {
   background-color: #fff; /* #fff2f4#faf5fd Light background color */

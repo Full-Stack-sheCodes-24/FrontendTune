@@ -1,9 +1,12 @@
 .container {
     display: flex;
+    background-color: #C8D9E6;
     justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
+    height: auto;
     padding-top: 10vh; /* Adjusts the distance from the top */
+    padding-bottom: 10vh; /* Adjusts the distance from the top */
+    width: 55%; /* Make sure the container takes full width but not exceeding max-width */
+    margin: 0 auto; /* to keep it centered */
 
     /* Center-left alignment for title, description, and button */
     .page-header {
@@ -21,7 +24,7 @@
         /* Styling for the description */
         .description {
             font-size: 1.2rem;
-            color: #304674; /* Gray text */
+            color: #121825; /* Gray text */
             margin-bottom: 1.5rem;
         }
 
