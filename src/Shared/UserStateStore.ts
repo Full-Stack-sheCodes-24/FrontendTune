@@ -8,6 +8,7 @@ export const useUserStateStore = defineStore('userState', {
             id: null!,
             name: null!,
             profilePicUrl: null!,
+            profilePicCache: null!,
             entries: [] as Entry[]
         }
     },

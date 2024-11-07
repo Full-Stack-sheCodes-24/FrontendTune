@@ -8,7 +8,6 @@ import SpotifyUserLogin from './components/SpotifyUserLogin/SpotifyUserLogin.vue
 import Logout from './components/Logout.vue';
 import SpotifyCallback from './components/SpotifyUserLogin/SpotifyCallback.vue';
 import { useUserStateStore } from './Shared/UserStateStore';
-import type { UserState } from './Shared/Models/UserState';
 
 const routes = [
   { path: '/', redirect: '/login' }, 
