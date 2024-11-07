@@ -7,6 +7,7 @@ import Home from './components/Home.vue';
 import SpotifyUserLogin from './components/SpotifyUserLogin/SpotifyUserLogin.vue';
 import SpotifyCallback from './components/SpotifyUserLogin/SpotifyCallback.vue';
 import { useUserStateStore } from './Shared/UserStateStore';
+import type { UserState } from './Shared/Models/UserState';
 
 const routes = [
   { path: '/', redirect: '/login' }, 
@@ -27,4 +28,10 @@ createApp(App)
     .use(pinia)
     .mount('#app');
 
+
+const userState = localStorage.getItem("user_state");
 const userStore = useUserStateStore()
+
+if (userState != null) {
+  userStore.$patch(JSON.parse(userState));
+}
