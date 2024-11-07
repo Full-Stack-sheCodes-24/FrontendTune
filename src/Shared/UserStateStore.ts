@@ -5,10 +5,13 @@ import type { Entry } from './Models/Entry';
 export const useUserStateStore = defineStore('userState', {
     state: (): UserState => {
         return {
-            userId: null!,
+            id: null!,
             name: null!,
             profilePicUrl: null!,
             entries: [] as Entry[]
         }
     },
+    getters: {
+        isLoggedIn: (state) => Boolean(state.id)
+    }
 });
