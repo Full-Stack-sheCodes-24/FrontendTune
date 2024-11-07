@@ -1,5 +1,3 @@
-
-
 <template>
   <nav class="navbar">
     <img src = "@/assets/logo.png">

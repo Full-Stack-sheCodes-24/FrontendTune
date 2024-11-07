@@ -1,11 +1,7 @@
 <template>
     <div class="home-container">
         <div class="left-column">
-            <ProfileSection
-                :image="exampleProfilePic"
-                :text="exampleBioText"
-                :birthday="exampleBirthday">
-            </ProfileSection>
+            <ProfileSection></ProfileSection>
             <div class="entries-container">
                 <CreateEntry></CreateEntry>
                 <div v-for="entry in entries">
@@ -27,9 +23,6 @@ import Calender from './Calender.vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
 const entries = ref([] as Entry[]);
-const exampleProfilePic = "https://media.licdn.com/dms/image/v2/C4E03AQGBBKCRQNcqJg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1579728661856?e=1735171200&v=beta&t=viz2XS_XBnZkgXF76Vqm4tOuU3u5y6a-oyrxCutPKq0";
-const exampleBioText = "this is my profile information";
-const exampleBirthday = new Date();
 
 onBeforeMount(() => {
     //Get entries from backend API

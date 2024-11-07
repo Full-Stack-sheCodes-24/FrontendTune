@@ -7,9 +7,11 @@
 import { SpotifyLoginClient } from '@/Shared/Clients/SpotifyLoginClient';
 import { onBeforeMount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useUserStateStore } from '@/Shared/UserStateStore'
 
 const route = useRoute();
 const router = useRouter();
+const userStateStore = useUserStateStore();
 
 onBeforeMount(() => {
     const code = route.query.code?.toString()!;
@@ -20,7 +22,10 @@ onBeforeMount(() => {
         const client = new SpotifyLoginClient();
         client.execute({ authorizationCode: code}).then(response => {
             // On success, save userState in local storage
-            localStorage.setItem("user_state", JSON.stringify(response))
+            localStorage.setItem("user_state", JSON.stringify(response));
+
+            // Save userState in pinia store to allow home page to update
+            userStateStore.$patch(response);
         }).catch(error => {
             // If error, reroute to login page and print error to console
             console.log(error);
