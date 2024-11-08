@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="text" v-model="inputText" id="searchInput">
+        <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput">
         <button @click="search(inputText)">Search</button>
         <div v-for="track in searchResults">
             <button>Select</button>
@@ -15,7 +15,7 @@ import { SpotifySearchMapper } from './Mappers/SpotifySearchMapper';
 import { SpotifySearchClient } from '../../Shared/Clients/SpotifySearchClient';
 
 const searchResults = ref([] as Track[]);
-const inputText = ref("Query...");
+const inputText = ref();
 const mapper = new SpotifySearchMapper();
 
 function search(query : string) {
