@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput">
+        <input type="text" v-model="inputText" placeholder="Type in song name;" id="searchInput">
         <button @click="search(inputText)">Search</button>
         <div v-for="track in searchResults">
             <button>Select</button>
