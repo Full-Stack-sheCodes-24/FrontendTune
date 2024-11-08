@@ -26,8 +26,8 @@ import type { Entry } from '@/Shared/Models/Entry';
 const entries = ref([] as Entry[]);
 
 onBeforeMount(() => {
-    //Get entries from backend API
-    //Hardcode example entries for now
+    // //Get entries from backend API
+    // //Hardcode example entries for now
     entries.value.push({
         track: {
             name: "Touch",
@@ -49,5 +49,10 @@ onBeforeMount(() => {
         text: "what a horrible day! :(",
         date: new Date()
     });
+
+const addEntry = (newEntry: Entry) => {
+  entries.value.unshift(newEntry); // Adds new entry to beginning of the array
+};
+
 })
 </script>
