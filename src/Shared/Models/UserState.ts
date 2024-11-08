@@ -1,7 +1,7 @@
 import type { Entry } from './Entry'
 
 export interface UserState {
-    userId: string,
+    id: string,
     name: string,
     profilePicUrl: string;
     entries: Entry[];

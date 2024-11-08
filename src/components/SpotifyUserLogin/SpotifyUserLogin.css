@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    background-color: #C8D9E6;
+    justify-content: center;
+    height: auto;
+    padding-top: 10vh; /* Adjusts the distance from the top */
+    padding-bottom: 10vh; /* Adjusts the distance from the top */
+    width: 55%; /* Make sure the container takes full width but not exceeding max-width */
+    margin: 0 auto; /* to keep it centered */
+
+    /* Center-left alignment for title, description, and button */
+    .page-header {
+        max-width: 60%; /* Limit the width of content */
+        text-align: center;
+
+        /* Styling for the title */
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #304674;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Styling for the description */
+        .description {
+            font-size: 1.2rem;
+            color: #121825; /* Gray text */
+            margin-bottom: 1.5rem;
+        }
+
+        /* Button styling */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+
+            .login-button {
+                background-color: #6eb06e;
+                color: white;
+                padding: 12px 24px;
+                border: none;
+                border-radius: 25px;
+                font-size: 18px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+        
+            .login-button:hover {
+                background-color: #5a8a5a; /* Darker blue on hover */
+            }
+        }
+    }
+}

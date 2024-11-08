@@ -1,0 +1,15 @@
+.calender-container {
+    text-align: center;
+
+    .calender-item-container {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+
+        .calender-item {
+            height: 48px;
+            width: 36px;
+            padding: 0;
+        }
+    }
+}

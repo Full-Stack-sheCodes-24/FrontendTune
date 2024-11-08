@@ -7,11 +7,17 @@ main {
 }
 
 /* Temporarily disable dark-theme from making styling look weird */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body {
       background-color: #F5EFEB;
       color:#304674;
   }
+} */
+body {
+  background: url('@/assets/background.gif') no-repeat center center fixed; /* Use '@' to reference 'src' folder */
+  background-size: cover; /* Ensures the image covers the entire page */
+  margin: 0; /* Removes default margin */
+  height: 100vh; /* Makes sure the body takes up the entire viewport height */
 }
 
 .card {
@@ -27,4 +33,29 @@ main {
 .clickable:hover {
   background-color: #f0f0f0; /* Slightly darker on hover */
   transition: background-color 0.3s; /* Smooth transition */
+}
+
+.navbar {
+  display: flex;
+  background-color: #C8D9E6;
+  align-items: center;
+  padding: 1rem;
+  font-size: 16px;
+}
+img{
+  height: 40px;
+  margin-right: 1rem;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: #304674;
+  text-decoration: none;
+  padding: 0.5rem 1rem; /* Add padding inside the border */
+  border: 1px solid #304674; /* Border around each link */
+  border-radius: 4px; /* Optional rounded corners */
 }

@@ -1,35 +1,29 @@
+<style>@import'./Home.css';</style>
 <template>
     <div class="home-container">
         <div class="left-column">
-            <ProfileSection
-                :image="exampleProfilePic"
-                :text="exampleBioText"
-                :birthday="exampleBirthday">
-            </ProfileSection>
+            <ProfileSection/>
             <div class="entries-container">
-                <CreateEntry></CreateEntry>
+                <CreateEntry/>
                 <div v-for="entry in entries">
                     <EntryItem :entry="entry"></EntryItem>
                 </div>
             </div>
         </div>
         <div class="right-column">
-            <Calender></Calender>
+            <Calender/>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import ProfileSection from './ProfileSection.vue';
-import CreateEntry from './CreateEntry.vue';
-import EntryItem from './EntryItem.vue';
-import Calender from './Calender.vue';
+import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
+import CreateEntry from '@/components/CreateEntry/CreateEntry.vue';
+import EntryItem from '@/components/EntryItem/EntryItem.vue';
+import Calender from '@/components/Calender/Calender.vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
 const entries = ref([] as Entry[]);
-const exampleProfilePic = "https://media.licdn.com/dms/image/v2/C4E03AQGBBKCRQNcqJg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1579728661856?e=1735171200&v=beta&t=viz2XS_XBnZkgXF76Vqm4tOuU3u5y6a-oyrxCutPKq0";
-const exampleBioText = "this is my profile information";
-const exampleBirthday = new Date();
 
 onBeforeMount(() => {
     //Get entries from backend API
@@ -57,22 +51,3 @@ onBeforeMount(() => {
     });
 })
 </script>
-<style>
-.home-container {
-    display: grid;
-    grid-template-columns: 2fr auto;
-    gap: 20px;
-
-    .left-column {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-
-        .entries-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-    }
-}
-</style>
