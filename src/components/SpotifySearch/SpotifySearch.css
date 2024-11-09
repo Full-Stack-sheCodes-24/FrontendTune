@@ -1,4 +1,10 @@
 .selected-song-format {
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+img {
+    height: 100px;
+    width: 100px;
 }
