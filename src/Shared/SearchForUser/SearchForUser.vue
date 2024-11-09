@@ -56,7 +56,7 @@ function search() {
 
 function redirect(user : UserState) {
     showSearchResults.value = false;
-    router.push({ path: `user/${user.id}` });
+    router.push({ path: `/user/${user.id}` });
 }
 
 // Close the dropdown results if user clicks off it or presses 'esc'
