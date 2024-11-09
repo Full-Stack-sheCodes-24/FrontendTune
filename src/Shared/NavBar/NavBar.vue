@@ -7,11 +7,13 @@
             <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink>
             <RouterLink to="/home" v-if="userStateStore.isLoggedIn">Home</RouterLink>
             <RouterLink to="/logout" v-if="userStateStore.isLoggedIn">Logout</RouterLink>
+            <SearchForUser></SearchForUser>
         </ul>
     </nav>
 </template>
 <script setup lang="ts">
 import { useUserStateStore } from '@/Shared/UserStateStore';
+import SearchForUser from '../SearchForUser/SearchForUser.vue';
 
 const userStateStore = useUserStateStore();
 </script>

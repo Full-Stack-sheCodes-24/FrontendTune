@@ -13,14 +13,14 @@ const route = useRoute();
 const router = useRouter();
 const userStateStore = useUserStateStore();
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
     const code = route.query.code?.toString()!;
     const state = route.query.state?.toString()!;
     if (sessionStorage.getItem('spotify_state') === state) {
         console.log(code);
         //send code to our backend
         const client = new SpotifyLoginClient();
-        client.execute({ authorizationCode: code}).then(response => {
+        await client.execute({ authorizationCode: code }).then(response => {
             // On success, save userState in local storage
             localStorage.setItem("user_state", JSON.stringify(response));
 

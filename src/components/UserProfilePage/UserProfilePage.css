@@ -1,0 +1,17 @@
+.user-profile-page-container {
+    display: grid;
+    grid-template-columns: 2fr auto;
+    gap: 20px;
+
+    .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .entries-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}
