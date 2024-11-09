@@ -78,7 +78,7 @@ async function refreshUserState(userId : string) {
         profilePicUrl.value = response.profilePicUrl;
         name.value = response.name;
         bioText.value = response.bioText;
-        birthday.value = response.birthday;
+        birthday.value = new Date(response.birthday);
     }).catch(error => {
         console.log(error);
     });

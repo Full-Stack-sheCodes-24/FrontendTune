@@ -37,19 +37,37 @@ const query = ref('');
 const debounceTimeout = ref();
 const searchResults = ref([] as UserState[]);
 const showSearchResults = ref(false);
+// Dictionary for query -> response to store search results and prevent excessive API calls
+// Useful if the user makes a typo or queries the same thing multiple times
+const cache: Record<string, UserState[]> = {};
 
 function debouncedSearch() {
-    if (debounceTimeout.value) clearTimeout(debounceTimeout.value)  // If still counting down, reset the timer
+    // If still counting down, reset the timer
+    if (debounceTimeout.value) clearTimeout(debounceTimeout.value);
 
     // Set a timeout to wait for the user to stop typing
     debounceTimeout.value = setTimeout(() => {
         search();
-    }, 300);    // Set how long we should wait for the user to stop typing before making a search
+    }, 300);    // If user stopped typing for 300 milliseconds, execute the search API request
 }
 
-function search() {
-    client.execute({ query: query.value }).then(response => {
+async function search() {
+    // Guard for empty string query
+    if (query.value === '') {
+        showSearchResults.value = false;
+        return;
+    }
+
+    // If query is in our cache, return the cached result
+    if (cache[query.value]) {
+        searchResults.value = cache[query.value];
+        return;
+    }
+
+    // Else make an API request to our backend
+    await client.execute({ query: query.value }).then(response => {
         searchResults.value = response;
+        cache[query.value] = response;
     }).catch(error => {
         console.log(error);
     });
