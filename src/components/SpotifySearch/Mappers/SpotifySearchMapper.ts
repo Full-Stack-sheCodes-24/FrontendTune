@@ -10,7 +10,8 @@ export class SpotifySearchMapper {
                 uri: spotifyTrackDTO.uri,
                 href: spotifyTrackDTO.href,
                 id: spotifyTrackDTO.id,
-                album: spotifyTrackDTO.album
+                album: spotifyTrackDTO.album,
+                preview_url: spotifyTrackDTO.preview_url
             } as Track);
         });
 

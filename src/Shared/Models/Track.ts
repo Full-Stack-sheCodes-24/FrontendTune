@@ -7,4 +7,5 @@ export interface Track {
     href: string
     id: string
     album: SpotifyAlbumDTO
+    preview_url: string | null
 }

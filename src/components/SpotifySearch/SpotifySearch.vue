@@ -1,6 +1,20 @@
+<style>@import'./SpotifySearch.css';</style>
 <template>
-    <p v-if="isSelected">{{ selectedSongName }}</p>
-    <img v-if="isSelected" :src="selectedSongImg"/>
+    <div class="selected-song-format">
+        <img v-if="isSelected" :src="selectedSongImg"/>
+        <p v-if="isSelected">{{ selectedSongName }}</p>
+        <p v-if="isSelected && selectedSongPreviewUrl != null">
+            <audio controls autoplay loop>
+                <source :src="selectedSongPreviewUrl" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </p>
+        <br>
+        <div v-if="isSelected && selectedSongPreviewUrl == null">
+            &nbsp; does not have a preview track.
+        </div>
+
+    </div>
     <div>
         <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput">
         <button @click="search(inputText)">Search</button>
@@ -22,6 +36,7 @@ const mapper = new SpotifySearchMapper();
 const selectedSongName = ref();
 const isSelected = ref(false);
 const selectedSongImg = ref();
+const selectedSongPreviewUrl = ref();
 
 function search(query : string) {
     const client = new SpotifySearchClient();
@@ -32,9 +47,9 @@ function search(query : string) {
 }
 
 function selectSong(track : Track){
+    selectedSongPreviewUrl.value = track.preview_url;
     selectedSongName.value = track.name;
-    isSelected.value = true;
     selectedSongImg.value = track.album.images[0].url;
-    // albumCover.value = trackName.
+    isSelected.value = true;
 }
 </script>

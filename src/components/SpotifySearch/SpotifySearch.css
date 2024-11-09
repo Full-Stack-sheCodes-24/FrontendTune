@@ -1,0 +1,4 @@
+.selected-song-format {
+    display: flex;
+    flex-direction: row;
+}
