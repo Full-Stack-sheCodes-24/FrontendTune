@@ -78,6 +78,7 @@ async function search() {
 
 function redirect(user : UserState) {
     showSearchResults.value = false;
+    query.value = '';
     router.push({ path: `/user/${user.id}` });
 }
 
