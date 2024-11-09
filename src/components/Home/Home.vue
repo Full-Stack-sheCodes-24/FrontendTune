@@ -36,7 +36,7 @@ onBeforeMount(() => {
             id: "zxcv"
         },
         text: "what a great day! :D",
-        date: new Date()    //Creates a new date object with the current date/time
+        date: new Date()
     });
 
     entries.value.push({
