@@ -48,7 +48,10 @@ function debouncedSearch() {
     if (debounceTimeout.value) clearTimeout(debounceTimeout.value);
 
     // Guard for empty string query
-    if (query.value === '') return;
+    if (query.value === '') {
+        searchResults.value = [];
+        return;
+    }
 
     // If query is in our cache, return the cached result
     if (cache[query.value]) {
