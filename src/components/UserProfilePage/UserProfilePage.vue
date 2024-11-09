@@ -1,16 +1,15 @@
-<style>@import'./Home.css';</style>
+<style>@import'./UserProfilePage.css';</style>
 <template>
-    <div class="home-container">
+    <div class="user-profile-page-container">
         <div class="left-column">
             <ProfileSection
-                :is-owner="true"
-                :profile-pic-url="userStateStore.profilePicUrl"
-                :name="userStateStore.name"
-                :bio-text="exampleBioText"
-                :birthday="exampleBirthday">
+                :is-owner="false"
+                :profile-pic-url="profilePicUrl"
+                :name="name"
+                :bio-text="bioText"
+                :birthday="birthday">
             </ProfileSection>
             <div class="entries-container">
-                <CreateEntry/>
                 <div v-for="entry in entries">
                     <EntryItem :entry="entry"></EntryItem>
                 </div>
@@ -22,38 +21,24 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
-import CreateEntry from '@/components/CreateEntry/CreateEntry.vue';
 import EntryItem from '@/components/EntryItem/EntryItem.vue';
 import Calender from '@/components/Calender/Calender.vue';
 import type { Entry } from '@/Shared/Models/Entry';
-import { useUserStateStore } from '@/Shared/UserStateStore';
-import { useRouter } from 'vue-router';
+import { UserGetClient } from '@/Shared/Clients/UserGetClient';
+import { useRoute } from 'vue-router';
 
-const router = useRouter();
-const userStateStore = useUserStateStore();
+const route = useRoute();
 
-const exampleBioText = "this is my profile information";
-const exampleBirthday = new Date();
-
+const profilePicUrl = ref();
+const name = ref();
+const bioText = ref();
+const birthday = ref();
 const entries = ref([] as Entry[]);
 
-const addEntry = (newEntry: Entry) => {
-  entries.value.unshift(newEntry); // Adds new entry to beginning of the array
-};
-
-onBeforeMount(() => {
-    const userState = localStorage.getItem("user_state");
-
-    // If userState does NOT exist in localStorage, reroute to login page
-    if (userState == null) {
-        router.push({ name: 'Login' });
-    }
-    // otherwise, load the local storage if the userStateStore hasn't already been loaded.
-    if (userStateStore.id != null) {
-        userStateStore.$patch(JSON.parse(userState!));
-    }
+watch(() => route.params.userId, (newUserId) => {
+    refreshUserState(newUserId.toString());
 });
 
 onMounted(async () => {
@@ -80,5 +65,22 @@ onMounted(async () => {
         text: "what a horrible day! :(",
         date: new Date()
     });
+
+    // Get userId from url. Ex: moodz.com/users/ajsdlifjasifj
+    const userId = route.params.userId.toString();
+
+    refreshUserState(userId);
 });
+
+async function refreshUserState(userId : string) {
+    const client = new UserGetClient();
+    await client.execute(userId).then(response => {
+        profilePicUrl.value = response.profilePicUrl;
+        name.value = response.name;
+        bioText.value = response.bioText;
+        birthday.value = response.birthday;
+    }).catch(error => {
+        console.log(error);
+    });
+}
 </script>

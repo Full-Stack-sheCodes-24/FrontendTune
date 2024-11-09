@@ -5,21 +5,25 @@
       <img class="profile-picture" :src="profilePicUrl">
       <div class ="profile-info">
           <h1 v-text="name"></h1>
-          <p v-text="exampleBioText"></p>
-          <p v-text="`Born ${formattedBirthday}`"></p>
+          <p v-text="bioText"></p>
+          <p v-if="formattedBirthday" v-text="`Born ${formattedBirthday}`"></p>
       </div>
     </div>
-    <button class="btn-edit-profile">Edit Profile</button>
+    <button v-if="isOwner"class="btn-edit-profile">Edit Profile</button>
   </div>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useUserStateStore } from '@/Shared/UserStateStore';
 
-const userStateStore = useUserStateStore();
-const {name, profilePicUrl} = storeToRefs(userStateStore)
+const { birthday } = defineProps({
+  isOwner: {
+    type: Boolean,
+    required: true
+  },
+  profilePicUrl: String,
+  name: String,
+  bioText: String,
+  birthday: Date
+});
 
-const exampleBioText = "this is my profile information";
-const exampleBirthday = new Date();
-const formattedBirthday = exampleBirthday.toDateString();
+const formattedBirthday = birthday?.toDateString() ?? null;
 </script>
