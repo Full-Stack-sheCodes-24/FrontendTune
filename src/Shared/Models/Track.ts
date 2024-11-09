@@ -1,5 +1,4 @@
 import type { SpotifyAlbumDTO } from "./SpotifyAlbumDTO"
-import type { SpotifyImageDTO } from "./SpotifyImageDTO";
 
 export interface Track {
     name: string
