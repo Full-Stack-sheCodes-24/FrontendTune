@@ -4,8 +4,11 @@
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
-    width: 300px;
-    margin: 0 auto;
+}
+
+.create-entry-container:hover {
+    background-color: #a0bbcf;
+    transition: background-color 0.3s; /* Smooth transition */
 }
 
 /* Modal */
