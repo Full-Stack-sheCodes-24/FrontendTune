@@ -42,8 +42,19 @@ const showSearchResults = ref(false);
 const cache: Record<string, UserState[]> = {};
 
 function debouncedSearch() {
+    showSearchResults.value = true;
+
     // If still counting down, reset the timer
     if (debounceTimeout.value) clearTimeout(debounceTimeout.value);
+
+    // Guard for empty string query
+    if (query.value === '') return;
+
+    // If query is in our cache, return the cached result
+    if (cache[query.value]) {
+        searchResults.value = cache[query.value];
+        return;
+    }
 
     // Set a timeout to wait for the user to stop typing
     debounceTimeout.value = setTimeout(() => {
@@ -52,27 +63,14 @@ function debouncedSearch() {
 }
 
 async function search() {
-    // Guard for empty string query
-    if (query.value === '') {
-        showSearchResults.value = false;
-        return;
-    }
-
-    // If query is in our cache, return the cached result
-    if (cache[query.value]) {
-        searchResults.value = cache[query.value];
-        return;
-    }
-
-    // Else make an API request to our backend
+    // Make an API request to our backend
     await client.execute({ query: query.value }).then(response => {
         searchResults.value = response;
+        // Store the response in our cache
         cache[query.value] = response;
     }).catch(error => {
         console.log(error);
     });
-
-    showSearchResults.value = true;
 }
 
 function redirect(user : UserState) {
