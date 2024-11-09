@@ -1,0 +1,25 @@
+.selected-song-format {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        animation: rotation 6s infinite linear;
+    }
+
+    img.pause-animation {
+      animation-play-state: paused;
+    }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
