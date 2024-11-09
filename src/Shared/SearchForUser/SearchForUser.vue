@@ -11,11 +11,14 @@
         <i class="material-icons">search</i>
         <div class="search-results-container card">
             <div class="search-result-item-container clickable"
-                v-if="showSearchResults"
+                v-if="showSearchResults && query.length != 0"
                 v-for="result in searchResults"
                 @click="redirect(result)">
                 <img :src="result.profilePicUrl"></img>
                 <p>{{result.name}}</p>
+            </div>
+            <div v-if="showSearchResults && query.length == 0">
+                <p>Find a friend by searching their name...</p>
             </div>
         </div>
     </div>
