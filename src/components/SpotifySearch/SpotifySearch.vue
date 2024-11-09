@@ -7,13 +7,15 @@
         <div>
             <p v-if="isSelected && selectedSongPreviewUrl == null">{{ selectedSongName }}&nbsp;{{ noPreviewUrlMsg }}</p>
             <p v-else-if="isSelected && selectedSongPreviewUrl != null">{{ selectedSongName }}</p>
-            <p v-if="selectedSongPreviewUrl != null">
-            <audio controls autoplay loop
-                :src="selectedSongPreviewUrl"
-                @pause="isPaused = true"
-                @play="isPaused = false">
-                Your browser does not support the audio element.
-            </audio>
+            <p v-show="selectedSongPreviewUrl != null">
+                <audio controls autoplay loop
+                    ref="audioPlayer"
+                    :src="selectedSongPreviewUrl"
+                    @pause="isPaused = true"
+                    @play="isPaused = false"
+                    @volumechange="saveVolumeLevel">
+                    Your browser does not support the audio element.
+                </audio>
             </p>
         </div>
     </div>
@@ -27,7 +29,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { Track } from '../../Shared/Models/Track';
 import { SpotifySearchMapper } from './Mappers/SpotifySearchMapper';
 import { SpotifySearchClient } from '../../Shared/Clients/SpotifySearchClient'; 
@@ -47,6 +49,7 @@ const selectedSongImg = ref();
 const selectedSongPreviewUrl = ref();
 const isPaused = ref(false);
 const noPreviewUrlMsg = "does not have a preview track.";
+const audioPlayer = ref<HTMLAudioElement | null>(null);
 
 async function search(query : string) {
     await client.execute({ query }).then(response => {
@@ -71,4 +74,21 @@ async function selectSong(track : Track){
     selectedSongImg.value = track.album.images[0].url;
     isSelected.value = true;
 }
+
+function saveVolumeLevel(event: Event) {
+    const audioPlayer = event.target as HTMLAudioElement
+    localStorage.setItem('volume_level', audioPlayer.volume.toString());
+}
+
+onMounted(() => {
+    // Get saved volumed level from local storage
+    const savedVolumeLevel = localStorage.getItem('volume_level');
+
+    // If volume level is saved, set the default volume of the audio player
+    if (savedVolumeLevel != null) {
+        audioPlayer.value!.volume = Number(savedVolumeLevel);
+    } else {    // Else set the default volume to 0.5
+        audioPlayer.value!.volume = 0.5;
+    }
+});
 </script>
