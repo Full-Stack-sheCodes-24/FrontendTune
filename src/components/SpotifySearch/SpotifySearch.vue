@@ -3,15 +3,13 @@
     <div class="selected-song-format">
         <img v-if="isSelected" :src="selectedSongImg"/>
         <div>
-            <p v-if="isSelected">{{ selectedSongName }}</p>
+            <p v-if="isSelected && selectedSongPreviewUrl == null">{{ selectedSongName }}&nbsp;{{ noPreviewUrlMsg }}</p>
+            <p v-else-if="isSelected && selectedSongPreviewUrl != null">{{ selectedSongName }}</p>
             <p v-if="selectedSongPreviewUrl != null">
             <audio controls autoplay loop :src="selectedSongPreviewUrl">
                 Your browser does not support the audio element.
             </audio>
             </p>
-        </div>
-        <div v-if="isSelected && selectedSongPreviewUrl == null">
-            &nbsp; does not have a preview track.
         </div>
     </div>
     <div>
@@ -36,6 +34,7 @@ const selectedSongName = ref();
 const isSelected = ref(false);
 const selectedSongImg = ref();
 const selectedSongPreviewUrl = ref();
+const noPreviewUrlMsg = "does not have a preview track.";
 
 function search(query : string) {
     const client = new SpotifySearchClient();
