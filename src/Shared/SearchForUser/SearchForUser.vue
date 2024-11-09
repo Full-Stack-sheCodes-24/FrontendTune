@@ -5,7 +5,8 @@
             v-model="query"
             placeholder="search for user..."
             @input="debouncedSearch()"
-            @click="showSearchResults = true">
+            @click="showSearchResults = true"
+            @keydown.esc="showSearchResults = false">
         </input>
         <i class="material-icons">search</i>
         <div class="search-results-container card">
@@ -58,7 +59,7 @@ function redirect(user : UserState) {
     router.push({ path: `user/${user.id}` });
 }
 
-// Close the dropdown results if user clicks off it
+// Close the dropdown results if user clicks off it or presses 'esc'
 const myDiv = ref<HTMLDivElement | null>(null);
 
 const handleClickOutside = (event : MouseEvent) => {
