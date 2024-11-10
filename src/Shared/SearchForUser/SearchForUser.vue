@@ -1,6 +1,6 @@
 <style>@import'./SearchForUser.css';</style>
 <template>
-    <div ref="myDiv" class="search-for-user-container">
+    <div ref="searchUserDiv" class="search-for-user-container">
         <input
             v-model="query"
             placeholder="search for user..."
@@ -83,10 +83,10 @@ function redirect(user : UserState) {
 }
 
 // Close the dropdown results if user clicks off it or presses 'esc'
-const myDiv = ref<HTMLDivElement | null>(null);
+const searchUserDiv = ref<HTMLDivElement | null>(null);
 
 const handleClickOutside = (event : MouseEvent) => {
-  if (myDiv.value && !myDiv.value.contains(event.target as Node)) {
+  if (!searchUserDiv.value!.contains(event.target as Node)) {
     showSearchResults.value = false;
   }
 };
