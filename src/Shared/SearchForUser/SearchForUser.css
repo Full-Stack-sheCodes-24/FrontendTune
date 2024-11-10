@@ -1,9 +1,20 @@
 .search-for-user-container{
     position: relative;
     width: 200px;
+    transition: width 0.3s;
     color: #304674;
     z-index: 2;
     margin-left: auto;
+
+    i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        height: 100%;
+        align-content: center;
+        padding-left: 10px;
+    }
 
     input {
         border-radius: 4px;
@@ -15,18 +26,9 @@
         background-color: #C8D9E6;
     }
 
-    i {
-        position: absolute;
-        left: 0;
-        pointer-events: none;
-        height: 100%;
-        align-content: center;
-        padding-left: 10px;
-    }
-
     .search-results-container {
         position: absolute;
-        padding: 0;
+        padding: 10px;
         width: 100%;
 
         .search-result-item-container {
@@ -36,6 +38,7 @@
             border-radius: 4px;
             padding: 0;
             margin: 4px;
+            cursor: pointer;
     
             img {
                 height: 50px;
@@ -48,8 +51,10 @@
         p {
             font-size: 14px;
             margin: 4px 6px;
-            justify-self: center;
             text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-wrap: nowrap;
         }
     }
 }
@@ -60,6 +65,17 @@
     left: 0;
     width: 100vw;
     height: calc(100vh - 76px);
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 1s;
     z-index: 1;
+}
+
+.search-for-user-container:focus-within {
+    width: 300px;
+    transition: width 0.3s;
+}
+
+.darken-background-active {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s;
 }

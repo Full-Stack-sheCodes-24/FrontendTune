@@ -1,33 +1,36 @@
 <style>@import'./SearchForUser.css';</style>
 <template>
     <div ref="searchUserDiv" class="search-for-user-container">
-        <input
-            v-model="query"
-            placeholder="search for user..."
-            @input="debouncedSearch()"
-            @click="showSearchResults = true"
-            @keydown.esc="showSearchResults = false">
-        </input>
         <i class="material-icons">search</i>
+        <input
+            ref="inputRef"
+            v-model="query"
+            placeholder="Search"
+            @input="debouncedSearch()"
+            @keydown.esc="close"
+            @focusin="handleFocusIn"
+            @blur="handleFocusOut">
+        </input>
         <div v-if="showSearchResults"
             class="search-results-container card">
             <div class="search-result-item-container clickable"
                 v-if="query.length != 0"
                 v-for="result in searchResults"
-                @click="redirect(result)">
+                @click="redirect(result)"
+                @mousedown.prevent>
                 <img :src="result.profilePicUrl"></img>
                 <p>{{result.name}}</p>
             </div>
-            <div v-if="query.length == 0">
-                <p>Find a friend by searching their name...</p>
-            </div>
+            <p v-if="query.length == 0">Find a friend by searching for their name</p>
         </div>
     </div>
-    <div v-if="showSearchResults" class="darken-background"></div>
+    <div v-show="showSearchResults"
+        class="darken-background"
+        :class="{ 'darken-background-active': isDarkenActive }"></div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { nextTick, ref } from 'vue';
 import { UserSearchClient } from '../Clients/UserSearchClient';
 import type { UserState } from '../Models/UserState';
 import { useRouter } from 'vue-router';
@@ -35,10 +38,12 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const client = new UserSearchClient();
 
+const inputRef = ref<HTMLElement | null>();
 const query = ref('');
 const debounceTimeout = ref();
 const searchResults = ref([] as UserState[]);
 const showSearchResults = ref(false);
+const isDarkenActive = ref(false);
 // Dictionary for query -> response to store search results and prevent excessive API calls
 // Useful if the user makes a typo or queries the same thing multiple times
 const cache: Record<string, UserState[]> = {};
@@ -80,20 +85,31 @@ async function search() {
 
 function redirect(user : UserState) {
     showSearchResults.value = false;
+    inputRef.value!.blur();
     query.value = '';
     router.push({ path: `/user/${user.id}` });
 }
 
-// Close the dropdown results if user clicks off it or presses 'esc'
-const searchUserDiv = ref<HTMLDivElement | null>(null);
-
-const handleClickOutside = (event : MouseEvent) => {
-  if (!searchUserDiv.value!.contains(event.target as Node)) {
+function close(event : KeyboardEvent) {
     showSearchResults.value = false;
-  }
-};
+    const target = event.target as HTMLInputElement;
+    target.blur();
+}
 
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
+async function handleFocusIn() {
+    showSearchResults.value = true;
+
+    // Wait for DOM to render darken-background div
+    await nextTick();
+    
+    // Delay the activation of the darken transition to ensure div is ready
+    setTimeout(() => {
+        isDarkenActive.value = true;
+    }, 10);
+}
+
+function handleFocusOut() {
+    showSearchResults.value = false;
+    isDarkenActive.value = false;
+}
 </script>
