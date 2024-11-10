@@ -21,7 +21,7 @@
                 <img :src="result.profilePicUrl"></img>
                 <p>{{result.name}}</p>
             </div>
-            <p v-if="query.length !==0 && searchResults.length === 0">No search results</p>
+            <p v-if="query.length !==0 && noSearchResults">No search results</p>
             <p v-if="query.length === 0">Find a friend by searching for their name</p>
         </div>
     </div>
@@ -43,6 +43,7 @@ const inputRef = ref<HTMLElement | null>();
 const query = ref('');
 const debounceTimeout = ref();
 const searchResults = ref([] as UserState[]);
+const noSearchResults = ref(false);
 const showSearchResults = ref(false);
 const isDarkenActive = ref(false);
 // Dictionary for query -> response to store search results and prevent excessive API calls
@@ -51,6 +52,7 @@ const cache: Record<string, UserState[]> = {};
 
 function debouncedSearch() {
     showSearchResults.value = true;
+    noSearchResults.value = false;
 
     // If still counting down, reset the timer
     if (debounceTimeout.value) clearTimeout(debounceTimeout.value);
@@ -64,6 +66,7 @@ function debouncedSearch() {
     // If query is in our cache, return the cached result
     if (cache[query.value]) {
         searchResults.value = cache[query.value];
+        if (searchResults.value.length === 0) noSearchResults.value = true;
         return;
     }
 
@@ -77,6 +80,7 @@ async function search() {
     // Make an API request to our backend
     await client.execute({ query: query.value }).then(response => {
         searchResults.value = response;
+        if (searchResults.value.length === 0) noSearchResults.value = true;
         // Store the response in our cache
         cache[query.value] = response;
     }).catch(error => {
