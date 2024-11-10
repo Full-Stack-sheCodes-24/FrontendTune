@@ -14,14 +14,15 @@
         <div v-if="showSearchResults"
             class="search-results-container card">
             <div class="search-result-item-container clickable"
-                v-if="query.length != 0"
+                v-if="query.length !== 0"
                 v-for="result in searchResults"
                 @click="redirect(result)"
                 @mousedown.prevent>
                 <img :src="result.profilePicUrl"></img>
                 <p>{{result.name}}</p>
             </div>
-            <p v-if="query.length == 0">Find a friend by searching for their name</p>
+            <p v-if="query.length !==0 && searchResults.length === 0">No search results</p>
+            <p v-if="query.length === 0">Find a friend by searching for their name</p>
         </div>
     </div>
     <div v-show="showSearchResults"
