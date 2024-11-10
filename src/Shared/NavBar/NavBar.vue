@@ -6,8 +6,8 @@
             <!-- If logged in, do not show login button -->
             <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink>
             <RouterLink to="/home" v-if="userStateStore.isLoggedIn">Home</RouterLink>
-            <RouterLink to="/logout" v-if="userStateStore.isLoggedIn">Logout</RouterLink>
             <SearchForUser></SearchForUser>
+            <RouterLink to="/logout" v-if="userStateStore.isLoggedIn">Logout</RouterLink>
         </ul>
     </nav>
 </template>

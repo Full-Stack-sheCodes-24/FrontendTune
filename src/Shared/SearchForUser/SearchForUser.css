@@ -1,6 +1,9 @@
 .search-for-user-container{
     position: relative;
     width: 200px;
+    color: #304674;
+    z-index: 2;
+    margin-left: auto;
 
     input {
         border-radius: 4px;
@@ -9,10 +12,7 @@
         height: 100%;
         padding-left: 40px;
         padding-right: 6px;
-    }
-
-    input:focus {
-        outline: none;
+        background-color: #C8D9E6;
     }
 
     i {
@@ -28,7 +28,7 @@
         position: absolute;
         padding: 0;
         width: 100%;
-    
+
         .search-result-item-container {
             display: flex;
             flex-direction: row;
@@ -52,4 +52,14 @@
             text-align: center;
         }
     }
+}
+
+.darken-background {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 76px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }

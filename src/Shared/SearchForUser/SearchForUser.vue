@@ -9,19 +9,21 @@
             @keydown.esc="showSearchResults = false">
         </input>
         <i class="material-icons">search</i>
-        <div class="search-results-container card">
+        <div v-if="showSearchResults"
+            class="search-results-container card">
             <div class="search-result-item-container clickable"
-                v-if="showSearchResults && query.length != 0"
+                v-if="query.length != 0"
                 v-for="result in searchResults"
                 @click="redirect(result)">
                 <img :src="result.profilePicUrl"></img>
                 <p>{{result.name}}</p>
             </div>
-            <div v-if="showSearchResults && query.length == 0">
+            <div v-if="query.length == 0">
                 <p>Find a friend by searching their name...</p>
             </div>
         </div>
     </div>
+    <div v-if="showSearchResults" class="darken-background"></div>
 </template>
 
 <script setup lang="ts">
