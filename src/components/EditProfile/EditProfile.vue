@@ -11,9 +11,9 @@
 
       <form @submit.prevent="submitForm">
         <h4>Biography</h4>
-        <textarea v-model="bio" class="entry-textarea" placeholder="Enter a bio." ></textarea>
+        <textarea v-model="newBioText" class="entry-textarea" placeholder="Enter a bio." ></textarea>
         <h4>Birthday</h4>
-        <input type="date" v-model="birthday" />
+        <input type="date" v-model="newBirthday" />
         <p></p>
 
         <!-- Post button -->
@@ -38,20 +38,25 @@ const props = defineProps<{
 }>();
 
 const profilePicUrl = ref(userStateStore.profilePicUrl);
-const bio = ref(userStateStore.bioText);
-const birthday = ref(userStateStore.birthday);
+const newBioText = ref(userStateStore.bioText);
+const newBirthday = ref(userStateStore.birthday);
 
 const updateUserProfileClient = new UserUpdateProfileClient();
 
 const submitForm = async () => {
   const request: UserUpdateProfileRequest = {
     profilePicUrl: profilePicUrl.value,
-    bioText: bio.value,
-    birthday: birthday.value ? new Date(birthday.value) : undefined,
+    bioText: newBioText.value,
+    birthday: newBirthday.value ? new Date(newBirthday.value) : undefined,
   }
 
   try {
     await updateUserProfileClient.execute(request);
+
+    userStateStore.$patch({ 
+        bioText: newBioText.value, 
+        birthday: newBirthday.value })
+
     console.log('Profile updated successfully:');
     props.closeModal();
   } catch (error) {
