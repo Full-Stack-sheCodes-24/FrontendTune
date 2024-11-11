@@ -33,10 +33,7 @@ const { birthday } = defineProps({
 });
 
 
-const formattedBirthday = birthday && birthday instanceof Date
-? birthday.toDateString()
-: null;
-
+const formattedBirthday = birthday?.toDateString();
 
 const isModalOpen = ref(false);
 
