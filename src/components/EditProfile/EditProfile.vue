@@ -7,21 +7,17 @@
       <h1>Edit Profile</h1>
 
       <h4>Profile Picture</h4>
-      <img @click="addImage" class="edit-profile-picture" :src="userStateStore.profilePicUrl">
-      <AddImage 
-        :isImageModalOpen="isImageModalOpen"
-        :closeImageModal="closeImageModal"
-      />
+      <img class="edit-profile-picture" :src="profilePicUrl">
 
       <form @submit.prevent="submitForm">
         <h4>Biography</h4>
-        <textarea v-model="formData.bio" class="entry-textarea" placeholder="Enter a bio." ></textarea>
+        <textarea v-model="bio" class="entry-textarea" placeholder="Enter a bio." ></textarea>
         <h4>Birthday</h4>
-        <input type="date" v-model="formData.birthday" />
+        <input type="date" v-model="birthday" />
         <p></p>
 
         <!-- Post button -->
-        <button type="submit" @click="submitForm" class="save-button">Save</button>
+        <button type="submit" class="save-button">Save</button>
 
       </form>
     </div>
@@ -31,33 +27,47 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
-
 const userStateStore = useUserStateStore();
 
+import { UserUpdateProfileClient } from '@/Shared/Clients/UserUpdateProfileClient';
+import type { UserUpdateProfileRequest } from '@/Shared/Clients/UserUpdateProfileRequest';
+
 const props = defineProps<{
-  isModalOpen: boolean
+  isModalOpen: boolean;
   closeModal: () => void;
 }>();
 
-const formData = ref({
-    profilePicUrl: '',
-    bio: '',
-    birthday: '',
-});
+const profilePicUrl = ref(userStateStore.profilePicUrl);
+const bio = ref(userStateStore.bioText);
+const birthday = ref(userStateStore.birthday);
 
-const submitForm = () => {
-  //backend not completed yet
+const updateUserProfileClient = new UserUpdateProfileClient();
+
+const submitForm = async () => {
+  const request: UserUpdateProfileRequest = {
+    profilePicUrl: profilePicUrl.value,
+    bioText: bio.value,
+    birthday: birthday.value ? new Date(birthday.value) : undefined,
+  }
+
+  try {
+    await updateUserProfileClient.execute(request);
+    console.log('Profile updated successfully:');
+    props.closeModal();
+  } catch (error) {
+    console.error('Error updating profile:', error);
+  }
 };
 
-const isImageModalOpen = ref(false);
+// const isImageModalOpen = ref(false);
 
-const addImage = () => {
-    isImageModalOpen.value = true;
-};
+// const addImage = () => {
+//     isImageModalOpen.value = true;
+// };
 
-const closeImageModal = () => {
-    isImageModalOpen.value = false;
-};
+// const closeImageModal = () => {
+//     isImageModalOpen.value = false;
+// };
  
 </script>
   

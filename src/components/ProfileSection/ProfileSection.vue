@@ -5,7 +5,7 @@
       <img class="profile-picture" :src="profilePicUrl">
       <div class ="profile-info">
           <h1 v-text="name"></h1>
-          <p v-text="bioText"></p>
+          <p v-text="bioText" data-placeholder="This person has no bio." contenteditable></p>
           <p v-if="formattedBirthday" v-text="`Born ${formattedBirthday}`"></p>
       </div>
     </div>
@@ -32,7 +32,10 @@ const { birthday } = defineProps({
   birthday: Date
 });
 
-const formattedBirthday = birthday?.toDateString() ?? null;
+
+const formattedBirthday = birthday && birthday instanceof Date
+? birthday.toDateString()
+: null;
 
 
 const isModalOpen = ref(false);
