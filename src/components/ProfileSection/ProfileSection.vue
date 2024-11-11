@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import EditProfileModal from '@/components/EditProfile/EditProfile.vue';
 
 const { birthday } = defineProps({
@@ -32,8 +32,7 @@ const { birthday } = defineProps({
   birthday: Date
 });
 
-
-const formattedBirthday = birthday?.toDateString();
+const formattedBirthday = computed(() => formatDateToMMDDYYYY(birthday));
 
 const isModalOpen = ref(false);
 
@@ -44,6 +43,15 @@ const openEditModal = () => {
 const closeModal = () => {
   isModalOpen.value = false;
 };
+
+function formatDateToMMDDYYYY(date : Date | undefined) : string | null {
+  if (date === undefined) return null;
+
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  const year = date.getUTCFullYear();
+  return `${month}/${day}/${year}`;
+}
  
 </script>
 

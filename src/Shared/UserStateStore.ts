@@ -4,6 +4,10 @@ import type { Entry } from './Models/Entry';
 
 export const useUserStateStore = defineStore('userState', {
     state: (): UserState => {
+        // If user state is already in local storage, hydrate the pinia store
+        if (localStorage.getItem('user_state')) return JSON.parse(localStorage.getItem('user_state')!);
+
+        // Else, initialize the pinia store
         return {
             id: null!,
             name: null!,

@@ -39,23 +39,33 @@ const props = defineProps<{
 
 const profilePicUrl = ref(userStateStore.profilePicUrl);
 const newBioText = ref(userStateStore.bioText);
-const newBirthday = ref(userStateStore.getBirthdayAsDate);
+const newBirthday = ref(userStateStore.getBirthdayAsDate.toISOString().slice(0, 10));
 
 const updateUserProfileClient = new UserUpdateProfileClient();
 
 const submitForm = async () => {
+  if (profilePicUrl.value == userStateStore.profilePicUrl
+    && newBioText.value == userStateStore.bioText
+    && newBirthday.value == userStateStore.getBirthdayAsDate.toISOString().slice(0, 10)
+  ) {
+    console.log("Nothing editted, not sending an API request")
+    props.closeModal();
+    return;
+  }
+
   const request: UserUpdateProfileRequest = {
     profilePicUrl: profilePicUrl.value,
     bioText: newBioText.value,
-    birthday: newBirthday.value
+    birthday: new Date(newBirthday.value)
   }
 
   try {
     await updateUserProfileClient.execute(request);
 
     userStateStore.$patch({ 
-        bioText: newBioText.value, 
-        birthday: newBirthday.value })
+      bioText: newBioText.value, 
+      birthday: new Date(newBirthday.value)
+    })
 
     console.log('Profile updated successfully:');
     props.closeModal();
