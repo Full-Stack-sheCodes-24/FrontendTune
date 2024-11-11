@@ -9,10 +9,17 @@
           <p v-if="formattedBirthday" v-text="`Born ${formattedBirthday}`"></p>
       </div>
     </div>
-    <button v-if="isOwner"class="btn-edit-profile">Edit Profile</button>
+    <button v-if="isOwner"class="btn-edit-profile" @click="openEditModal">Edit Profile</button>
+    <EditProfileModal
+      :isModalOpen="isModalOpen"
+      :closeModal="closeModal"
+    />
   </div>
 </template>
+
 <script setup lang="ts">
+import { ref } from 'vue';
+import EditProfileModal from '@/components/EditProfile/EditProfile.vue';
 
 const { birthday } = defineProps({
   isOwner: {
@@ -26,4 +33,17 @@ const { birthday } = defineProps({
 });
 
 const formattedBirthday = birthday?.toDateString() ?? null;
+
+
+const isModalOpen = ref(false);
+
+const openEditModal = () => {
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+ 
 </script>
+
