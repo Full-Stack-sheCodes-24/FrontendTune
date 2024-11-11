@@ -33,10 +33,9 @@ const { birthday } = defineProps({
 });
 
 
-const formattedBirthday = birthday && birthday instanceof Date
-? birthday.toDateString()
-: null;
-
+const formattedBirthday = birthday && !isNaN(Date.parse(birthday as unknown as string))
+  ? new Date(birthday as unknown as string).toDateString()
+  : null;
 
 const isModalOpen = ref(false);
 
