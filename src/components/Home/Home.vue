@@ -7,7 +7,7 @@
                 :profile-pic-url="userStateStore.profilePicUrl"
                 :name="userStateStore.name"
                 :bio-text="userStateStore.bioText"
-                :birthday="userStateStore.birthday">
+                :birthday="userStateStore.getBirthdayAsDate">
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>

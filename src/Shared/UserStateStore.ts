@@ -14,6 +14,7 @@ export const useUserStateStore = defineStore('userState', {
         }
     },
     getters: {
-        isLoggedIn: (state) => Boolean(state.id)
+        isLoggedIn: (state) => Boolean(state.id),
+        getBirthdayAsDate: (state) => new Date(state.birthday)
     }
 });

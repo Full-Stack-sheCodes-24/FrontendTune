@@ -39,7 +39,7 @@ const props = defineProps<{
 
 const profilePicUrl = ref(userStateStore.profilePicUrl);
 const bio = ref(userStateStore.bioText);
-const birthday = ref(userStateStore.birthday);
+const birthday = ref(userStateStore.getBirthdayAsDate);
 
 const updateUserProfileClient = new UserUpdateProfileClient();
 
@@ -47,7 +47,7 @@ const submitForm = async () => {
   const request: UserUpdateProfileRequest = {
     profilePicUrl: profilePicUrl.value,
     bioText: bio.value,
-    birthday: birthday.value ? new Date(birthday.value) : undefined,
+    birthday: birthday.value
   }
 
   try {
