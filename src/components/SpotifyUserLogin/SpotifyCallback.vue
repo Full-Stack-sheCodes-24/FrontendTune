@@ -1,6 +1,8 @@
+<style>@import'./SpotifyCallback.css';</style>
+
 <template>
-    <div>
-        <h1>Loading...</h1>
+    <div class="loading">
+        <img src="https://giffiles.alphacoders.com/170/170278.gif" alt="Loading..." />
     </div>
 </template>
 <script setup lang="ts">
