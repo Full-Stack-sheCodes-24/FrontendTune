@@ -5,7 +5,7 @@
       <img class="profile-picture" :src="profilePicUrl">
       <div class ="profile-info">
           <h1 v-text="name"></h1>
-          <p v-text="bioText" data-placeholder="This person has no bio." contenteditable></p>
+          <p v-text="bioTextWithDefault"></p>
           <p v-if="formattedBirthday" v-text="`Born ${formattedBirthday}`"></p>
       </div>
     </div>
@@ -21,7 +21,7 @@
 import { computed, ref } from 'vue';
 import EditProfileModal from '@/components/EditProfile/EditProfile.vue';
 
-const { birthday } = defineProps({
+const { bioText, birthday } = defineProps({
   isOwner: {
     type: Boolean,
     required: true
@@ -33,7 +33,7 @@ const { birthday } = defineProps({
 });
 
 const formattedBirthday = computed(() => formatDateToMMDDYYYY(birthday));
-
+const bioTextWithDefault = computed(() => bioText ?? "This person has no bio.");
 const isModalOpen = ref(false);
 
 const openEditModal = () => {
@@ -54,4 +54,3 @@ function formatDateToMMDDYYYY(date : Date | undefined) : string | null {
 }
  
 </script>
-

@@ -32,8 +32,4 @@
         background-color: #f0f0f0; /* Slightly darker on hover */
         transition: background-color 0.3s; /* Smooth transition */
     }
-
-    p:empty:not(:focus)::before {
-        content: attr(data-placeholder);
-      }
 }
