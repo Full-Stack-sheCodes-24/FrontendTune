@@ -27,12 +27,17 @@
   max-height: calc(5 * 45px);
   overflow-y: auto;
   padding: 10px;
+  width: 100%;
 }
 .spotify-search-results div {
   padding: 10px;
   border-bottom: 1px solid #eee;
 }
-
 .spotify-search-results div:hover {
   background-color: #C8D9E6;
+}
+.track-item{
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap;
 }

@@ -27,7 +27,7 @@
                 :key = "track.id"
                 @click="selectSong(track)"
                 class = "track-item">
-            {{ track.name }}
+                {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
         </div>
         </div>
     </div>

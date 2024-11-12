@@ -11,7 +11,8 @@ export class SpotifySearchMapper {
                 href: spotifyTrackDTO.href,
                 id: spotifyTrackDTO.id,
                 album: spotifyTrackDTO.album,
-                preview_url: spotifyTrackDTO.preview_url
+                preview_url: spotifyTrackDTO.preview_url,
+                artist: spotifyTrackDTO.artists
             } as Track);
         });
 
