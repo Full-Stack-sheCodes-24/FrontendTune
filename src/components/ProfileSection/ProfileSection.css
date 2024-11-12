@@ -21,15 +21,19 @@
         }
     }
 
-    i {
-        color: #2f4676;
-    }
-
     .btn-edit-profile {
+        border-radius: 50%; /* Circle */
         height: fit-content;
-        background-color: transparent;
-        border-color: transparent;
-        border-radius: 8px;
+        width: fit-content;
+        border: none;
+        cursor: pointer;
+        line-height: 0;
+        padding: 4px;
+        background: none;
+
+        i {
+            color:#304674;
+        }
     }
 
     .btn-edit-profile:hover {
