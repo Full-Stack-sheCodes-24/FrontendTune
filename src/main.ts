@@ -1,5 +1,5 @@
 import './assets/main.css';
-import { createApp } from 'vue';
+import { createApp, watch } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -31,10 +31,10 @@ createApp(App)
     .use(pinia)
     .mount('#app');
 
-const userState = localStorage.getItem("user_state");
-const userStore = useUserStateStore()
 
-// If userState exists in localStorage, hydrate the userStateStore
-if (userState != null) {
-  userStore.$patch(JSON.parse(userState));
-}
+// Any time the state is updated, update our local storage
+watch(pinia.state, state => {
+  localStorage.setItem('user_state', JSON.stringify(state.userState));
+},
+{ deep: true}
+);

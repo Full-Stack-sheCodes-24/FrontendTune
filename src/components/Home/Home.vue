@@ -6,8 +6,8 @@
                 :is-owner="true"
                 :profile-pic-url="userStateStore.profilePicUrl"
                 :name="userStateStore.name"
-                :bio-text="exampleBioText"
-                :birthday="exampleBirthday">
+                :bio-text="userStateStore.bioText"
+                :birthday="userStateStore.getBirthdayAsDate">
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
