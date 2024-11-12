@@ -22,9 +22,13 @@
     <div>
         <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput">
         <button @click="search(inputText)">Search</button>
-        <div v-for="track in searchResults">
-            <button @click="selectSong(track)">Select</button>
-            {{ track.name }}
+        <div class = "spotify-search-results">
+            <div v-for="track in searchResults"
+                :key = "track.id"
+                @click="selectSong(track)"
+                class = "track-item">
+                {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
+        </div>
         </div>
     </div>
 </template>
