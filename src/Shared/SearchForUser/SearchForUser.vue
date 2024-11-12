@@ -35,8 +35,10 @@ import { nextTick, ref } from 'vue';
 import { UserSearchClient } from '../Clients/UserSearchClient';
 import type { UserState } from '../Models/UserState';
 import { useRouter } from 'vue-router';
+import { useUserStateStore } from '../UserStateStore';
 
 const router = useRouter();
+const userStateStore = useUserStateStore();
 const client = new UserSearchClient();
 
 const inputRef = ref<HTMLElement | null>();
@@ -92,6 +94,11 @@ function redirect(user : UserState) {
     showSearchResults.value = false;
     inputRef.value!.blur();
     query.value = '';
+    // If user clicks on themself, send them to their home page
+    if (user.id === userStateStore.id) {
+        router.push({ name: 'Home' });
+        return;
+    }
     router.push({ path: `/user/${user.id}` });
 }
 
