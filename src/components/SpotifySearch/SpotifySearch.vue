@@ -5,7 +5,7 @@
             :src="selectedSongImg"
             :class="{ 'pause-animation': isPaused }"/>
         <div>
-            <p v-if="isSelected && selectedSongPreviewUrl == null">{{ selectedSongName }}&nbsp;{{ noPreviewUrlMsg }}</p>
+            <p v-if="isSelected && !(hasPreviewUrl)">{{ selectedSongName }}&nbsp;{{ noPreviewUrlMsg }}</p>
             <p v-else-if="isSelected && selectedSongPreviewUrl != null">{{ selectedSongName }}</p>
             <p v-show="selectedSongPreviewUrl != null">
                 <audio controls autoplay loop
@@ -49,6 +49,7 @@ const inputText = ref();
 const mapper = new SpotifySearchMapper();
 const selectedSongName = ref();
 const isSelected = ref(false);
+const hasPreviewUrl = ref(true);
 const selectedSongImg = ref();
 const selectedSongPreviewUrl = ref();
 const isPaused = ref(false);
@@ -72,6 +73,9 @@ async function selectSong(track : Track){
         }).catch(error => {
             console.log(error);
         });
+        if (selectedSongPreviewUrl.value == null){
+            hasPreviewUrl.value = false;
+        }
     }
 
     selectedSongName.value = track.name;

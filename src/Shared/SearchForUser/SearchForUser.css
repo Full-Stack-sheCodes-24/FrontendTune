@@ -26,6 +26,10 @@
         background-color: #C8D9E6;
     }
 
+    input::placeholder {
+        color: #304674;
+    }
+
     .search-results-container {
         position: absolute;
         padding: 10px;
