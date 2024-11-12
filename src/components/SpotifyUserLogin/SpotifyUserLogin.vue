@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Toast from '@/Shared/Toast/Toast.vue';
 
@@ -26,7 +26,7 @@ const route = useRoute();
 
 const loginErrorHappened = ref(false);
 
-onMounted(() => {
+onBeforeMount(() => {
   const error = route.path.endsWith('/error');
   loginErrorHappened.value = error;
 });

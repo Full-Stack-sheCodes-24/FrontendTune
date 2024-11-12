@@ -13,11 +13,12 @@
 import { ref } from 'vue';
 
 const props = defineProps({
+    isVisible: Boolean,
     message: String,
     isError: Boolean
 });
 
-const isVisible = ref(true);
+const isVisible = ref(props.isVisible);
 
 function hideToast() {
     isVisible.value = false;

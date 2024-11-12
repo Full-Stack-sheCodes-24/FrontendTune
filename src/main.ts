@@ -14,6 +14,7 @@ const routes = [
   { path: '/', redirect: '/home' }, 
   { path: '/home', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
+  { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
   { path: '/logout', name: 'Logout', component: Logout },
   { path: '/callback', name: 'Callback', component: SpotifyCallback }
 ];
