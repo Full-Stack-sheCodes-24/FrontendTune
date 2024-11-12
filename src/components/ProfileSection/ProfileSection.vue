@@ -9,7 +9,9 @@
           <p v-if="formattedBirthday" v-text="`Born ${formattedBirthday}`"></p>
       </div>
     </div>
-    <button v-if="isOwner"class="btn-edit-profile" @click="openEditModal">Edit Profile</button>
+    <button v-if="isOwner" class="btn-edit-profile" @click="openEditModal">
+      <i class="material-symbols-outlined">edit</i>
+    </button>
     <EditProfileModal
       :isModalOpen="isModalOpen"
       :closeModal="closeModal"
