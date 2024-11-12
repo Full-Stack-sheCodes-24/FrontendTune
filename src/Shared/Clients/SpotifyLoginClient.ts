@@ -9,6 +9,7 @@ export class SpotifyLoginClient {
         });
 
         const response = await client.get(`/Spotify/login/${request.authorizationCode}`);
+
         return response.data;
     }
 }

@@ -23,7 +23,7 @@
         height: 100%;
         padding-left: 40px;
         padding-right: 6px;
-        background-color: #C8D9E6;
+        background-color: transparent;
     }
 
     input::placeholder {

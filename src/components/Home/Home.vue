@@ -47,7 +47,7 @@ onBeforeMount(() => {
     const userState = localStorage.getItem("user_state");
 
     // If userState does NOT exist in localStorage, reroute to login page
-    if (userState == null) {
+    if (userState == null || JSON.parse(userState).id == null) {
         router.push({ name: 'Login' });
     }
     // otherwise, load the local storage if the userStateStore hasn't already been loaded.

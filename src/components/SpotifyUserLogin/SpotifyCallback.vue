@@ -23,19 +23,16 @@ onBeforeMount(async () => {
         //send code to our backend
         const client = new SpotifyLoginClient();
         await client.execute({ authorizationCode: code }).then(response => {
-            // On success, save userState in local storage
-            localStorage.setItem("user_state", JSON.stringify(response));
-
             // Save userState in pinia store to allow home page to update
-            userStateStore.$patch(response);
+            userStateStore.$patch(response!);
+            // Redirect home
+            router.push({ name: 'Home' });
         }).catch(error => {
             // If error, reroute to login page and print error to console
             console.log(error);
-            router.push({ name: 'Login' });
+            router.push({ name: 'LoginError' });
+            return;
         });
-
-        // Redirect home
-        router.push({ name: 'Home' });
     }
 })
 </script>

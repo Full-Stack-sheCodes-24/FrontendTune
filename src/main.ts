@@ -8,13 +8,13 @@ import SpotifyUserLogin from '@/components/SpotifyUserLogin/SpotifyUserLogin.vue
 import Logout from '@/components/Logout/Logout.vue';
 import SpotifyCallback from '@/components/SpotifyUserLogin/SpotifyCallback.vue';
 import UserProfilePage from '@/components/UserProfilePage/UserProfilePage.vue';
-import { useUserStateStore } from './Shared/UserStateStore';
 
 const routes = [
-  { path: '/user/:userId', name: 'User', component: UserProfilePage, props: true },
+  { path: '/user/:userId', name: 'User', component: UserProfilePage },
   { path: '/', redirect: '/home' }, 
   { path: '/home', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
+  { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
   { path: '/logout', name: 'Logout', component: Logout },
   { path: '/callback', name: 'Callback', component: SpotifyCallback }
 ];
