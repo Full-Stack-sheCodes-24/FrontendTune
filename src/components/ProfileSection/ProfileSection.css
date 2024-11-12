@@ -21,11 +21,15 @@
         }
     }
 
+    i {
+        color: #2f4676;
+    }
+
     .btn-edit-profile {
-        background-color: #fff; /* #fff2f4#faf5fd Light background color */
-        border: 1px solid #ddd; /* Soft border */
-        border-radius: 8px; /* Rounded corners */
         height: fit-content;
+        background-color: transparent;
+        border-color: transparent;
+        border-radius: 8px;
     }
 
     .btn-edit-profile:hover {
