@@ -1,7 +1,7 @@
 <style>@import'./SearchForUser.css';</style>
 <template>
     <div ref="searchUserDiv" class="search-for-user-container">
-        <i class="material-icons">search</i>
+        <i class="material-symbols-outlined">search</i>
         <input
             ref="inputRef"
             v-model="query"
