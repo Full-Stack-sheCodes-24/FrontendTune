@@ -49,7 +49,7 @@ export const useUserStateStore = defineStore('userState', {
                     if(error.response.status == HttpStatusCode.Unauthorized){
                         localStorage.removeItem("user_state");
                         this.$reset();
-                        this.$router.push({ name: 'Login' });
+                        this.router.push({ name: 'Login' });
                     }
                 });
             }
