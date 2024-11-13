@@ -6,6 +6,7 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #bac52d;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,6 +43,14 @@
     border-radius: 5px;
     padding: 8px;
     resize: none;
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+.entry-textarea:focus {
+    border-color: #7d1f1f;
+    outline: none;
+    box-shadow: 0 0 5px rgba(154, 34, 72, 0.5);
 }
 
 /* Save button */
@@ -70,3 +79,21 @@
     transition: 0.3s; /* Smooth transition */
 }
 
+/* for the birthday date area */
+.dateinput {
+    width: 180px; 
+    padding: 8px 12px;
+    margin-top: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dateinput:focus {
+    border-color: #7d1f1f;
+    outline: none;
+    box-shadow: 0 0 5px rgba(154, 34, 72, 0.5);
+}

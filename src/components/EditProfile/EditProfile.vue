@@ -12,10 +12,10 @@
       <AddImage @fileSelected="handleFileSelected"/>
 
       <form @submit.prevent="submitForm">
-        <h4>Biography</h4>
+        <h4><br>Biography</h4>
         <textarea v-model="newBioText" class="entry-textarea" placeholder="Enter a bio." ></textarea>
         <h4>Birthday</h4>
-        <input type="date" v-model="newBirthday" />
+        <input type="date" v-model="newBirthday" class="dateinput" />
         <br>
 
         <!-- Post button -->
