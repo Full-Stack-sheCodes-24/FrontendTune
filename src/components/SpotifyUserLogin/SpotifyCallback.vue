@@ -25,6 +25,7 @@ onBeforeMount(async () => {
         await client.execute({ authorizationCode: code }).then(response => {
             // Save userState in pinia store to allow home page to update
             userStateStore.$patch(response!);
+            userStateStore.updateExpiryDate();
             // Redirect home
             router.push({ name: 'Home' });
         }).catch(error => {

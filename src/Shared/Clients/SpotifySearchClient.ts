@@ -6,6 +6,7 @@ import { useUserStateStore } from '../UserStateStore';
 export class SpotifySearchClient {
     async execute(request : SpotifySearchRequest) : Promise<SpotifySearchResponse> {
         const userState = useUserStateStore();
+        await userState.checkAccessToken();
         const token = userState.auth.accessToken;
         const userId = userState.id;
 
