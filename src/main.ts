@@ -2,12 +2,13 @@ import './assets/main.css';
 import { createApp, watch } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, useRouter, type Router } from 'vue-router';
 import Home from '@/components/Home/Home.vue';
 import SpotifyUserLogin from '@/components/SpotifyUserLogin/SpotifyUserLogin.vue';
 import Logout from '@/components/Logout/Logout.vue';
 import SpotifyCallback from '@/components/SpotifyUserLogin/SpotifyCallback.vue';
 import UserProfilePage from '@/components/UserProfilePage/UserProfilePage.vue';
+import { markRaw } from 'vue'
 
 const routes = [
   { path: '/user/:userId', name: 'User', component: UserProfilePage },
@@ -25,6 +26,14 @@ const router = createRouter({
 });
 
 const pinia = createPinia();
+declare module 'pinia' {
+  export interface PiniaCustomProperties {
+    router: Router
+  }
+}
+pinia.use(({ store }) => {
+  store.router = markRaw(router)
+});
 
 createApp(App)
     .use(router)

@@ -9,6 +9,7 @@ export interface UserState {
     entries: Entry[];
     auth: {accessToken: string,
         refreshToken: string,
-        expiresIn: number
+        expiresIn: number,
+        expiryDate: Date
     }
 }
