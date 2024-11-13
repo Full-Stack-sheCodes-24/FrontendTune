@@ -14,7 +14,8 @@ export const useUserStateStore = defineStore('userState', {
             profilePicUrl: null!,
             bioText: null!,
             birthday: null!,
-            entries: [] as Entry[]
+            entries: [] as Entry[],
+            auth: null!
         }
     },
     getters: {
