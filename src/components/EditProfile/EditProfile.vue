@@ -11,8 +11,6 @@
       <br>
       <AddImage @fileSelected="handleFileSelected"/>
 
-      <h4>Background</h4>
-
       <form @submit.prevent="submitForm">
         <h4>Biography</h4>
         <textarea v-model="newBioText" class="entry-textarea" placeholder="Enter a bio." ></textarea>
