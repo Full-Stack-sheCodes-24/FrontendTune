@@ -2,7 +2,9 @@
 <template>
   <div class="profile-section-container card">
     <div class="profile-info-container">
-      <img class="profile-picture" :src="profilePicUrl">
+      <div class="profile-pic-wrapper">
+        <img class="profile-picture" :src="profilePicUrl">
+      </div>
       <div class ="profile-info">
           <h1 v-text="name"></h1>
           <p v-text="bioTextWithDefault"></p>

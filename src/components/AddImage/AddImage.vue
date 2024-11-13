@@ -1,7 +1,7 @@
 <style>@import'./AddImage.css';</style>
 
 <template>
-    <input type="file" @change="onFileSelected" accept="image/*" />
+    <input type="file" class="uploading-image" @change="onFileSelected" accept="image/*" />
  </template>
 
 <script setup lang="ts">

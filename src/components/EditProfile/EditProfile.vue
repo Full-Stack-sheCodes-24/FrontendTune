@@ -8,15 +8,17 @@
       <h4>Profile Picture</h4>
 
       <img class="edit-profile-picture" :src="newProfilePicUrl">
-      <p></p>
+      <br>
       <AddImage @fileSelected="handleFileSelected"/>
+
+      <h4>Background</h4>
 
       <form @submit.prevent="submitForm">
         <h4>Biography</h4>
         <textarea v-model="newBioText" class="entry-textarea" placeholder="Enter a bio." ></textarea>
         <h4>Birthday</h4>
         <input type="date" v-model="newBirthday" />
-        <p></p>
+        <br>
 
         <!-- Post button -->
         <button type="submit" class="save-button">Save</button>

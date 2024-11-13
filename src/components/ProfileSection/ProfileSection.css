@@ -7,17 +7,30 @@
         display: flex;
         flex-direction: row;
 
-        .profile-picture {
+        .profile-pic-wrapper {
             width: 128px;
             height: 128px;
-            border-radius: 50%; /* Makes the picture circular */
-            margin-right: 20px;
+            border-radius: 100%; 
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .profile-picture {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
         }
 
         .profile-info p {
-            margin: 5px 0 ;
+            margin: 5px 15px ;
             display: flex;
             flex-direction: column;
+        }
+
+        .profile-info h1 {
+            margin-left: 10px ;
         }
     }
 
