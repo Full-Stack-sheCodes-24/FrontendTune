@@ -5,9 +5,11 @@
     <div class="modal-content">
       <button @click="closeModal" class="close-button">×</button>
       <h1>Edit Profile</h1>
-
       <h4>Profile Picture</h4>
-      <img class="edit-profile-picture" :src="profilePicUrl">
+
+      <img class="edit-profile-picture" :src="newProfilePicUrl">
+      <p></p>
+      <AddImage @fileSelected="handleFileSelected"/>
 
       <form @submit.prevent="submitForm">
         <h4>Biography</h4>
@@ -26,6 +28,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import AddImage from '@/components/AddImage/AddImage.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 const userStateStore = useUserStateStore();
 
@@ -37,24 +40,30 @@ const props = defineProps<{
   closeModal: () => void;
 }>();
 
-const profilePicUrl = ref(userStateStore.profilePicUrl);
+const newProfilePicUrl = ref(userStateStore.profilePicUrl);
 const newBioText = ref(userStateStore.bioText);
 const newBirthday = ref(userStateStore.getBirthdayAsDate.toISOString().slice(0, 10));
+
+const handleFileSelected = (fileUrl: string | undefined) => {
+  if (fileUrl) {
+    newProfilePicUrl.value = fileUrl; // Set profilePicUrl to the selected image URL
+  }
+};
 
 const updateUserProfileClient = new UserUpdateProfileClient();
 
 const submitForm = async () => {
-  if (profilePicUrl.value == userStateStore.profilePicUrl
+  if (newProfilePicUrl.value == userStateStore.profilePicUrl
     && newBioText.value == userStateStore.bioText
     && newBirthday.value == userStateStore.getBirthdayAsDate.toISOString().slice(0, 10)
   ) {
-    console.log("Nothing editted, not sending an API request")
+    console.log("Nothing edited, not sending an API request")
     props.closeModal();
     return;
   }
 
   const request: UserUpdateProfileRequest = {
-    profilePicUrl: profilePicUrl.value,
+    profilePicUrl: newProfilePicUrl.value,
     bioText: newBioText.value,
     birthday: new Date(newBirthday.value)
   }
@@ -63,8 +72,9 @@ const submitForm = async () => {
     await updateUserProfileClient.execute(request);
 
     userStateStore.$patch({ 
-      bioText: newBioText.value, 
-      birthday: new Date(newBirthday.value)
+        profilePicUrl: newProfilePicUrl.value,
+        bioText: newBioText.value, 
+        birthday: new Date(newBirthday.value)
     })
 
     console.log('Profile updated successfully:');
@@ -74,15 +84,5 @@ const submitForm = async () => {
   }
 };
 
-// const isImageModalOpen = ref(false);
-
-// const addImage = () => {
-//     isImageModalOpen.value = true;
-// };
-
-// const closeImageModal = () => {
-//     isImageModalOpen.value = false;
-// };
- 
 </script>
   
