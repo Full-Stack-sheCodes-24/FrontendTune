@@ -14,7 +14,7 @@ main {
   }
 } */
 body {
-  background: url('https://images8.alphacoders.com/135/thumb-1920-1354012.png') no-repeat center center fixed; /* Use '@' to reference 'src' folder */
+  background: url("@/assets/blob-scene-haikei.svg") no-repeat center center fixed; /* Use '@' to reference 'src' folder */
   background-size: cover; /* Ensures the image covers the entire page */
   margin: 0; /* Removes default margin */
   height: 100vh; /* Makes sure the body takes up the entire viewport height */
