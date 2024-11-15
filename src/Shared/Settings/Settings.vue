@@ -13,7 +13,7 @@
                     class="tab clickable"
                     @click="handleTabClick($event)">
                     <i class="material-symbols-outlined">monitor</i>
-                    <h2>Display</h2>
+                    <h2>Display Preferences</h2>
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 .nav-logout-button {
-  color: #304674;
+  color: var(--text-color);
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border: 1px solid #304674;
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer; /* Ensure the button looks clickable */

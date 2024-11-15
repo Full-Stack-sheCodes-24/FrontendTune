@@ -1,4 +1,6 @@
 .display-container {
+    padding: 0 10px;
+    
     .title {
         padding-bottom: 10px;
         font-weight: bold;
