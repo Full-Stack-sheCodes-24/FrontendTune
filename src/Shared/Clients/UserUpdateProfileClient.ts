@@ -5,7 +5,7 @@ import { useUserStateStore } from '../UserStateStore';
 export class UserUpdateProfileClient {
     async execute(request : UserUpdateProfileRequest) {
         const userState = useUserStateStore();
-        userState.checkAccessToken();
+        await userState.checkAccessToken();
         const token = userState.auth.accessToken;
         const userId = userState.id;
 
