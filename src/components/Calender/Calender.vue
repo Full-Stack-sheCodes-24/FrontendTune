@@ -3,8 +3,10 @@
     <div class="calender-container card">
         <h1 v-text="month"></h1>
         <div class="calender-item-container">
-            <CalenderItem v-for="day in days">
-            </CalenderItem>
+            <CalenderItem v-for="day in days"
+                :currentDay="day"
+                :albumCoverCalendar=undefined
+            />
         </div>
     </div>
 </template>

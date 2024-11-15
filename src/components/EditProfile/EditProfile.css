@@ -74,6 +74,9 @@
     border-radius: 50%; /* Makes the picture circular */
     margin-left: 0px;
 }
+
+/* This is for if anyone wants to make the click on profile picture to add image,
+if not this could be removed? */
 .edit-profile-picture:hover {
     filter: brightness(70%);
     transition: 0.3s; /* Smooth transition */
