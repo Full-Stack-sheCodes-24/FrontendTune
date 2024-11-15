@@ -15,7 +15,7 @@
         margin: auto;
         justify-content: space-between;
 
-        img {
+        .logo {
             height: 40px;
             cursor: pointer;
             mix-blend-mode: color-burn;

@@ -17,6 +17,7 @@
     }
 
     input {
+        color: var(--text-color);
         border-radius: 4px;
         border: 1px solid var(--primary-color);
         width: 100%;
@@ -44,7 +45,7 @@
             margin: 4px;
             cursor: pointer;
     
-            img {
+            .profile-pic {
                 height: 50px;
                 width: 50px;
                 border-radius: 50%;

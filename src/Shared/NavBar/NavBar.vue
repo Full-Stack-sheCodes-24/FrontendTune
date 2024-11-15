@@ -4,7 +4,7 @@
         <div class="navbar-layout">
             <!-- If logged in, do not show login button -->
              <div class="btn-container">
-                <img src="@/assets/logo.png" @click="redirectToHome">
+                <img class="logo" src="@/assets/logo.png" @click="redirectToHome">
                 <!-- If logged in, do not show login button -->
                 <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink>
                 <RouterLink to="/home" v-if="userStateStore.isLoggedIn">Home</RouterLink>

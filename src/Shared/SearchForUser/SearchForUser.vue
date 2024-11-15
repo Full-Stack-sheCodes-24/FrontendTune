@@ -18,7 +18,7 @@
                 v-for="result in searchResults"
                 @click="redirect(result)"
                 @mousedown.prevent>
-                <img :src="result.profilePicUrl"></img>
+                <img class="profile-pic" :src="result.profilePicUrl"></img>
                 <p>{{result.name}}</p>
             </div>
             <p v-if="query.length !==0 && noSearchResults">No search results</p>
