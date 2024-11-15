@@ -2,15 +2,12 @@
     position: absolute;
     top: 20%;
     left: 50%;
-    margin-left: -100px;
-    width: 200px;
-    height: 40px;
+    transform: translate(-50%, 0);
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 20px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: opacity 0.3s;
     background-color: #2ecc71;
     text-align: center;
     line-height: 0;

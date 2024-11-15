@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    background-color: #c8d9e65d;
+    background-color: var(--transparent-color);
     border-radius: 15%;
     justify-content: center;
     height: auto;
@@ -14,18 +14,21 @@
         max-width: 60%; /* Limit the width of content */
         text-align: center;
 
+        img {
+            mix-blend-mode: color-burn;
+            filter: brightness(.5) contrast(4);
+        }
+
         /* Styling for the title */
         .title {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #304674;
             margin-bottom: 0.5rem;
         }
 
         /* Styling for the description */
         .description {
             font-size: 1.2rem;
-            color: #223152; /* Gray text */
             margin-bottom: 1.5rem;
         }
 

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import type { UserUpdateProfileRequest } from './UserUpdateProfileRequest';
 import { useUserStateStore } from '../UserStateStore';
+import type { UserSettingsRequest } from './UserSettingsRequest';
 
-export class UserUpdateProfileClient {
-    async execute(request : UserUpdateProfileRequest) {
+export class UserSettingsClient {
+    async execute(request : UserSettingsRequest) {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
@@ -16,7 +16,7 @@ export class UserUpdateProfileClient {
             },
         });
 
-        const response = await client.put(`/Users/${userId}/profile`, request);
+        const response = await client.put(`/Users/${userId}/settings`, request);
         return response.data;
     }
 }

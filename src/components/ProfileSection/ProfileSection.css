@@ -45,7 +45,7 @@
         background: none;
 
         i {
-            color:#304674;
+            color:var(--primary-color);
         }
     }
 

@@ -12,6 +12,7 @@
              <div class="btn-container">
                 <SearchForUser></SearchForUser>
                 <Logout v-if="userStateStore.isLoggedIn"></Logout>
+                <RouterLink to="/settings" v-if="userStateStore.isLoggedIn">Settings</RouterLink>
              </div>
         </div>
     </nav>

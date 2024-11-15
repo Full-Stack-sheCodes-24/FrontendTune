@@ -7,7 +7,16 @@ import { HttpStatusCode } from 'axios';
 export const useUserStateStore = defineStore('userState', {
     state: (): UserState => {
         // If user state is already in local storage, hydrate the pinia store
-        if (localStorage.getItem('user_state')) return JSON.parse(localStorage.getItem('user_state')!);
+        if (localStorage.getItem('user_state')) {
+            const parsedUserState = JSON.parse(localStorage.getItem('user_state')!);
+
+            // Update theme
+            if (parsedUserState.settings?.theme != null) {
+                document.body.className = (`${parsedUserState.settings.theme}-theme`);
+            }
+
+            return parsedUserState;
+        }
 
         // Else, initialize the pinia store
         return {
@@ -17,7 +26,8 @@ export const useUserStateStore = defineStore('userState', {
             bioText: null!,
             birthday: null!,
             entries: [] as Entry[],
-            auth: null!
+            auth: null!,
+            settings: null!
         }
     },
     getters: {
@@ -26,8 +36,7 @@ export const useUserStateStore = defineStore('userState', {
         getExpiryAsDate: (state) => new Date(state.auth.expiryDate)
     },
     actions: {
-        updateExpiryDate()
-        {
+        updateExpiryDate() {
             const currentDate = new Date();
             const currentMinutes = currentDate.getMinutes();
             const newMinutes = currentMinutes + this.auth.expiresIn;
@@ -35,10 +44,9 @@ export const useUserStateStore = defineStore('userState', {
             currentDate.setMinutes(newMinutes);
             this.auth.expiryDate = currentDate;
         },
-        async checkAccessToken()
-        {
+        async checkAccessToken() {
             const currentDate = new Date();
-            if(currentDate > this.getExpiryAsDate){
+            if (currentDate > this.getExpiryAsDate){
                 const client = new NewAuthTokenClient();
                 await client.execute().then(response => {
                     this.auth.expiresIn = response.expiresIn;
@@ -46,12 +54,17 @@ export const useUserStateStore = defineStore('userState', {
                     this.updateExpiryDate();
                 }).catch(error => {
                     console.log(error.response.status);
-                    if(error.response.status == HttpStatusCode.Unauthorized){
+                    if (error.response.status === HttpStatusCode.Unauthorized){
                         localStorage.removeItem("user_state");
                         this.$reset();
                         this.router.push({ name: 'Login' });
                     }
                 });
+            }
+        },
+        updateTheme() {
+            if (this.settings?.theme != null) {
+                document.body.className = (`${this.settings.theme}-theme`);
             }
         }
     }

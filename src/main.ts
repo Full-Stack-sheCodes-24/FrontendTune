@@ -6,6 +6,7 @@ import { createRouter, createWebHistory, useRouter, type Router } from 'vue-rout
 import Home from '@/components/Home/Home.vue';
 import SpotifyUserLogin from '@/components/SpotifyUserLogin/SpotifyUserLogin.vue';
 import Logout from '@/components/Logout/Logout.vue';
+import Settings from '@/Shared/Settings/Settings.vue'
 import SpotifyCallback from '@/components/SpotifyUserLogin/SpotifyCallback.vue';
 import UserProfilePage from '@/components/UserProfilePage/UserProfilePage.vue';
 import { markRaw } from 'vue'
@@ -17,6 +18,7 @@ const routes = [
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
   { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
   { path: '/logout', name: 'Logout', component: Logout },
+  { path: '/settings', name: 'Settings', component: Settings },
   { path: '/callback', name: 'Callback', component: SpotifyCallback }
 ];
 
@@ -39,7 +41,6 @@ createApp(App)
     .use(router)
     .use(pinia)
     .mount('#app');
-
 
 // Any time the state is updated, update our local storage
 watch(pinia.state, state => {
