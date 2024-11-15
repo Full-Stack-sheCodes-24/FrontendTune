@@ -11,7 +11,7 @@
              </div>
              <div class="btn-container">
                 <SearchForUser></SearchForUser>
-                <RouterLink to="/logout" v-if="userStateStore.isLoggedIn">Logout</RouterLink>
+                <Logout v-if="userStateStore.isLoggedIn"></Logout>
              </div>
         </div>
     </nav>
@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import SearchForUser from '../SearchForUser/SearchForUser.vue';
+import Logout from '../../components/Logout/Logout.vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();

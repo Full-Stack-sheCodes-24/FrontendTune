@@ -1,3 +1,73 @@
-.logout-container {
-    
+.nav-logout-button {
+  color: #304674;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #304674;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer; /* Ensure the button looks clickable */
+}
+
+.logout-button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Modal */
+.logout-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+}
+
+/* Logout and Cancel buttons */
+.logout-button,
+.cancel-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-button {
+  background-color: #4CAF50; /* Red for logout */
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #45A049; /* Darker red on hover */
+}
+
+.cancel-button {
+  background-color: #e74c3c; /* Blue for cancel */
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b; /* Darker blue on hover */
+}
+
+/* Button container to arrange the buttons side by side */
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
 }
