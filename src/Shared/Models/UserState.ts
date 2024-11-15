@@ -7,9 +7,13 @@ export interface UserState {
     bioText: string;
     birthday: Date;
     entries: Entry[];
-    auth: {accessToken: string,
+    auth: {
+        accessToken: string,
         refreshToken: string,
         expiresIn: number,
         expiryDate: Date
+    };
+    settings: {
+        theme: string;
     }
 }

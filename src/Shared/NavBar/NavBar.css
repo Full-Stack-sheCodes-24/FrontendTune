@@ -1,6 +1,6 @@
 .navbar {
     display: flex;
-    background-color: #c8d9e681;
+    background-color: var(--transparent-color);
     align-items: center;
     font-size: 16px;
     padding: 1rem;
@@ -18,13 +18,16 @@
         img {
             height: 40px;
             cursor: pointer;
+            mix-blend-mode: color-burn;
+            filter: brightness(.5) contrast(4);
         }
+    
 
         a {
-            color: #304674;
+            color: var(--text-color);
             text-decoration: none;
             padding: 0.5rem 1rem; /* Add padding inside the border */
-            border: 1px solid #304674; /* Border around each link */
+            border: 1px solid var(--primary-color); /* Border around each link */
             border-radius: 4px; /* Optional rounded corners */
         }
 

@@ -1,5 +1,5 @@
 .create-entry-container {
-    background-color: #c8d9e684;
+    background-color: var(--transparent-color);
     padding: 20px;
     border-radius: 8px;
     cursor: pointer;
@@ -7,7 +7,7 @@
 }
 
 .create-entry-container:hover {
-    background-color: #a0bbcfc8;
+    background-color: var(--transparent-hover-color);
     transition: background-color 0.3s; /* Smooth transition */
 }
 

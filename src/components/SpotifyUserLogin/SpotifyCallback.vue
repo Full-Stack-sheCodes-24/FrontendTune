@@ -26,6 +26,7 @@ onBeforeMount(async () => {
             // Save userState in pinia store to allow home page to update
             userStateStore.$patch(response!);
             userStateStore.updateExpiryDate();
+            userStateStore.updateTheme();
             // Redirect home
             router.push({ name: 'Home' });
         }).catch(error => {

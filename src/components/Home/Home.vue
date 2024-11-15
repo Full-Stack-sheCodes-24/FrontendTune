@@ -34,25 +34,16 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const userStateStore = useUserStateStore();
 
-const exampleBioText = "this is my profile information";
-const exampleBirthday = new Date();
-
 const entries = ref([] as Entry[]);
 
 const addEntry = (newEntry: Entry) => {
-  entries.value.unshift(newEntry); // Adds new entry to beginning of the array
+    entries.value.unshift(newEntry); // Adds new entry to beginning of the array
 };
 
 onBeforeMount(() => {
-    const userState = localStorage.getItem("user_state");
-
-    // If userState does NOT exist in localStorage, reroute to login page
-    if (userState == null || JSON.parse(userState).id == null) {
+    // If user is not logged in, reroute to Login page
+    if (!userStateStore.isLoggedIn) {
         router.push({ name: 'Login' });
-    }
-    // otherwise, load the local storage if the userStateStore hasn't already been loaded.
-    if (userStateStore.id != null) {
-        userStateStore.$patch(JSON.parse(userState!));
     }
 });
 
