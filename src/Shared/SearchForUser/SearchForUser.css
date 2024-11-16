@@ -66,9 +66,10 @@
 
 .darken-background {
     position: absolute;
+    display: border-box;
     top: 76px;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 76px);
     background-color: rgba(0, 0, 0, 0);
     transition: background-color 1s;

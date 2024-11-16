@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    background-color: var(--transparent-color);
+    background-color: var(--tertiary-color);
     border-radius: 15%;
     justify-content: center;
     height: auto;

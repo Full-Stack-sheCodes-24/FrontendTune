@@ -1,6 +1,6 @@
 .navbar {
     display: flex;
-    background-color: var(--transparent-color);
+    background-color: var(--tertiary-color);
     align-items: center;
     font-size: 16px;
     padding: 1rem;
