@@ -1,3 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
 .entry-container {
-    
+    position: relative;
+}
+.favicon-container {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 4px;
+}
+
+.favicon-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.music-play {
+    position: absolute;
+    top: 30%;
+    right: 5%;
+    border-radius: 8px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #e678c5;
+  }
+  
+  audio::-webkit-media-controls-current-time-display {
+    color: #fff;
+  }
+
+  audio::-webkit-media-controls-timeline {
+    background-color: #a664b3;
+    border-radius: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .output-text {
+    color: rgb(18, 8, 90);
+    font-family: "Indie Flower", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2em; /* Optional: Adjust size for better readability */
+    line-height: 1.5; /* Optional: Improve spacing for multiline text */
 }

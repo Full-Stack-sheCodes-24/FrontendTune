@@ -34,7 +34,7 @@ import { storeToRefs } from 'pinia';
 const router = useRouter();
 const userStateStore = useUserStateStore();
 
-const { entries } = storeToRefs(userStateStore);
+const entries = userStateStore.getEntriesWithDate
 
 onBeforeMount(() => {
     // If user is not logged in, reroute to Login page

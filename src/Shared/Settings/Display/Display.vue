@@ -31,6 +31,9 @@ async function handleThemeClick(event : MouseEvent) {
     const target = event.target as HTMLElement;
     const id = target.id;
 
+    // If selected theme is already the set theme, return
+    if (id === userStateStore.settings.theme) return;
+
     await client.execute({ theme: id }).then(() => {
         userStateStore.settings.theme = id;
         userStateStore.updateTheme();
