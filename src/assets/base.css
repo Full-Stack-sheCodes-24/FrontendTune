@@ -18,7 +18,7 @@
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100%;
   color: var(--text-color);
   background-color: var(--background-color);
   transition:
@@ -42,6 +42,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;   /* Always show vertical scroll bar */
 }
 
 .material-symbols-outlined {
