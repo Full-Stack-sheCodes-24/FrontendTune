@@ -10,11 +10,7 @@
       <button @click="closeModal" class="close-button">×</button>
       <h1>Create an Entry</h1>  
       <textarea v-model="entryText" placeholder="Write about your day..." class="entry-textarea"></textarea>
-      
-      <SpotifySearch></SpotifySearch>
-
-
-
+      <SpotifySearch @update-selected-track="updateSelectedTrack"></SpotifySearch>
       <!-- Post button -->
       <button @click="postEntry" class="post-button">Post</button>
     </div>
@@ -26,12 +22,15 @@ import { ref } from 'vue';
 import { CreateEntryClient } from '@/Shared/Clients/CreateEntryClient'; 
 import SpotifySearch from '@/components/SpotifySearch/SpotifySearch.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
-const userStateStore = useUserStateStore();
+import type { Entry } from '@/Shared/Models/Entry';
+import type { Track } from '@/Shared/Models/Track';
 
+const userStateStore = useUserStateStore();
+const createEntryClient = new CreateEntryClient(); //initialize CreateEntryClient
 
 const isModalOpen = ref(false);
 const entryText = ref('');
-const selectedTrack = ref({ name: "Some Track", uri: "some-uri", href: "some-href", id: "some-id" });
+const selectedTrack = ref();
 
 const openModal = () => {
   isModalOpen.value = true;
@@ -41,15 +40,12 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
-//const postEntry = () => {
-  //closeModal();
-//};
-
-const createEntryClient = new CreateEntryClient(); //initialize CreateEntryClient
-
+function updateSelectedTrack(newTrack : Track) {
+  selectedTrack.value = newTrack;
+}
 
 // Function to post the entry
-const postEntry = async () => {
+async function postEntry() {
   // Check if there's any content to post
   if (!entryText.value.trim()) {
     console.log("Empty entry.");
@@ -77,27 +73,6 @@ const postEntry = async () => {
   } catch (error) {
     console.error("Failed to post entry:", error);
   }
-};
-
+}
 
 </script> 
-  
- <!-- Props and data
-const isModalOpen = ref(false);
-const entryText = ref('');
-const selectedTrack = ref({ name: "Some Track", uri: "some-uri", href: "some-href", id: "some-id" });
-
-// Emitting `add-entry` w/ new entry details
-const postEntry = () => {
-  if (entryText.value.trim()) {
-    const newEntry: Entry = {
-      track: selectedTrack.value,
-      text: entryText.value,
-      date: new Date()
-    };
-    emit("add-entry", newEntry);
-    entryText.value = '';
-    closeModal();
-  }
-}; -->
-  

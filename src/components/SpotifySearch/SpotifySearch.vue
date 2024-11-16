@@ -50,11 +50,16 @@ const mapper = new SpotifySearchMapper();
 const selectedSongName = ref();
 const isSelected = ref(false);
 const hasPreviewUrl = ref(true);
+const selectedTrack = ref();
 const selectedSongImg = ref();
 const selectedSongPreviewUrl = ref();
 const isPaused = ref(false);
 const noPreviewUrlMsg = "does not have a preview track.";
 const audioPlayer = ref<HTMLAudioElement | null>(null);
+
+const emit = defineEmits<{
+    (event: 'update-selected-track', value: Track): void;
+}>();
 
 async function search(query : string) {
     await client.execute({ query }).then(response => {
@@ -63,6 +68,9 @@ async function search(query : string) {
 }
 
 async function selectSong(track : Track){
+    selectedTrack.value = track;
+    emit('update-selected-track', selectedTrack.value); // Let CreateEntry.vue know that the value has changed
+
     selectedSongPreviewUrl.value = track.preview_url;
 
     // Try getting the preview_url from a different spotify endpoint

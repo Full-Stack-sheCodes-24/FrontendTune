@@ -22,23 +22,19 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onBeforeMount } from 'vue';
 import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
 import CreateEntry from '@/components/CreateEntry/CreateEntry.vue';
 import EntryItem from '@/components/EntryItem/EntryItem.vue';
 import Calender from '@/components/Calender/Calender.vue';
-import type { Entry } from '@/Shared/Models/Entry';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
 
-const entries = ref([] as Entry[]);
-
-const addEntry = (newEntry: Entry) => {
-    entries.value.unshift(newEntry); // Adds new entry to beginning of the array
-};
+const { entries } = storeToRefs(userStateStore);
 
 onBeforeMount(() => {
     // If user is not logged in, reroute to Login page
@@ -46,52 +42,4 @@ onBeforeMount(() => {
         router.push({ name: 'Login' });
     }
 });
-
-onMounted(async () => {
-    entries.value = await fetchEntriesFromBackend();
-    console.log("Fetched entries:", entries.value);
-});
-
-
-
-async function fetchEntriesFromBackend() {
-  try {
-    const userState = useUserStateStore();
-    await userState.checkAccessToken();
-    
-    const userID = userState.id;
-    const token = userState.auth.accessToken;
-
-    if (!token) {
-      console.error("Token not found in user state");
-      return [];
-    }
-
-    // Construct the full API endpoint URL
-    const baseURL = import.meta.env.VITE_BACKEND_URL;
-    const endpoint = `${baseURL}/Users/${userID}/entries`;
-
-    // Make the API request
-    const response = await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch entries: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data; 
-  } catch (error) {
-    console.error("Error fetching entries from backend:", error);
-    return [];
-  }
-}
-
-
-
 </script>
