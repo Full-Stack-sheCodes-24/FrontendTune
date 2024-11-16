@@ -1,34 +1,36 @@
 <style>@import'./SpotifySearch.css';</style>
 <template>
-    <div class="selected-song-format">
-        <img v-if="isSelected"
-            :src="selectedSongImg"
-            :class="{ 'pause-animation': isPaused }"/>
+    <div class="spotify-search-container">
+        <div class="selected-song-format">
+            <img v-if="isSelected"
+                :src="selectedSongImg"
+                :class="{ 'pause-animation': isPaused }"/>
+            <div>
+                <p v-if="isSelected && !(hasPreviewUrl)">{{ selectedSongName }}&nbsp;{{ noPreviewUrlMsg }}</p>
+                <p v-else-if="isSelected && selectedSongPreviewUrl != null">{{ selectedSongName }}</p>
+                <p v-show="selectedSongPreviewUrl != null">
+                    <audio controls autoplay loop
+                        ref="audioPlayer"
+                        :src="selectedSongPreviewUrl"
+                        @pause="isPaused = true"
+                        @play="isPaused = false"
+                        @volumechange="saveVolumeLevel">
+                        Your browser does not support the audio element.
+                    </audio>
+                </p>
+            </div>
+        </div>
         <div>
-            <p v-if="isSelected && !(hasPreviewUrl)">{{ selectedSongName }}&nbsp;{{ noPreviewUrlMsg }}</p>
-            <p v-else-if="isSelected && selectedSongPreviewUrl != null">{{ selectedSongName }}</p>
-            <p v-show="selectedSongPreviewUrl != null">
-                <audio controls autoplay loop
-                    ref="audioPlayer"
-                    :src="selectedSongPreviewUrl"
-                    @pause="isPaused = true"
-                    @play="isPaused = false"
-                    @volumechange="saveVolumeLevel">
-                    Your browser does not support the audio element.
-                </audio>
-            </p>
-        </div>
-    </div>
-    <div>
-        <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput">
-        <button @click="search(inputText)">Search</button>
-        <div class = "spotify-search-results">
-            <div v-for="track in searchResults"
-                :key = "track.id"
-                @click="selectSong(track)"
-                class = "track-item">
-                {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
-        </div>
+            <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput">
+            <button @click="search(inputText)">Search</button>
+            <div class = "spotify-search-results">
+                <div v-for="track in searchResults"
+                    :key = "track.id"
+                    @click="selectSong(track)"
+                    class = "track-item">
+                    {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
+            </div>
+            </div>
         </div>
     </div>
 </template>
@@ -57,9 +59,7 @@ const isPaused = ref(false);
 const noPreviewUrlMsg = "does not have a preview track.";
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 
-const emit = defineEmits<{
-    (event: 'update-selected-track', value: Track): void;
-}>();
+const emit = defineEmits(['update-selected-track']);
 
 async function search(query : string) {
     await client.execute({ query }).then(response => {
