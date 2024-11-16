@@ -23,6 +23,9 @@ onBeforeMount(async () => {
         //send code to our backend
         const client = new SpotifyLoginClient();
         await client.execute({ authorizationCode: code }).then(response => {
+
+            console.log(response);
+            
             // Save userState in pinia store to allow home page to update
             userStateStore.$patch(response!);
             userStateStore.updateExpiryDate();
