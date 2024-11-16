@@ -1,12 +1,13 @@
 <style>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable">
-        <h1 v-text="entry.text"></h1>
-        <p>{{ entry.track.name }}  
-        <div class="favicon-container" @click="togglePlayback">
-            <img src="/favicon.ico" alt="Play Icon" class="favicon-icon" />
+        <h1 class= "output-text" v-text="entry.text"></h1>
+        <div class="track-info">
+            <p class="track-name">{{ entry.track.name }}</p>
+            <div class="favicon-container" @click="togglePlayback">
+                <img src="/favicon.ico" alt="Play Icon" class="favicon-icon" />
+            </div>
         </div>
-        </p>
         <div class="music-play" v-if="showPlayback">
             <audio controls autoplay loop :src="entry.track.preview_url || undefined">
                 Your browser does not support the audio element.
