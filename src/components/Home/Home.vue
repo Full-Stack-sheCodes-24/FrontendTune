@@ -22,63 +22,24 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onBeforeMount } from 'vue';
 import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
 import CreateEntry from '@/components/CreateEntry/CreateEntry.vue';
 import EntryItem from '@/components/EntryItem/EntryItem.vue';
 import Calender from '@/components/Calender/Calender.vue';
-import type { Entry } from '@/Shared/Models/Entry';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
 
-const exampleBioText = "this is my profile information";
-const exampleBirthday = new Date();
-
-const entries = ref([] as Entry[]);
-
-const addEntry = (newEntry: Entry) => {
-  entries.value.unshift(newEntry); // Adds new entry to beginning of the array
-};
+const { entries } = storeToRefs(userStateStore);
 
 onBeforeMount(() => {
-    const userState = localStorage.getItem("user_state");
-
-    // If userState does NOT exist in localStorage, reroute to login page
-    if (userState == null || JSON.parse(userState).id == null) {
+    // If user is not logged in, reroute to Login page
+    if (!userStateStore.isLoggedIn) {
         router.push({ name: 'Login' });
     }
-    // otherwise, load the local storage if the userStateStore hasn't already been loaded.
-    if (userStateStore.id != null) {
-        userStateStore.$patch(JSON.parse(userState!));
-    }
-});
-
-onMounted(async () => {
-    //Get entries from backend API
-    //Hardcode example entries for now
-    entries.value.push({
-        track: {
-            name: "Touch",
-            uri: "asdf",
-            href: "qewr",
-            id: "zxcv"
-        },
-        text: "what a great day! :D",
-        date: new Date()
-    });
-
-    entries.value.push({
-        track: {
-            name: "APT",
-            uri: "asdf",
-            href: "qewr",
-            id: "zxcv"
-        },
-        text: "what a horrible day! :(",
-        date: new Date()
-    });
 });
 </script>

@@ -1,5 +1,5 @@
 .create-entry-container {
-    background-color: #c8d9e684;
+    background-color: var(--transparent-color);
     padding: 20px;
     border-radius: 8px;
     cursor: pointer;
@@ -7,7 +7,7 @@
 }
 
 .create-entry-container:hover {
-    background-color: #a0bbcfc8;
+    background-color: var(--transparent-hover-color);
     transition: background-color 0.3s; /* Smooth transition */
 }
 
@@ -51,10 +51,15 @@
     width: 100%;
     height: 80px;
     margin-top: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
     padding: 8px;
     resize: none;
+    color: var(--text-color);
+}
+
+.entry-textarea::placeholder {
+    color: var(--text-color);
 }
 
 /* Post button */
@@ -62,12 +67,12 @@
     margin-top: 10px;
     padding: 10px;
     border: none;
-    background-color: #4CAF50;
+    background-color: var(--secondary-color);
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .post-button:hover {
-    background-color: #45a049;
+    background-color: var(--primary-color);
 }

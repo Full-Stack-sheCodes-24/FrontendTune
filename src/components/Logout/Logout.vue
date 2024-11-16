@@ -1,25 +1,40 @@
 <style>@import'./Logout.css';</style>
 <template>
-    <div class="logout-container card">
-        <p>Are you sure you want to logout?</p>
-        <button @click="logout()">Yes</button>
-        <button @click="redirect()">No</button>
+    <!-- Button to trigger logout modal -->
+    <button @click="openLogoutModal" class="nav-logout-button">Logout</button>
+    
+    <div v-if="isModalOpen" class="logout-modal" @click.self="closeModal">
+        <div class="modal-content">
+            <p>Are you sure you want to logout?</p>
+            <div class="button-container">
+                <button @click="logout" class="logout-button">Yes</button>
+                <button @click="closeModal" class="cancel-button">No</button>
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const userStateStore = useUserStateStore();
 const router = useRouter();
+const isModalOpen = ref(false);
+
+function openLogoutModal() {
+  isModalOpen.value = true;
+}
+
+function closeModal() {
+    isModalOpen.value = false;
+}
 
 function logout() {
     localStorage.removeItem("user_state");
     userStateStore.$reset();
     router.push({ name: 'Login' });
+    isModalOpen.value = false;
 }
 
-function redirect() {
-    router.push({ name: 'Home' });
-}
 </script>

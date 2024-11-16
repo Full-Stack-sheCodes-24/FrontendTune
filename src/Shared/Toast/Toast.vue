@@ -13,20 +13,29 @@
 import { ref } from 'vue';
 
 const props = defineProps({
-    isVisible: Boolean,
-    message: String,
-    isError: Boolean
+  message: String,
+  isError: Boolean
 });
 
-const isVisible = ref(props.isVisible);
+const isVisible = ref(false);
+const debounceHide = ref();
 
 function hideToast() {
     isVisible.value = false;
 }
 
-// Automatically hide toast after 2s
-setTimeout(() => {
-    isVisible.value = false;
-}, 2000);
+function showToast() {
+  isVisible.value = true;
+
+  // If waiting to hide toast already, reset the wait
+  if (debounceHide.value) clearTimeout(debounceHide.value);
+
+  // Automatically hide toast after 2s
+  debounceHide.value = setTimeout(() => {
+      hideToast();
+  }, 3000);
+}
+
+defineExpose({ hideToast, showToast });
 
 </script>

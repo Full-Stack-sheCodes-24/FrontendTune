@@ -1,0 +1,56 @@
+.settings-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+
+    .profile-info-container {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        justify-self: center;
+        padding-bottom: 10px;
+    
+        .profile-pic-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%; 
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-right: 10px;
+    
+            .profile-picture {
+                width: 100%; 
+                height: 100%; 
+                object-fit: cover; 
+            }
+        }
+    }
+}
+
+.settings-tab-container {
+    display: grid;
+    padding-top: 10px;
+    gap: 4px;
+
+    .tab {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 0;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        gap: 10px;
+        width: 100%;
+
+        i {
+            font-size: 30px;
+        }
+    }
+}

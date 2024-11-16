@@ -5,8 +5,6 @@
  </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue';
-
 const emit = defineEmits<{
   (e: 'fileSelected', fileData: string | undefined): void;
 }>();

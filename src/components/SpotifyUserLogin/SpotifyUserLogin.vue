@@ -10,25 +10,36 @@
           </div>
       </header>
   </div>
-  <Toast
-    :is-visible="loginErrorHappened"
+  <Toast ref="toastRef"
     :message="'Error logging in'"
     :is-error="true">
   </Toast>
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { onBeforeMount, onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import Toast from '@/Shared/Toast/Toast.vue';
+import { useUserStateStore } from '@/Shared/UserStateStore';
 
 const route = useRoute();
+const router = useRouter();
+const userStateStore = useUserStateStore();
 
-const loginErrorHappened = ref(false);
+const toastRef = ref<typeof Toast>();
 
 onBeforeMount(() => {
+  // If user is logged in, reroute to home page
+  if (userStateStore.isLoggedIn) {
+    router.push({ name: 'Home' });
+  }
+});
+
+onMounted(() => {
   const error = route.path.endsWith('/error');
-  loginErrorHappened.value = error;
+  if (error) {
+    toastRef.value!.showToast();
+  }
 });
 
 function generateRandomString(length: number): string {

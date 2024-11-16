@@ -21,15 +21,14 @@ body {
 }
 
 .card {
-  background-color: #fff; /* #fff2f4#faf5fd Light background color */
+  background-color: var(--background-color);
   border: 1px solid #ddd; /* Soft border */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   padding: 20px; /* Space inside the box */
-  font-style: bold;
 }
 
 .clickable:hover {
-  background-color: #f0f0f0; /* Slightly darker on hover */
+  background-color: var(--quaternary-color); /* Slightly darker on hover */
   transition: background-color 0.3s; /* Smooth transition */
 }

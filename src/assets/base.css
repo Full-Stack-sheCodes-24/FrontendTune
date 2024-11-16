@@ -1,38 +1,12 @@
 :root {
-  --vt-c-beige: #f5efeb;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
-
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-beige);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
+  --background-color: #FFFFFF;
+  --text-color: #2F4156;
+  --primary-color: #2F4156;
+  --secondary-color: #567c8d;
+  --tertiary-color: #C8D9E6;
+  --quaternary-color: #F5EFEB;
+  --transparent-color: #567c8d4a;
+  --transparent-hover-color: #567c8d78;
 }
 
 *,
@@ -45,8 +19,8 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  color: var(--text-color);
+  background-color: var(--background-color);
   transition:
     color 0.5s,
     background-color 0.5s;
@@ -76,4 +50,26 @@ body {
   'wght' 300,
   'GRAD' 0,
   'opsz' 24
+}
+
+.blue-theme {
+  --background-color: #FFFFFF;
+  --text-color: #2F4156;
+  --primary-color: #2F4156;
+  --secondary-color: #567C8D;
+  --tertiary-color: #C8D9E6;
+  --quaternary-color: #F5EFEB;
+  --transparent-color: #567c8d4a;
+  --transparent-hover-color: #567c8d78;
+}
+
+.pink-theme {
+  --background-color: #fff6f8;
+  --text-color: #ffc0cb;
+  --primary-color: #ffc0cb;
+  --secondary-color: #ffc6d0;
+  --tertiary-color: #ffd9df;
+  --quaternary-color: #ffdfe5;
+  --transparent-color: #ffc6d04a;
+  --transparent-hover-color: #ffc6d076;
 }

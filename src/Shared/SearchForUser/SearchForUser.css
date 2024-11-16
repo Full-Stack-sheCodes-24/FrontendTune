@@ -2,7 +2,7 @@
     position: relative;
     width: 200px;
     transition: width 0.3s;
-    color: #304674;
+    color: var(--text-color);
     z-index: 2;
     margin-left: auto;
 
@@ -17,8 +17,9 @@
     }
 
     input {
+        color: var(--text-color);
         border-radius: 4px;
-        border: 1px solid #304674;
+        border: 1px solid var(--primary-color);
         width: 100%;
         height: 100%;
         padding-left: 40px;
@@ -27,7 +28,7 @@
     }
 
     input::placeholder {
-        color: #304674;
+        color: var(--text-color);
     }
 
     .search-results-container {
@@ -44,7 +45,7 @@
             margin: 4px;
             cursor: pointer;
     
-            img {
+            .profile-pic {
                 height: 50px;
                 width: 50px;
                 border-radius: 50%;
@@ -65,9 +66,10 @@
 
 .darken-background {
     position: absolute;
+    display: border-box;
     top: 76px;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 76px);
     background-color: rgba(0, 0, 0, 0);
     transition: background-color 1s;

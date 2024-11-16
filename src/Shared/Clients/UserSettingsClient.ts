@@ -1,10 +1,9 @@
 import axios from 'axios';
-import type { SpotifySearchRequest } from './SpotifySearchRequest';
-import type { SpotifySearchResponse } from './SpotifySearchResponse';
 import { useUserStateStore } from '../UserStateStore';
+import type { UserSettingsRequest } from './UserSettingsRequest';
 
-export class SpotifySearchClient {
-    async execute(request : SpotifySearchRequest) : Promise<SpotifySearchResponse> {
+export class UserSettingsClient {
+    async execute(request : UserSettingsRequest) {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
@@ -12,13 +11,12 @@ export class SpotifySearchClient {
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
-            params: request,
             headers: {
                 Authorization: `Bearer ${token}`
             },
         });
 
-        const response = await client.get('/Spotify/search');
+        const response = await client.put(`/Users/${userId}/settings`, request);
         return response.data;
     }
 }
