@@ -14,7 +14,7 @@ main {
   }
 } */
 body {
-  background: url('bg3.jpg') no-repeat center center fixed; /* Use '@' to reference 'src' folder */
+  background: url('bg1.jpg') no-repeat center center fixed; /* Use '@' to reference 'src' folder */
   background-size: cover; /* Ensures the image covers the entire page */
   margin: 0; /* Removes default margin */
   height: 100vh; /* Makes sure the body takes up the entire viewport height */
