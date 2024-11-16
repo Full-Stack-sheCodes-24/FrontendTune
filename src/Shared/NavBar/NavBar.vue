@@ -8,6 +8,7 @@
                 <!-- If logged in, do not show login button -->
                 <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink>
                 <RouterLink to="/home" v-if="userStateStore.isLoggedIn">Home</RouterLink>
+                <RouterLink to="/about">About Us</RouterLink>
              </div>
              <div class="btn-container">
                 <SearchForUser></SearchForUser>
