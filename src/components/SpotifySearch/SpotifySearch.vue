@@ -11,7 +11,7 @@
                 <p v-show="selectedSongPreviewUrl != null">
                     <audio controls autoplay loop
                         ref="audioPlayer"
-                        :src="selectedSongPreviewUrl"
+                        :src="selectedSongPreviewUrl || undefined"
                         @pause="isPaused = true"
                         @play="isPaused = false"
                         @volumechange="saveVolumeLevel">
@@ -21,8 +21,7 @@
             </div>
         </div>
         <div>
-            <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput">
-            <button @click="search(inputText)">Search</button>
+            <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
             <div class = "spotify-search-results">
                 <div v-for="track in searchResults"
                     :key = "track.id"
@@ -47,24 +46,47 @@ import { SpotifyGetTrackClient } from '@/Shared/Clients/SpotifyGetTrackClient';
 const client = new SpotifySearchV2Client();
 
 const searchResults = ref([] as Track[]);
-const inputText = ref();
+const inputText = ref('');
+const debounceTimeout = ref<number | null>(null);
+const cache: Record<string, Track[]> = {};
 const mapper = new SpotifySearchMapper();
-const selectedSongName = ref();
+const selectedSongName = ref('');
 const isSelected = ref(false);
 const hasPreviewUrl = ref(true);
 const selectedTrack = ref();
-const selectedSongImg = ref();
-const selectedSongPreviewUrl = ref();
+const selectedSongImg = ref('');
+const selectedSongPreviewUrl = ref<string | null>(null);
 const isPaused = ref(false);
 const noPreviewUrlMsg = "does not have a preview track.";
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 
 const emit = defineEmits(['update-selected-track']);
 
-async function search(query : string) {
-    await client.execute({ query }).then(response => {
-        searchResults.value = mapper.searchResponseToTracks(response);
-    });
+function debouncedSearch() {
+    if (debounceTimeout.value) clearTimeout(debounceTimeout.value);
+    if (inputText.value.trim() === '') {
+        searchResults.value = [];
+        return;
+    }
+    debounceTimeout.value = window.setTimeout(() => {
+        performSearch(inputText.value);
+    }, 300);
+}
+
+async function performSearch(query: string){
+    if (cache[query]) {
+        searchResults.value = cache[query];
+        return;
+    }
+    try {
+        const response = await client.execute({ query });
+        const results = mapper.searchResponseToTracks(response);
+        searchResults.value = results;
+        cache[query] = results;
+    }
+    catch (error){
+        console.error('Search error:', error);
+    }
 }
 
 async function selectSong(track : Track){
@@ -72,20 +94,17 @@ async function selectSong(track : Track){
     emit('update-selected-track', selectedTrack.value); // Let CreateEntry.vue know that the value has changed
 
     selectedSongPreviewUrl.value = track.preview_url;
-
-    // Try getting the preview_url from a different spotify endpoint
-    if (selectedSongPreviewUrl.value == null) {
+    if(!selectedSongPreviewUrl.value){
         const client = new SpotifyGetTrackClient();
-        await client.execute(track.id).then(response => {
+        try{
+            const response = await client.execute(track.id);
             selectedSongPreviewUrl.value = response.preview_url;
-        }).catch(error => {
-            console.log(error);
-        });
-        if (selectedSongPreviewUrl.value == null){
-            hasPreviewUrl.value = false;
         }
+        catch(error){
+            console.error(error);
+        }
+        if(!selectedSongPreviewUrl.value) hasPreviewUrl.value = false;
     }
-
     selectedSongName.value = track.name;
     selectedSongImg.value = track.album.images[0].url;
     isSelected.value = true;
