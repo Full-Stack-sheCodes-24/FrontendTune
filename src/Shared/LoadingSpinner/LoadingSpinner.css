@@ -1,20 +1,30 @@
 .loading-spinner-container {
     display: flex;
+    flex-direction: column;
+
+    .loading-text {
+        font-weight: bold;
+        font-size: 50px;
+    }
 }
 
-.loading-spinner-main {
-    animation: bob-main 0.5s infinite alternate ease-in-out;
-}
+.loading-spinner-logo-container {
+    display: flex;
 
-.loading-spinner-accents {
-    transform: translate(-30px, -30px);
-
-    .loading-spinner-accent1 {
-        animation: bob-accent 0.5s 0.1s infinite alternate ease-in-out;
+    .loading-spinner-main {
+        animation: bob-main 0.5s infinite alternate ease-in-out;
     }
     
-    .loading-spinner-accent2 {
-        animation: bob-accent 0.5s 0.2s infinite alternate ease-in-out;
+    .loading-spinner-accents {
+        transform: translate(-30px, -30px);
+    
+        .loading-spinner-accent1 {
+            animation: bob-accent 0.5s 0.1s infinite alternate ease-in-out;
+        }
+        
+        .loading-spinner-accent2 {
+            animation: bob-accent 0.5s 0.2s infinite alternate ease-in-out;
+        }
     }
 }
 
