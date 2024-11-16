@@ -33,7 +33,14 @@ export const useUserStateStore = defineStore('userState', {
     getters: {
         isLoggedIn: (state) => Boolean(state.id),
         getBirthdayAsDate: (state) => new Date(state.birthday),
-        getExpiryAsDate: (state) => new Date(state.auth.expiryDate)
+        getExpiryAsDate: (state) => new Date(state.auth.expiryDate),
+        getEntriesWithDate: (state) => {
+            var Entries = state.entries
+            for(let i = 0; i < Entries.length; i++){
+                Entries[i].date = new Date(Entries[i].date)
+            }
+            return Entries
+        }
     },
     actions: {
         updateExpiryDate() {

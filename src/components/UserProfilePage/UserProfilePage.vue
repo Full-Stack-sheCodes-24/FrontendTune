@@ -55,6 +55,9 @@ async function refreshUserState(userId : string) {
         name.value = response.name;
         bioText.value = response.bioText;
         birthday.value = new Date(response.birthday);
+        for(let i = 0; i < response.entries.length; i++){
+            response.entries[i].date = new Date(response.entries[i].date)
+        }
         entries.value = response.entries;
     }).catch(error => {
         console.log(error);
