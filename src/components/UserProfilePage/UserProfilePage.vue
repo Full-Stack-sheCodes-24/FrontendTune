@@ -42,30 +42,6 @@ watch(() => route.params.userId, (newUserId) => {
 });
 
 onMounted(async () => {
-    //Get entries from backend API
-    //Hardcode example entries for now
-    entries.value.push({
-        track: {
-            name: "Touch",
-            uri: "asdf",
-            href: "qewr",
-            id: "zxcv"
-        },
-        text: "what a great day! :D",
-        date: new Date()
-    });
-
-    entries.value.push({
-        track: {
-            name: "APT",
-            uri: "asdf",
-            href: "qewr",
-            id: "zxcv"
-        },
-        text: "what a horrible day! :(",
-        date: new Date()
-    });
-
     // Get userId from url. Ex: moodz.com/users/ajsdlifjasifj
     const userId = route.params.userId.toString();
 
@@ -79,6 +55,7 @@ async function refreshUserState(userId : string) {
         name.value = response.name;
         bioText.value = response.bioText;
         birthday.value = new Date(response.birthday);
+        entries.value = response.entries;
     }).catch(error => {
         console.log(error);
     });
