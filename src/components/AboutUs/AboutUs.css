@@ -1,3 +1,38 @@
+.about-title p{
+    background-color: var(--tertiary-color);
+    border-radius: 25px;
+    display: inline-block;
+    padding: 10px 25px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.app-desc{
+    background-color: var(--tertiary-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 20px;
+    font-size:  18px;
+}
+.tech-stack .title{
+    background-color: var(--tertiary-color);
+    border-radius: 25px;
+    display: inline-block;
+    padding: 10px 25px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.our-team p{
+    background-color: var(--tertiary-color);
+    border-radius: 25px;
+    display: inline-block;
+    padding: 10px 25px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
 .slider{
     width: 100%;
     height: var(--height);
@@ -31,4 +66,8 @@
 .slider:hover .item{
     animation-play-state: paused!important;
     filter: grayscale(1);
+}
+.slider .list .item:hover {
+    animation-play-state: paused !important;  /* Pauses the animation for the hovered image */
+    filter: grayscale(0);  /* Removes grayscale on hover for the focused image */
 }
