@@ -4,7 +4,11 @@
         <h1 class= "output-text" v-text="entry.text"></h1>
         <div class="track-info">
             <p class="track-name">{{ entry.track.name }}</p>
-            <div class="favicon-container" @click="togglePlayback">
+            <div 
+                v-if="entry.track.preview_url" 
+                class="favicon-container" 
+                @click="togglePlayback"
+            >
                 <img src="/favicon.ico" alt="Play Icon" class="favicon-icon" />
             </div>
         </div>
@@ -13,7 +17,6 @@
                 Your browser does not support the audio element.
             </audio>
         </div>
-        <p v-if="!entry.track.preview_url">No preview available for this track</p>
         <p v-text="entry.date.toLocaleString()"></p>
     </div>
 </template>
