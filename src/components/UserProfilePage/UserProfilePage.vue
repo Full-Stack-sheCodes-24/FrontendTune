@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="right-column">
-            <Calender/>
+            <Calender :entries="entries"></Calender>
         </div>
     </div>
 </template>
@@ -46,6 +46,7 @@ onMounted(async () => {
     const userId = route.params.userId.toString();
 
     refreshUserState(userId);
+
 });
 
 async function refreshUserState(userId : string) {

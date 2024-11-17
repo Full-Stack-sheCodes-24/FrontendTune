@@ -2,7 +2,7 @@
     <div class="calender-item card clickable" @click="goToEntry">
         <p class="days-on-calendar">{{ currentDay }}</p>   
         <div v-if="entry != null"> 
-            <img :src="entry.track?.album?.images[0]?.url || fallbackImg"/>
+            <img :src="entry.track.album.images[0].url || fallbackImg"/>
         </div>
     </div>
 </template>
@@ -16,14 +16,14 @@ const fallbackImg = 'https://spiralcute.com/characters/img/characters/thumb_chii
 const albumCover = ref();
 const props = defineProps<{
     currentDay: number;
-    entry: Entry | null;
+    entry: Entry | undefined;
 }>();
 
 const goToEntry = () => {
-    if (props.entry !== null) {
+    if (props.entry !== undefined) {
         const element = document.getElementById(props.entry.id);
-    element?.scrollIntoView();
-    console.log("Go to entry!")
+        element?.scrollIntoView();
+        console.log("Go to entry!")
     }
 }
 </script>

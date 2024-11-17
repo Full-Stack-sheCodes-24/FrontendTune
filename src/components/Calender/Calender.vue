@@ -23,36 +23,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { UserGetClient } from '@/Shared/Clients/UserGetClient';
+import { ref, watchEffect } from 'vue';
 import CalenderItem from './CalenderItem.vue';
 
 const today = new Date();
 let currentMonth = today.getMonth(); // 0 for January, 11 for December
 let currentYear = today.getFullYear();
-import { useUserStateStore } from '@/Shared/UserStateStore';
-const userStateStore = useUserStateStore();
+import type { Entry } from '@/Shared/Models/Entry';
 
-// import { useRoute } from 'vue-router';
-// const route = useRoute();
-// const currentUser = ref()
+const props = defineProps<{
+    entries?: Entry[];
+}>();
 
-// async function refreshUserState(userId : string) {
-//     const client = new UserGetClient();
-//     await client.execute(userId).then(response => {
-//         currentUser.value = response;
-//     }).catch(error => {
-//         console.log(error);
-//     });
-// }
+watchEffect(() => {
+    console.log("Entries in Calender.vue:", props.entries); // Debug: Check received entries
+});
 
 //Finds the first entry that has a date equals the day and passes it to CalenderItem
 const getEntryForDay = (day: number) => {
-    const entry = userStateStore.entries.find(e => {
-        const entryDate = new Date(e.date);
-        return entryDate.getDate() === day;
-    });
-    return entry || null; 
+    if (props.entries != null) {
+        const entry = props.entries.find(e => {
+            const entryDate = new Date(e.date);
+            return entryDate.getDate() === day;
+        });
+        return entry; 
+    }
 }
 
 const monthNames: string[] = [
