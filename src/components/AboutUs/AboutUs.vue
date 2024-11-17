@@ -2,21 +2,19 @@
 <template>
     <div class = "app-desc">
         <p class = "desc-title">Welcome to Moodz!</p>
-        <!-- <img class="logo-design" src="/public/favicon.ico"> -->
     </div>
     <div class = "about-title">
-        <!-- <p>About Us</p> -->
-        <p class = "desc"> Moodz is a journalling application that enables a user to add a song that complements their journal entry.
-            Users login to the application through Spotify and will be directed to the home page. 
-            The user will be able to edit their profile picture, bio, and add their birthdays.Moodz is a journalling application that enables a user to add a song that complements their journal entry.
-            Users login to the application through Spotify and will be directed to the home page. 
-            The user will be able to edit their profile picture, bio, and add their birthdays</p>
+        <p class = "desc"> Moodz was created for the SheCodes Fall 2024 Semester Long Project. It is a journalling application
+        that enables a user to create a journal entry and add a song that complements the entry. Users will login with their Spotify
+        accounts and they will be directed to their home page. Each user will have their own profile where they will be able to edit their
+        profile pictures, add a bio, and change their birthdays. When the user wants to create a journal entry, they can choose a song and listen
+        to a preview before officially posting it. They will also be able to find their friends and looks at their journal entries. </p>
     </div>
     <div class = "our-team">
-        <p>Our Team</p>
+        <p class ="team">Made with <i>love,</i> by [team name]</p>
     </div>
     <div class="slider" style ="
-        --width: 200px;
+        --width: 300px;
         --height: 500px;
         --quantity: 9;
     ">
@@ -33,3 +31,4 @@
         </div>
     </div>
 </template>
+
