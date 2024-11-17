@@ -8,7 +8,8 @@
         that enables a user to create a journal entry and add a song that complements the entry. Users will login with their Spotify
         accounts and they will be directed to their home page. Each user will have their own profile where they will be able to edit their
         profile pictures, add a bio, and change their birthdays. When the user wants to create a journal entry, they can choose a song and listen
-        to a preview before officially posting it. They will also be able to find their friends and looks at their journal entries. </p>
+        to a preview before officially posting it. They will also be able to find their friends and look at their journal entries as well as 
+        change background themes. </p>
     </div>
     <div class = "our-team">
         <p class ="team">Made with <i>love,</i> by [team name]</p>
