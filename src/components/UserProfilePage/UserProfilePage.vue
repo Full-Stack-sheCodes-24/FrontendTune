@@ -39,6 +39,7 @@ const entries = ref([] as Entry[]);
 
 watch(() => route.params.userId, (newUserId) => {
     refreshUserState(newUserId.toString());
+    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
 });
 
 onMounted(async () => {
@@ -46,6 +47,8 @@ onMounted(async () => {
     const userId = route.params.userId.toString();
 
     refreshUserState(userId);
+    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
+
 
 });
 

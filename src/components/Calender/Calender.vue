@@ -32,7 +32,7 @@ let currentYear = today.getFullYear();
 import type { Entry } from '@/Shared/Models/Entry';
 
 const props = defineProps<{
-    entries?: Entry[];
+    entries: Entry[];
 }>();
 
 watchEffect(() => {
@@ -46,7 +46,7 @@ const getEntryForDay = (day: number) => {
             const entryDate = new Date(e.date);
             return entryDate.getDate() === day;
         });
-        return entry; 
+        return entry; // it returns undefined if no entry value is found
     }
 }
 
