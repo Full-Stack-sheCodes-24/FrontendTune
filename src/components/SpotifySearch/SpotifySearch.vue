@@ -116,14 +116,16 @@ function saveVolumeLevel(event: Event) {
 }
 
 onMounted(() => {
-    // Get saved volumed level from local storage
-    const savedVolumeLevel = localStorage.getItem('volume_level');
+    if (audioPlayer != null) {
+        // Get saved volumed level from local storage
+        const savedVolumeLevel = localStorage.getItem('volume_level');
 
-    // If volume level is saved, set the default volume of the audio player
-    if (savedVolumeLevel != null) {
-        audioPlayer.value!.volume = Number(savedVolumeLevel);
-    } else {    // Else set the default volume to 0.5
-        audioPlayer.value!.volume = 0.5;
+        // If volume level is saved, set the default volume of the audio player
+        if (savedVolumeLevel != null) {
+            audioPlayer.value!.volume = Number(savedVolumeLevel);
+        } else {    // Else set the default volume to 0.5
+            audioPlayer.value!.volume = 0.5;
+        }
     }
 });
 </script>
