@@ -7,13 +7,15 @@
             <div 
                 v-if="entry.track.preview_url" 
                 class="favicon-container" 
-                @click="togglePlayback"
-            >
+                @click="togglePlayback">
                 <img src="/favicon.ico" alt="Play Icon" class="favicon-icon" />
             </div>
         </div>
         <div class="music-play" v-if="showPlayback">
-            <audio controls autoplay loop :src="entry.track.preview_url || undefined">
+            <audio controls autoplay loop
+                ref="audioPlayer"
+                :src="entry.track.preview_url || undefined"
+                @volumechange="saveVolumeLevel">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -21,9 +23,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { PropType } from 'vue';
 import type { Entry } from '@/Shared/Models/Entry';
+
+const audioPlayer = ref<HTMLAudioElement | null>(null);
 
 defineProps({
     entry: {
@@ -36,4 +40,21 @@ const showPlayback = ref(false);
 function togglePlayback() {
     showPlayback.value = !showPlayback.value;
 }
+
+function saveVolumeLevel(event: Event) {
+    const audioPlayer = event.target as HTMLAudioElement
+    localStorage.setItem('volume_level', audioPlayer.volume.toString());
+}
+
+onMounted(() => {
+    // Get saved volumed level from local storage
+    const savedVolumeLevel = localStorage.getItem('volume_level');
+
+    // If volume level is saved, set the default volume of the audio player
+    if (savedVolumeLevel != null) {
+        audioPlayer.value!.volume = Number(savedVolumeLevel);
+    } else {    // Else set the default volume to 0.5
+        audioPlayer.value!.volume = 0.5;
+    }
+});
 </script>
