@@ -116,7 +116,7 @@ function saveVolumeLevel(event: Event) {
 }
 
 onMounted(() => {
-    if (audioPlayer != null) {
+    if (audioPlayer.value != null) {
         // Get saved volumed level from local storage
         const savedVolumeLevel = localStorage.getItem('volume_level');
 
