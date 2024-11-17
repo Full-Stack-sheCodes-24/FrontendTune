@@ -28,6 +28,10 @@
             .pink {
                 background: linear-gradient(45deg, #ffc0cb, #fff2f4);
             }
+
+            .green {
+                background: linear-gradient(45deg, #345e30, #69a17b);
+            }
         }
     }
 }

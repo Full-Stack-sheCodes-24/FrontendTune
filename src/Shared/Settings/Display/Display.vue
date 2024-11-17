@@ -10,6 +10,9 @@
             <div class="color-container" @click="handleThemeClick($event)">
                 <div id="pink" class="color pink"></div>
             </div>
+            <div class="color-container" @click="handleThemeClick($event)">
+                <div id="green" class="color green"></div>
+            </div>
         </div>
     </div>
     <Toast ref="toastRef"
