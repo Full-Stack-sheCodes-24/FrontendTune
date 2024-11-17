@@ -23,7 +23,7 @@ const goToEntry = () => {
     if (props.entry != undefined) {
         const element = document.getElementById(`entry-${new Date(props.entry.date).getTime()}`);
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.scrollIntoView({ behavior: 'smooth'});
             console.log("Scrolled to entry:", `entry-${new Date(props.entry.date).getTime()}`);
         } else {
             console.warn("Element not found for entry ID:", `entry-${new Date(props.entry.date).getTime()}`);
