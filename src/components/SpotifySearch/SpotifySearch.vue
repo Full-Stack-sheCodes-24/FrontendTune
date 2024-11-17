@@ -90,9 +90,6 @@ async function performSearch(query: string){
 }
 
 async function selectSong(track : Track){
-    selectedTrack.value = track;
-    emit('update-selected-track', selectedTrack.value); // Let CreateEntry.vue know that the value has changed
-
     selectedSongPreviewUrl.value = track.preview_url;
     if(!selectedSongPreviewUrl.value){
         const client = new SpotifyGetTrackClient();
@@ -108,6 +105,8 @@ async function selectSong(track : Track){
     selectedSongName.value = track.name;
     selectedSongImg.value = track.album.images[0].url;
     isSelected.value = true;
+    selectedTrack.value = track;
+    emit('update-selected-track', selectedTrack.value); // Let CreateEntry.vue know that the value has changed
 }
 
 function saveVolumeLevel(event: Event) {
