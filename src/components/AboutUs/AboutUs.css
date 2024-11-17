@@ -1,37 +1,91 @@
 .about-title p{
-    background-color: var(--tertiary-color);
+    /* background-color: var(--tertiary-color); */
     border-radius: 25px;
     display: inline-block;
     padding: 10px 25px;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 80px;
+    margin: 10px auto;
+    text-align: center;
 }
 
-.app-desc{
+.about-title{
+    text-align: center;
+}
+
+/* .logo-design {
+    height: 100px;
+    margin-left:20px;
+} */
+
+.app-desc {
+    /* background-color: var(--tertiary-color); */
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    cursor: pointer;
+    position: relative;
+    margin-top: 20px;
+}
+
+.app-desc .desc-title {
+    position: relative;
+    display: inline-block;
+}
+
+.app-desc .desc-title::after {
+    content: '';
+    position: absolute;
+    height: 5px;
+    left: 0;
+    bottom: -5px; 
+    width: 0;
+    background: var(--secondary-color);
+    transition: width 0.3s ease-in-out;
+}
+
+.app-desc .desc-title:hover::after {
+    width: 100%;
+}
+
+.about-title .desc{
     background-color: var(--tertiary-color);
     border-radius: 8px;
     padding: 1rem;
     margin-top: 20px;
-    font-size:  18px;
-}
-.tech-stack .title{
-    background-color: var(--tertiary-color);
-    border-radius: 25px;
-    display: inline-block;
-    padding: 10px 25px;
-    font-weight: bold;
-    font-size: 20px;
+    font-size:  20px;
+    display: flex;
+    justify-content: center;
 }
 
 .our-team p{
-    background-color: var(--tertiary-color);
-    border-radius: 25px;
-    display: inline-block;
-    padding: 10px 25px;
-    font-weight: bold;
-    font-size: 20px;
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    cursor: pointer;
+    position: relative;
+    margin-top: 20px;
+    text-align: center; 
 }
 
+.our-team p::after{
+    content: '';
+    position: absolute;
+    height: 5px;
+    left: 0;
+    bottom: -5px; 
+    width: 0;
+    background: var(--secondary-color);
+    transition: width 0.3s ease-in-out;
+}
+.our-team p:hover::after{
+    width: 100%;
+}
 
 .slider{
     width: 100%;
@@ -71,3 +125,4 @@
     animation-play-state: paused !important;  /* Pauses the animation for the hovered image */
     filter: grayscale(0);  /* Removes grayscale on hover for the focused image */
 }
+
