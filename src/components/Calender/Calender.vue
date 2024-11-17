@@ -16,19 +16,44 @@
         <div class="calender-item-container">    
             <CalenderItem v-for="day in days"
                 :currentDay="day"
-                :albumCoverCalendar=undefined
+                :entry=getEntryForDay(day)
             />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import CalenderItem from './CalenderItem.vue';
 import { ref } from 'vue';
+import { UserGetClient } from '@/Shared/Clients/UserGetClient';
+import CalenderItem from './CalenderItem.vue';
 
 const today = new Date();
 let currentMonth = today.getMonth(); // 0 for January, 11 for December
 let currentYear = today.getFullYear();
+import { useUserStateStore } from '@/Shared/UserStateStore';
+const userStateStore = useUserStateStore();
+
+// import { useRoute } from 'vue-router';
+// const route = useRoute();
+// const currentUser = ref()
+
+// async function refreshUserState(userId : string) {
+//     const client = new UserGetClient();
+//     await client.execute(userId).then(response => {
+//         currentUser.value = response;
+//     }).catch(error => {
+//         console.log(error);
+//     });
+// }
+
+//Finds the first entry that has a date equals the day and passes it to CalenderItem
+const getEntryForDay = (day: number) => {
+    const entry = userStateStore.entries.find(e => {
+        const entryDate = new Date(e.date);
+        return entryDate.getDate() === day;
+    });
+    return entry || null; 
+}
 
 const monthNames: string[] = [
         "January", "February", "March", "April", "May", "June",

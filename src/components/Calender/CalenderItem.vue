@@ -1,14 +1,29 @@
 <template>
-    <div class="calender-item card clickable">
-        
-        <p class="days-on-calendar">{{ currentDay }}</p>    
-        <img src="https://spiralcute.com/characters/img/characters/thumb_chiikawa.jpg"/>
+    <div class="calender-item card clickable" @click="goToEntry">
+        <p class="days-on-calendar">{{ currentDay }}</p>   
+        <div v-if="entry != null"> 
+            <img :src="entry.track?.album?.images[0]?.url || fallbackImg"/>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import type { Entry } from '@/Shared/Models/Entry';
+import { ref } from 'vue';
+
+const fallbackImg = 'https://spiralcute.com/characters/img/characters/thumb_chiikawa.jpg';
+
+const albumCover = ref();
 const props = defineProps<{
     currentDay: number;
-    albumCoverCalendar: string | undefined;
+    entry: Entry | null;
 }>();
+
+const goToEntry = () => {
+    if (props.entry !== null) {
+        const element = document.getElementById(props.entry.id);
+    element?.scrollIntoView();
+    console.log("Go to entry!")
+    }
+}
 </script>

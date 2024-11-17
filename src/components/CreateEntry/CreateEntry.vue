@@ -54,6 +54,7 @@ async function postEntry() {
 
   // Construct the entry object to send
   const newEntry: Entry = {
+    id: new Date().toDateString(),
     text: entryText.value,
     track: selectedTrack.value,
     date: new Date()
