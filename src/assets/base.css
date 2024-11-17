@@ -85,3 +85,13 @@ body {
   --transparent-color: #a8d5ba4a;
   --transparent-hover-color: #a8d5ba76;
 }
+.purple-theme {
+  --background-color: #f3e6f9;
+  --text-color: #6b4c8d;
+  --primary-color: #8a6b9f;
+  --secondary-color: #b29dc9;
+  --tertiary-color: #d6b9e0;
+  --quaternary-color: #dcbbe9;
+  --transparent-color: #a8a2d64a;
+  --transparent-hover-color: #a8a2d676;
+}
