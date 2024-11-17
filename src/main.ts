@@ -10,6 +10,7 @@ import Settings from '@/Shared/Settings/Settings.vue'
 import SpotifyCallback from '@/components/SpotifyUserLogin/SpotifyCallback.vue';
 import UserProfilePage from '@/components/UserProfilePage/UserProfilePage.vue';
 import { markRaw } from 'vue'
+import AboutUs from './components/AboutUs/AboutUs.vue';
 
 const routes = [
   { path: '/user/:userId', name: 'User', component: UserProfilePage },
@@ -19,7 +20,8 @@ const routes = [
   { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
   { path: '/logout', name: 'Logout', component: Logout },
   { path: '/settings', name: 'Settings', component: Settings },
-  { path: '/callback', name: 'Callback', component: SpotifyCallback }
+  { path: '/callback', name: 'Callback', component: SpotifyCallback },
+  { path: '/about', name: 'About', component: AboutUs }
 ];
 
 const router = createRouter({
