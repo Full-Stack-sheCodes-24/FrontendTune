@@ -41,12 +41,19 @@
 
 .about-title .desc{
     background-color: var(--tertiary-color);
+    color: var(--text-color);
     border-radius: 8px;
     padding: 1rem;
     margin-top: 20px;
     font-size:  20px;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; 
 }
 
+.about-title .desc:hover{
+    background-color: var(--primary-color);
+    transform: scale(1.1);  
+    color: #fff;
+}
 .our-team{
     display: flex;
     justify-content: center;
