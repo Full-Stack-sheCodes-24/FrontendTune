@@ -48,7 +48,7 @@ audio::-webkit-media-controls-panel {
     margin-right: 10px;
   }
   .output-text {
-    color: rgb(18, 8, 90);
+    color: var(--text-color);
     font-family: "Indie Flower", cursive;
     font-weight: 400;
     font-style: normal;

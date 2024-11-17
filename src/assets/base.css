@@ -18,7 +18,7 @@
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100%;
   color: var(--text-color);
   background-color: var(--background-color);
   transition:
@@ -42,6 +42,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;   /* Always show vertical scroll bar */
 }
 
 .material-symbols-outlined {
@@ -65,11 +66,32 @@ body {
 
 .pink-theme {
   --background-color: #fff6f8;
-  --text-color: #ffc0cb;
-  --primary-color: #ffc0cb;
+  --text-color: #5e4146;
+  --primary-color: #eb6a80;
   --secondary-color: #ffc6d0;
   --tertiary-color: #ffd9df;
   --quaternary-color: #ffdfe5;
   --transparent-color: #ffc6d04a;
   --transparent-hover-color: #ffc6d076;
+}
+
+.green-theme {
+  --background-color: #f0fbf4;
+  --text-color: #4a6b57;
+  --primary-color: #688a76;
+  --secondary-color: #8cb09a;
+  --tertiary-color: #c3dacd;
+  --quaternary-color: #c5e9d3;
+  --transparent-color: #a8d5ba4a;
+  --transparent-hover-color: #a8d5ba76;
+}
+.purple-theme {
+  --background-color: #f3e6f9;
+  --text-color: #6b4c8d;
+  --primary-color: #8a6b9f;
+  --secondary-color: #b29dc9;
+  --tertiary-color: #d6b9e0;
+  --quaternary-color: #dcbbe9;
+  --transparent-color: #a8a2d64a;
+  --transparent-hover-color: #a8a2d676;
 }
