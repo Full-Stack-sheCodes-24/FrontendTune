@@ -66,6 +66,7 @@ async function postEntry() {
     console.log("Entry posted successfully");
 
     userStateStore.entries.push(newEntry);  // Update the store to reflect the new entry
+    userStateStore.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
 
     // Clear entry text and close the modal after successful submission
     entryText.value = '';

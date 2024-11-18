@@ -35,8 +35,9 @@ import { DeleteEntryClient } from '@/Shared/Clients/DeleteEntryClient';
 const router = useRouter();
 const userStateStore = useUserStateStore();
 const { entries } = storeToRefs(userStateStore);
-
+userStateStore.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
 const entriesDate = userStateStore.getEntriesWithDate
+
 
 async function deleteEntry(entryDate: Date) {
   try {
