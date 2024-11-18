@@ -1,4 +1,4 @@
-<style>@import'./SpotifySearch.css';</style>
+<style scoped>@import'./SpotifySearch.css';</style>
 <template>
     <div class="spotify-search-container">
         <div class="selected-song-format">

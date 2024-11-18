@@ -1,4 +1,4 @@
-<style>@import'./EntryItem.css';</style>
+<style scoped>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable">
         <button v-if="isOwner" class="delete-button" @click="$emit('delete', entry.date)" title="Delete Entry">✖</button>

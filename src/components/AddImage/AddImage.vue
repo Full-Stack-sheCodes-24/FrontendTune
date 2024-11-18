@@ -1,4 +1,4 @@
-<style>@import'./AddImage.css';</style>
+<style scoped>@import'./AddImage.css';</style>
 
 <template>
     <input type="file" class="uploading-image" @change="onFileSelected" accept="image/*" />

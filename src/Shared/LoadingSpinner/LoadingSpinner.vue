@@ -1,4 +1,4 @@
-<style>@import'./LoadingSpinner.css';</style>
+<style scoped>@import'./LoadingSpinner.css';</style>
 <template>
     <div class="loading-spinner-container">
         <div class="loading-spinner-logo-container">

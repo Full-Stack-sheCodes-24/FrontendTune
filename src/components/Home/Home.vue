@@ -1,4 +1,4 @@
-<style>@import'./Home.css';</style>
+<style scoped>@import'./Home.css';</style>
 <template>
     <div class="home-container">
         <div class="left-column">

@@ -1,4 +1,4 @@
-<style src="./EditProfile.css"></style>
+<style scoped src="./EditProfile.css"></style>
 
 <template>
   <div v-if="isModalOpen" class="entry-modal" @click.self="closeModal">

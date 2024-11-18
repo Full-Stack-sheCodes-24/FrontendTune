@@ -1,10 +1,13 @@
-<style>@import'./NavBar.css';</style>
+<style scoped>@import'./NavBar.css';</style>
 <template>
     <nav class="navbar">
         <div class="navbar-layout">
             <!-- If logged in, do not show login button -->
              <div class="btn-container">
-                <img class="logo" src="@/assets/logo.png" @click="redirectToHome">
+                <img class="logo"
+                    src="@/assets/logo.png"
+                    @click="redirectToHome"
+                    alt="Moodz logo">
                 <!-- If logged in, do not show login button -->
                 <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink>
                 <RouterLink to="/home" v-if="userStateStore.isLoggedIn">Home</RouterLink>
