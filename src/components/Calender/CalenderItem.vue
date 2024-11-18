@@ -1,3 +1,4 @@
+<style scoped src="./Calender.css"></style>
 <template>
     <div class="calender-item card clickable">
         
