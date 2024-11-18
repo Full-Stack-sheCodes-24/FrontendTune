@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="right-column">
-            <Calender/>
+            <Calender v-if="!isPrivate"/>
         </div>
     </div>
 </template>
@@ -36,6 +36,7 @@ const name = ref();
 const bioText = ref();
 const birthday = ref();
 const entries = ref([] as Entry[]);
+const isPrivate = ref();
 
 watch(() => route.params.userId, (newUserId) => {
     refreshUserState(newUserId.toString());
@@ -53,6 +54,13 @@ async function refreshUserState(userId : string) {
     await client.execute(userId).then(response => {
         profilePicUrl.value = response.profilePicUrl;
         name.value = response.name;
+        if (response.isPrivate) {
+            isPrivate.value = true;
+            bioText.value = 'This user has their profile privated.';
+            birthday.value = null;
+            entries.value = [] as Entry[];
+            return;
+        }
         bioText.value = response.bioText;
         birthday.value = new Date(response.birthday);
         for(let i = 0; i < response.entries.length; i++){

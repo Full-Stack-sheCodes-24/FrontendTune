@@ -15,5 +15,6 @@ export interface UserState {
     };
     settings: {
         theme: string;
+        isPrivate: boolean;
     }
 }
