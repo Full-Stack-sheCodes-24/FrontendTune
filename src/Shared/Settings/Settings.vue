@@ -4,7 +4,9 @@
         <div class="left-column card">
             <div class="profile-info-container">
                 <div class="profile-pic-wrapper">
-                    <img class="profile-picture" :src="userStateStore.profilePicUrl">
+                    <img class="profile-picture"
+                    :src="userStateStore.profilePicUrl"
+                    alt="Your Profile Picture">
                 </div>
                 <h1>Settings</h1>
             </div>
