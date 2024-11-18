@@ -5,6 +5,7 @@
         <input
             ref="inputRef"
             v-model="query"
+            title="Search"
             placeholder="Search"
             @input="debouncedSearch()"
             @keydown.esc="close"
