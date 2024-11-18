@@ -39,7 +39,7 @@ const { isOwner, name, bioText, birthday } = defineProps({
 });
 
 const profilePicAltText = computed(() => isOwner ? "Your profile picture" : `Profile picture for ${name}`);
-const formattedBirthday = computed(() => formatDateToMMDDYYYY(birthday));
+const formattedBirthday = computed(() => birthday ? formatDateToMMDDYYYY(birthday) : null);
 const bioTextWithDefault = computed(() => bioText ?? "This person has no bio.");
 const isModalOpen = ref(false);
 

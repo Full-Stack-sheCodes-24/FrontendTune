@@ -1,9 +1,17 @@
 .privacy-container {
     padding: 0 10px;
+    display: flex;
+    flex-direction: column;
     
     .title {
         padding-bottom: 10px;
         font-weight: bold;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        pointer-events: none;
     }
 
     /* The switch - the box around the slider */
@@ -13,6 +21,7 @@
         width: 60px;
         height: 34px;
         margin-top: 20px;
+        pointer-events: initial;
 
         /* Hide default HTML checkbox */
         input {

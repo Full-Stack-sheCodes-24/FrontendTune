@@ -6,8 +6,8 @@
                 :is-owner="false"
                 :profile-pic-url="profilePicUrl"
                 :name="name"
-                :bio-text="isPrivate ? 'This user has their profile privated.' : bioText"
-                :birthday="isPrivate ? null : birthday">
+                :bio-text="bioText"
+                :birthday="birthday">
             </ProfileSection>
             <div class="entries-container">
                 <div v-for="entry in entries">
@@ -56,6 +56,8 @@ async function refreshUserState(userId : string) {
         name.value = response.name;
         if (response.isPrivate) {
             isPrivate.value = true;
+            bioText.value = 'This user has their profile privated.';
+            birthday.value = null;
             return;
         }
         bioText.value = response.bioText;
