@@ -23,11 +23,25 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import type { PropType } from 'vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
+
+watch(audioPlayer, audioPlayer => {
+    if (audioPlayer == null) return
+    
+    // Get saved volumed level from local storage
+    const savedVolumeLevel = localStorage.getItem('volume_level');
+
+    // If volume level is saved, set the default volume of the audio player
+    if (savedVolumeLevel != null) {
+        audioPlayer!.volume = Number(savedVolumeLevel);
+    } else {    // Else set the default volume to 0.5
+        audioPlayer!.volume = 0.5;
+    }
+});
 
 defineProps({
     entry: {
@@ -45,18 +59,4 @@ function saveVolumeLevel(event: Event) {
     const audioPlayer = event.target as HTMLAudioElement
     localStorage.setItem('volume_level', audioPlayer.volume.toString());
 }
-
-onMounted(() => {
-    if (audioPlayer.value != null) {
-        // Get saved volumed level from local storage
-        const savedVolumeLevel = localStorage.getItem('volume_level');
-
-        // If volume level is saved, set the default volume of the audio player
-        if (savedVolumeLevel != null) {
-            audioPlayer.value!.volume = Number(savedVolumeLevel);
-        } else {    // Else set the default volume to 0.5
-            audioPlayer.value!.volume = 0.5;
-        }
-    }
-});
 </script>
