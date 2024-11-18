@@ -58,6 +58,7 @@ async function refreshUserState(userId : string) {
             isPrivate.value = true;
             bioText.value = 'This user has their profile privated.';
             birthday.value = null;
+            entries.value = [] as Entry[];
             return;
         }
         bioText.value = response.bioText;
