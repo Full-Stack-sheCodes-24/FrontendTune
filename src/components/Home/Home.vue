@@ -11,7 +11,7 @@
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
-                <div v-for="entry in entries">
+                <div v-for="entry in sortedEntries">
                     <EntryItem :entry="entry"></EntryItem>
                 </div>
             </div>
@@ -30,11 +30,15 @@ import Calender from '@/components/Calender/Calender.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
 
 const entries = userStateStore.getEntriesWithDate
+const sortedEntries = computed(() => {
+    return [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
 
 onBeforeMount(() => {
     // If user is not logged in, reroute to Login page
