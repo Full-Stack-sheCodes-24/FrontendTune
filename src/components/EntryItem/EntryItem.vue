@@ -1,7 +1,7 @@
 <style>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable">
-        <button class="delete-button" @click="$emit('delete', entry.date)" title="Delete Entry">✖</button>
+        <button v-if="isOwner" class="delete-button" @click="$emit('delete', entry.date)" title="Delete Entry">✖</button>
         <h1 class= "output-text" v-text="entry.text"></h1>
         <div class="track-info">
             <p class="track-name">{{ entry.track.name }}</p>
@@ -48,7 +48,11 @@ defineProps({
     entry: {
         type: Object as PropType<Entry>,
         required: true
-    }
+    },
+    isOwner: {
+        type: Boolean,
+        required: true,
+    },
 });
 const showPlayback = ref(false);
 

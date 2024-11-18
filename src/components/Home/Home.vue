@@ -12,7 +12,7 @@
             <div class="entries-container">
                 <CreateEntry/>
                 <div v-for="entry in entries" :key="entry.date.toISOString">
-                    <EntryItem :entry="entry" @delete="deleteEntry"></EntryItem>
+                    <EntryItem :entry="entry" @delete="deleteEntry" :is-owner="true"></EntryItem>
                 </div>
             </div>
         </div>

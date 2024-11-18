@@ -11,7 +11,7 @@
             </ProfileSection>
             <div class="entries-container">
                 <div v-for="entry in entries">
-                    <EntryItem :entry="entry"></EntryItem>
+                    <EntryItem :entry="entry" :is-owner="isOwner"></EntryItem>
                 </div>
             </div>
         </div>
@@ -21,21 +21,26 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
 import EntryItem from '@/components/EntryItem/EntryItem.vue';
 import Calender from '@/components/Calender/Calender.vue';
 import type { Entry } from '@/Shared/Models/Entry';
 import { UserGetClient } from '@/Shared/Clients/UserGetClient';
 import { useRoute } from 'vue-router';
+import { useUserStateStore } from '@/Shared/UserStateStore';
+import { storeToRefs } from 'pinia';
 
 const route = useRoute();
+const userStateStore = useUserStateStore();
+const { id } = storeToRefs(userStateStore);
 
 const profilePicUrl = ref();
 const name = ref();
 const bioText = ref();
 const birthday = ref();
 const entries = ref([] as Entry[]);
+
 
 watch(() => route.params.userId, (newUserId) => {
     refreshUserState(newUserId.toString());
@@ -63,4 +68,6 @@ async function refreshUserState(userId : string) {
         console.log(error);
     });
 }
+const isOwner = computed(() => route.params.userId === id.value);
+
 </script>
