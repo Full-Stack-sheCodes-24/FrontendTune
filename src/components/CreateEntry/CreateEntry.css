@@ -8,7 +8,7 @@
 
 .create-entry-container:hover {
     background-color: var(--secondary-color);
-    color: var(--quaternary-color);
+    color: var(--background-color);
     transition: background-color 0.3s; /* Smooth transition */
 }
 
