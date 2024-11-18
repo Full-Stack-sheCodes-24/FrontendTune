@@ -1,4 +1,4 @@
-<style>@import'./SpotifyUserLogin.css';</style>
+<style scoped>@import'./SpotifyUserLogin.css';</style>
 <template>
   <div class="container">
       <header class="page-header">

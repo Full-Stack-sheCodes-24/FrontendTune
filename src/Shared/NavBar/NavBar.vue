@@ -1,4 +1,4 @@
-<style>@import'./NavBar.css';</style>
+<style scoped>@import'./NavBar.css';</style>
 <template>
     <nav class="navbar">
         <div class="navbar-layout">

@@ -1,4 +1,4 @@
-<style>@import'./Toast.css';</style>
+<style scoped>@import'./Toast.css';</style>
 <template>
   <div
     v-if="isVisible"

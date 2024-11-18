@@ -1,4 +1,4 @@
-<style>@import'./AboutUs.css';</style>
+<style scoped>@import'./AboutUs.css';</style>
 <template>
     <div class = "app-desc">
         <p class = "desc-title">Welcome to Moodz!</p>

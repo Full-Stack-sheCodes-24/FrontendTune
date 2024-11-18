@@ -1,4 +1,4 @@
-<style>@import'./EntryItem.css';</style>
+<style scoped>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable">
         <h1 class= "output-text" v-text="entry.text"></h1>

@@ -1,4 +1,4 @@
-<style>@import'./ProfileSection.css';</style>
+<style scoped>@import'./ProfileSection.css';</style>
 <template>
   <div class="profile-section-container card">
     <div class="profile-info-container">

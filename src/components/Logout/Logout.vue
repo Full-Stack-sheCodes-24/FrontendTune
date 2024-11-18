@@ -1,4 +1,4 @@
-<style>@import'./Logout.css';</style>
+<style scoped>@import'./Logout.css';</style>
 <template>
     <!-- Button to trigger logout modal -->
     <button @click="openLogoutModal" class="nav-logout-button">Logout</button>

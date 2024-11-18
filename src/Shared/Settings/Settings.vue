@@ -1,4 +1,4 @@
-<style>@import'./Settings.css';</style>
+<style scoped>@import'./Settings.css';</style>
 <template>
     <div class="settings-container">
         <div class="left-column card">

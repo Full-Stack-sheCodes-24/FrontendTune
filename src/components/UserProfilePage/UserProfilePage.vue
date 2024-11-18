@@ -1,4 +1,4 @@
-<style>@import'./UserProfilePage.css';</style>
+<style scoped>@import'./UserProfilePage.css';</style>
 <template>
     <div class="user-profile-page-container">
         <div class="left-column">
