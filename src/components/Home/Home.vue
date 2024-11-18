@@ -11,8 +11,8 @@
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
-                <div v-for="entry in entries">
-                    <EntryItem :entry="entry"></EntryItem>
+                <div v-for="entry in entries" :key="entry.date.toISOString">
+                    <EntryItem :entry="entry" @delete="deleteEntry"></EntryItem>
                 </div>
             </div>
         </div>
@@ -30,11 +30,28 @@ import Calender from '@/components/Calender/Calender.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { DeleteEntryClient } from '@/Shared/Clients/DeleteEntryClient';
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
+const { entries } = storeToRefs(userStateStore);
 
-const entries = userStateStore.getEntriesWithDate
+const entriesDate = userStateStore.getEntriesWithDate
+
+async function deleteEntry(entryDate: Date) {
+  try {
+    const deleteClient = new DeleteEntryClient();
+    await deleteClient.execute({ date: entryDate });
+
+    //remove entry from userstate
+    userStateStore.entries = userStateStore.entries.filter(
+      (entry) => entry.date !== entryDate
+    );
+  } catch (error) {
+    console.error('Error deleting entry:', error);
+    alert('Failed to delete the entry.');
+  }
+}
 
 onBeforeMount(() => {
     // If user is not logged in, reroute to Login page
