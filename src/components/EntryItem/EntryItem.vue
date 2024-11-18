@@ -1,7 +1,12 @@
 <style scoped>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable">
-        <button v-if="isOwner" class="delete-button" @click="$emit('delete', entry.date)" title="Delete Entry">✖</button>
+        <button v-if="isOwner" class="delete-button" @click="confirmation" title="Delete Entry">✖</button>
+        <div v-if="showConfirmationDialog" class="confirmation-dialog">
+            <p>Are you sure you want to delete this entry?</p>
+            <button class="confirm-button yes" @click="deleteEntry">Yes</button>
+            <button class="confirm-button no" @click="cancelDelete">No</button>
+        </div>
         <h1 class= "output-text" v-text="entry.text"></h1>
         <div class="track-info">
             <p class="track-name">{{ entry.track.name }}</p>
@@ -44,7 +49,7 @@ watch(audioPlayer, audioPlayer => {
     }
 });
 
-defineProps({
+const props = defineProps({
     entry: {
         type: Object as PropType<Entry>,
         required: true
@@ -54,7 +59,13 @@ defineProps({
         required: true,
     },
 });
+
+const emit = defineEmits<{
+    (event: 'delete', entryDate: Date): void;
+}>();
+
 const showPlayback = ref(false);
+const showConfirmationDialog = ref(false);
 
 function togglePlayback() {
     showPlayback.value = !showPlayback.value;
@@ -63,5 +74,18 @@ function togglePlayback() {
 function saveVolumeLevel(event: Event) {
     const audioPlayer = event.target as HTMLAudioElement
     localStorage.setItem('volume_level', audioPlayer.volume.toString());
+}
+
+function confirmation(){
+    showConfirmationDialog.value = true;
+}
+
+function deleteEntry(){
+    showConfirmationDialog.value = false;
+    props.entry && emit('delete', props.entry.date);
+}
+
+function cancelDelete(){
+    showConfirmationDialog.value = false;
 }
 </script>
