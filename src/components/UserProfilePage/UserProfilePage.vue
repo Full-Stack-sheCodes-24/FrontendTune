@@ -49,7 +49,6 @@ watch(() => route.params.userId, (newUserId) => {
 onMounted(async () => {
     // Get userId from url. Ex: moodz.com/users/ajsdlifjasifj
     const userId = route.params.userId.toString();
-
     refreshUserState(userId);
 });
 
@@ -63,8 +62,8 @@ async function refreshUserState(userId : string) {
         for(let i = 0; i < response.entries.length; i++){
             response.entries[i].date = new Date(response.entries[i].date)
         }
+        response.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
         entries.value = response.entries;
-        userStateStore.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
     }).catch(error => {
         console.log(error);
     });
