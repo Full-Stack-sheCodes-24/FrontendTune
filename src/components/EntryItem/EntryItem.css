@@ -15,7 +15,16 @@
   border-radius: 50%;
   cursor: pointer;
   padding: 5px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
+
+.entry-container:hover .delete-button {
+  display: block; 
+  opacity: 1;
+}
+
 .delete-button:hover {
   color: white;
   background-color: red;
