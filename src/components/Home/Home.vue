@@ -11,9 +11,6 @@
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
-                <!-- <div v-for="entry in entries">
-                    <EntryItem :entry="entry"></EntryItem>
-                </div> -->
                 <div v-for="entry in sortedEntries">
                     <EntryItem :entry="entry"></EntryItem>
                 </div>
