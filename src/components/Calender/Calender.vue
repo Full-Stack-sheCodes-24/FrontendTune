@@ -44,7 +44,9 @@ const getEntryForDay = (day: number) => {
     if (props.entries != null) {
         const entry = props.entries.find(e => {
             const entryDate = new Date(e.date);
-            return entryDate.getDate() === day;
+            return entryDate.getFullYear() === currentYear && 
+                   entryDate.getMonth() === currentMonth && 
+                   entryDate.getDate() === day;
         });
         return entry; // it returns undefined if no entry value is found
     }
