@@ -1,7 +1,7 @@
 <style scoped>@import'./Privacy.css';</style>
 <template>
     <div class="privacy-container">
-        <h2 class="title">Privacy and Security</h2>
+        <h2 class="title">Privacy and Safety</h2>
         <h2>Protect Your Posts</h2>
         <p>When selected, your profile and posts will not be visible by other people</p>
         <label class="switch">
