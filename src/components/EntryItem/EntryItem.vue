@@ -2,7 +2,7 @@
 <template>
     <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`">
         <div class="entry-content">
-        <h1 class= "output-text" v-text="entry.text"></h1>
+        <pre class= "output-text" v-text="entry.text"></pre>
         <div class="track-info">
             <p class="track-name">{{ entry.track.name }}</p>
             <div 
