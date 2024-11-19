@@ -4,7 +4,7 @@ import { useUserStateStore } from '../UserStateStore';
 
 
 export class DeleteEntryClient { //reference how backend setup API, get userid from local storage
-    async execute(request : Entry)  {
+    async execute(request: {date: Date})  {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const userID = userState.id;
@@ -23,7 +23,7 @@ export class DeleteEntryClient { //reference how backend setup API, get userid f
             }
         });
 
-        const response = await client.delete(`/Users/${userID}/entries/${date}`);
+        const response = await client.delete(`/Users/${userID}/entries/${date.toISOString()}`);
         return response.data;
     }
 }

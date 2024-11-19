@@ -11,7 +11,7 @@
             </ProfileSection>
             <div class="entries-container">
                 <div v-for="entry in entries">
-                    <EntryItem :entry="entry"></EntryItem>
+                    <EntryItem :entry="entry" :is-owner="false"></EntryItem>
                 </div>
             </div>
         </div>
