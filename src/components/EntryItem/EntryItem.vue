@@ -13,10 +13,18 @@
             </div>
         </div>
         <div class="music-play" v-if="showPlayback">
+            <img 
+                class="song_img" 
+                v-if="entry?.track?.albumImageUrl" 
+                :class="{'pause-animation': isPaused}" 
+                :src="entry?.track?.albumImageUrl" 
+            />
             <audio controls autoplay loop
                 ref="audioPlayer"
                 :src="entry.track.preview_url || undefined"
-                @volumechange="saveVolumeLevel">
+                @volumechange="saveVolumeLevel"
+                @pause="isPaused = true"
+                @play="isPaused = false">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -28,12 +36,15 @@
         </button>
     </div>
 </template>
+
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { nextTick, onMounted, ref, watch } from 'vue';
 import type { PropType } from 'vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
+const isPaused = ref(true);
+const resetRotation = ref(false);
 
 watch(audioPlayer, audioPlayer => {
     if (audioPlayer == null) return
