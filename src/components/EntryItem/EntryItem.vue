@@ -1,6 +1,6 @@
 <style scoped>@import'./EntryItem.css';</style>
 <template>
-    <div class="entry-container card clickable">
+    <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`">
         <h1 class= "output-text" v-text="entry.text"></h1>
         <div class="track-info">
             <p class="track-name">{{ entry.track.name }}</p>

@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="right-column">
-            <Calender v-if="!isPrivate"/>
+            <Calender v-if="!isPrivate" :entries="entries"></Calender>
         </div>
     </div>
 </template>
@@ -40,6 +40,7 @@ const isPrivate = ref();
 
 watch(() => route.params.userId, (newUserId) => {
     refreshUserState(newUserId.toString());
+    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
 });
 
 onMounted(async () => {
@@ -47,6 +48,9 @@ onMounted(async () => {
     const userId = route.params.userId.toString();
 
     refreshUserState(userId);
+    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
+
+
 });
 
 async function refreshUserState(userId : string) {

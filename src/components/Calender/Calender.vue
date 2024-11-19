@@ -16,19 +16,41 @@
         <div class="calender-item-container">    
             <CalenderItem v-for="day in days"
                 :currentDay="day"
-                :albumCoverCalendar=undefined
+                :entry=getEntryForDay(day)
             />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { ref, watchEffect } from 'vue';
 import CalenderItem from './CalenderItem.vue';
-import { ref } from 'vue';
 
 const today = new Date();
 let currentMonth = today.getMonth(); // 0 for January, 11 for December
 let currentYear = today.getFullYear();
+import type { Entry } from '@/Shared/Models/Entry';
+
+const props = defineProps<{
+    entries: Entry[];
+}>();
+
+watchEffect(() => {
+    console.log("Entries in Calender.vue:", props.entries); // Debug: Check received entries
+});
+
+//Finds the first entry that has a date equals the day and passes it to CalenderItem
+const getEntryForDay = (day: number) => {
+    if (props.entries != null) {
+        const entry = props.entries.find(e => {
+            const entryDate = new Date(e.date);
+            return entryDate.getFullYear() === currentYear && 
+                   entryDate.getMonth() === currentMonth && 
+                   entryDate.getDate() === day;
+        });
+        return entry; // it returns undefined if no entry value is found
+    }
+}
 
 const monthNames: string[] = [
         "January", "February", "March", "April", "May", "June",
