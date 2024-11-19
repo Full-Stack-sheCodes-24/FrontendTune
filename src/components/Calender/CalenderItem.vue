@@ -24,7 +24,7 @@ const goToEntry = () => {
     if (props.entry != undefined) {
         const element = document.getElementById(`entry-${new Date(props.entry.date).getTime()}`);
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth'});
+            element.scrollIntoView({ behavior: 'smooth', block: 'center'});
             element.classList.add('highlight');
 
             setTimeout(() => {
