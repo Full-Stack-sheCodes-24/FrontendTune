@@ -1,4 +1,4 @@
-<style>@import'./Display.css';</style>
+<style scoped>@import'./Display.css';</style>
 <template>
     <div class="display-container">
         <h2 class="title">Display Preferences</h2>

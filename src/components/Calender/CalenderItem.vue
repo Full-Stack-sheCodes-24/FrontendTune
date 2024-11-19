@@ -1,8 +1,9 @@
+<style scoped src="./Calender.css"></style>
 <template>
     <div class="calender-item card clickable" @click="goToEntry">
         <p class="days-on-calendar">{{ currentDay }}</p>   
         <div v-if="entry != undefined"> 
-            <img :src="entry?.track?.album?.images[0]?.url || fallbackImg"/>
+            <img :src="entry?.track?.album?.images[0]?.url || fallbackImg" :alt="`Calendar Picture for day ${currentDay}`"/>
         </div>
     </div>
 </template>

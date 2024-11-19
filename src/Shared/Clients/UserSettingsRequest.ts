@@ -1,3 +1,4 @@
 export interface UserSettingsRequest {
-    theme: string;
+    theme?: string;
+    isPrivate?: boolean;
 }

@@ -18,6 +18,7 @@ const routes = [
   { path: '/home', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
   { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
+  { path: '/login/session-timeout', name: 'LoginSessionTimeout', component: SpotifyUserLogin },
   { path: '/logout', name: 'Logout', component: Logout },
   { path: '/settings', name: 'Settings', component: Settings },
   { path: '/callback', name: 'Callback', component: SpotifyCallback },

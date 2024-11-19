@@ -1,4 +1,4 @@
-<style>@import'./Calender.css';</style>
+<style scoped>@import'./Calender.css';</style>
 <template>
     <div class="calender-container card">
         <div class="calendar-title">

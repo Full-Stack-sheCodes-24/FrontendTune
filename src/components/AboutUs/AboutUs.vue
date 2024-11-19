@@ -1,4 +1,4 @@
-<style>@import'./AboutUs.css';</style>
+<style scoped>@import'./AboutUs.css';</style>
 <template>
     <div class = "app-desc">
         <p class = "desc-title">Welcome to Moodz!</p>
@@ -12,7 +12,7 @@
         change background themes. </p>
     </div>
     <div class = "our-team">
-        <p class ="team">Made with <i>love,</i> by [team name]</p>
+        <p class ="team">Made with <i>love,</i> by Moody Toonies</p>
     </div>
     <div class="slider" style ="
         --width: 300px;

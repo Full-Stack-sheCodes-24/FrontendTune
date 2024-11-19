@@ -1,4 +1,4 @@
-<style>@import'./SpotifyCallback.css';</style>
+<style scoped>@import'./SpotifyCallback.css';</style>
 
 <template>
     <div class="loading">

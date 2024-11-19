@@ -8,7 +8,7 @@
 
 .create-entry-container:hover {
     background-color: var(--secondary-color);
-    color: var(--quaternary-color);
+    color: var(--background-color);
     transition: background-color 0.3s; /* Smooth transition */
 }
 
@@ -27,7 +27,7 @@
 }
 
 .modal-content {
-    background: white;
+    background: var(--background-color);
     padding: 20px;
     border-radius: 10px;
     width: 90%;
