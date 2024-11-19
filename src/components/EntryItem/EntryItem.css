@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
 .entry-container {
-    position: relative;
+  position: relative; /* Allow positioning of child elements relative to this container */
+  display: flex;
+  align-items: center;
+}
+.entry-content {
+  flex-grow: 1; /* Allow content to take up available space */
 }
 .favicon-container {
     cursor: pointer;
@@ -62,3 +67,21 @@ audio::-webkit-media-controls-panel {
   transition: 0.3s ease; /* Optional smooth transition */
 }
 
+
+.btn-delete-entry {
+  position: absolute; /* Position relative to the entry-container */
+  top: 10px; /* Adjust distance from the top */
+  right: 10px; /* Adjust distance from the right */
+  border-radius: 50%; /* Circle shape */
+  height: fit-content;
+  width: fit-content;
+  border: none;
+  cursor: pointer;
+  line-height: 0;
+  padding: 4px;
+  background: none;
+
+  i {
+      color: var(--primary-color);
+  }
+}

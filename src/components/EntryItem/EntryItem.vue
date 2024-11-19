@@ -1,6 +1,7 @@
 <style scoped>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`">
+        <div class="entry-content">
         <h1 class= "output-text" v-text="entry.text"></h1>
         <div class="track-info">
             <p class="track-name">{{ entry.track.name }}</p>
@@ -20,6 +21,11 @@
             </audio>
         </div>
         <p v-text="entry.date.toLocaleString()"></p>
+        </div>
+        <!-- Trash button -->
+        <button v-if="isOwner" class="btn-delete-entry" @click="$emit('delete', entry.date)">
+            <i class="material-symbols-outlined">delete</i>
+        </button>
     </div>
 </template>
 <script setup lang="ts">
@@ -47,8 +53,13 @@ defineProps({
     entry: {
         type: Object as PropType<Entry>,
         required: true
-    }
+    },
+    isOwner: {
+        type: Boolean,
+        required: true
+  },
 });
+        
 const showPlayback = ref(false);
 
 function togglePlayback() {
