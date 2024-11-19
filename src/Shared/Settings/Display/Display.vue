@@ -1,4 +1,4 @@
-<style>@import'./Display.css';</style>
+<style scoped>@import'./Display.css';</style>
 <template>
     <div class="display-container">
         <h2 class="title">Display Preferences</h2>
@@ -9,6 +9,12 @@
             </div>
             <div class="color-container" @click="handleThemeClick($event)">
                 <div id="pink" class="color pink"></div>
+            </div>
+            <div class="color-container" @click="handleThemeClick($event)">
+                <div id="green" class="color green"></div>
+            </div>
+            <div class="color-container" @click="handleThemeClick($event)">
+                <div id="purple" class="color purple"></div>
             </div>
         </div>
     </div>

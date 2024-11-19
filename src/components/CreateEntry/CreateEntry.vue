@@ -1,4 +1,4 @@
-<style src="./CreateEntry.css"></style>
+<style scoped src="./CreateEntry.css"></style>
 <template>
   <div @click="openModal" class="create-entry-container card">
     <h1>Whats your mood today?</h1>

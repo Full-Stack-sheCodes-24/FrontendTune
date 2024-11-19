@@ -22,12 +22,21 @@
             }
 
             .blue {
-                background: linear-gradient(45deg, #2F4156 40%, #567C8D, #C8D9E6 75%, #F5EFEB);
+                background: linear-gradient(45deg, #2F4156 40%, #567C8D 60%, #C8D9E6 80%, #F5EFEB);
             }
-
+            
             .pink {
-                background: linear-gradient(45deg, #ffc0cb, #fff2f4);
+                background: linear-gradient(45deg, #ff80ab 40%, #ff99cc 60%, #f3c6e1 80%);
             }
+            
+            .green {
+                background: linear-gradient(45deg, #345e30 40%, #5f7f59 60%, #9bc8a1 80%);
+            }
+            
+            .purple {
+                background: linear-gradient(45deg, #5f3471 40%, #7e4a93 60%, #9f75ba 80%);
+            }
+            
         }
     }
 }

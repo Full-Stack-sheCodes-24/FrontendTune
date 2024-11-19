@@ -1,4 +1,4 @@
-<style>@import'./SpotifyUserLogin.css';</style>
+<style scoped>@import'./SpotifyUserLogin.css';</style>
 <template>
   <div class="container">
       <header class="page-header">
@@ -11,7 +11,7 @@
       </header>
   </div>
   <Toast ref="toastRef"
-    :message="'Error logging in'"
+    :message="errorMessage"
     :is-error="true">
   </Toast>
 </template>
@@ -27,6 +27,7 @@ const router = useRouter();
 const userStateStore = useUserStateStore();
 
 const toastRef = ref<typeof Toast>();
+const errorMessage = ref<string>();
 
 onBeforeMount(() => {
   // If user is logged in, reroute to home page
@@ -38,6 +39,13 @@ onBeforeMount(() => {
 onMounted(() => {
   const error = route.path.endsWith('/error');
   if (error) {
+    errorMessage.value = 'Error logging in'
+    toastRef.value!.showToast();
+  }
+
+  const sessionTimeout = route.path.endsWith('/session-timeout')
+  if (sessionTimeout) {
+    errorMessage.value = 'Session timed out.'
     toastRef.value!.showToast();
   }
 });

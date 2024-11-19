@@ -10,6 +10,8 @@ import Settings from '@/Shared/Settings/Settings.vue'
 import SpotifyCallback from '@/components/SpotifyUserLogin/SpotifyCallback.vue';
 import UserProfilePage from '@/components/UserProfilePage/UserProfilePage.vue';
 import { markRaw } from 'vue'
+import AboutUs from './components/AboutUs/AboutUs.vue';
+import { useUserStateStore } from './Shared/UserStateStore';
 
 const routes = [
   { path: '/user/:userId', name: 'User', component: UserProfilePage },
@@ -17,9 +19,11 @@ const routes = [
   { path: '/home', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
   { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
+  { path: '/login/session-timeout', name: 'LoginSessionTimeout', component: SpotifyUserLogin },
   { path: '/logout', name: 'Logout', component: Logout },
   { path: '/settings', name: 'Settings', component: Settings },
-  { path: '/callback', name: 'Callback', component: SpotifyCallback }
+  { path: '/callback', name: 'Callback', component: SpotifyCallback },
+  { path: '/about', name: 'About', component: AboutUs }
 ];
 
 const router = createRouter({
@@ -48,3 +52,9 @@ watch(pinia.state, state => {
 },
 { deep: true}
 );
+
+// If cached login exists, refresh user state in the case that user logged in elsewhere and updated info
+const cache = localStorage.getItem('user_state')
+if(cache != null) {
+  useUserStateStore().refreshUserState();
+}

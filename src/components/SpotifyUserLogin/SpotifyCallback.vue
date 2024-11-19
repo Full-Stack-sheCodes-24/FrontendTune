@@ -1,8 +1,8 @@
-<style>@import'./SpotifyCallback.css';</style>
+<style scoped>@import'./SpotifyCallback.css';</style>
 
 <template>
     <div class="loading">
-        <img src="https://giffiles.alphacoders.com/170/170278.gif" alt="Loading..." />
+        <LoadingSpinner/>
     </div>
 </template>
 <script setup lang="ts">
@@ -10,6 +10,7 @@ import { SpotifyLoginClient } from '@/Shared/Clients/SpotifyLoginClient';
 import { onBeforeMount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStateStore } from '@/Shared/UserStateStore'
+import LoadingSpinner from '@/Shared/LoadingSpinner/LoadingSpinner.vue';
 
 const route = useRoute();
 const router = useRouter();

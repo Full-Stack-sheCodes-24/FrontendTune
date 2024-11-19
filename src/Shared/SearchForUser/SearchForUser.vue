@@ -1,10 +1,11 @@
-<style>@import'./SearchForUser.css';</style>
+<style scoped>@import'./SearchForUser.css';</style>
 <template>
     <div ref="searchUserDiv" class="search-for-user-container">
         <i class="material-symbols-outlined">search</i>
         <input
             ref="inputRef"
             v-model="query"
+            title="Search"
             placeholder="Search"
             @input="debouncedSearch()"
             @keydown.esc="close"

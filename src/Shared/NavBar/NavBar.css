@@ -41,7 +41,7 @@
 
     @media only screen and (max-width: 1280px) {
         .navbar-layout {
-            min-width: calc(100vw - 2rem);
+            min-width: calc(100% - 2rem);
             box-sizing: border-box;
         }
     }

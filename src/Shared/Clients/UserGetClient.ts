@@ -1,8 +1,8 @@
 import axios from 'axios';
-import type { UserState } from '@/Shared/Models/UserState';
+import type { OtherUserState } from '@/Shared/Models/OtherUserState';
 
 export class UserGetClient {
-    async execute(userId : string) : Promise<UserState> {
+    async execute(userId : string) : Promise<OtherUserState> {
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`
         });

@@ -1,9 +1,11 @@
-<style>@import'./ProfileSection.css';</style>
+<style scoped>@import'./ProfileSection.css';</style>
 <template>
   <div class="profile-section-container card">
     <div class="profile-info-container">
       <div class="profile-pic-wrapper">
-        <img class="profile-picture" :src="profilePicUrl">
+        <img class="profile-picture"
+          :src="profilePicUrl"
+          :alt="profilePicAltText">
       </div>
       <div class ="profile-info">
           <h1 v-text="name"></h1>
@@ -25,7 +27,7 @@
 import { computed, ref } from 'vue';
 import EditProfileModal from '@/components/EditProfile/EditProfile.vue';
 
-const { bioText, birthday } = defineProps({
+const { isOwner, name, bioText, birthday } = defineProps({
   isOwner: {
     type: Boolean,
     required: true
@@ -36,7 +38,8 @@ const { bioText, birthday } = defineProps({
   birthday: Date
 });
 
-const formattedBirthday = computed(() => formatDateToMMDDYYYY(birthday));
+const profilePicAltText = computed(() => isOwner ? "Your profile picture" : `Profile picture for ${name}`);
+const formattedBirthday = computed(() => birthday ? formatDateToMMDDYYYY(birthday) : null);
 const bioTextWithDefault = computed(() => bioText ?? "This person has no bio.");
 const isModalOpen = ref(false);
 
