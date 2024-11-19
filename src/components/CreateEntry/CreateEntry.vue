@@ -7,7 +7,7 @@
 
   <div v-if="isModalOpen" class="entry-modal" @click.self="closeModal">
     <div class="modal-content">
-      <button @click="closeModal" class="close-button">×</button>
+      <button @click="closeModal" class="material-symbols-outlined close-button">close</button>
       <h1>Create an Entry</h1>  
       <textarea v-model="entryText" placeholder="Write about your day..." class="entry-textarea"></textarea>
       <SpotifySearch @update-selected-track="updateSelectedTrack"></SpotifySearch>

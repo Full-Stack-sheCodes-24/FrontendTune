@@ -31,6 +31,15 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
+    border-radius: 50%;
+    height: fit-content;
+    width: fit-content;
+    padding: 4px;
+}
+
+.close-button:hover {
+    background-color: var(--quaternary-color); /* Slightly darker on hover */
+    transition: background-color 0.3s; /* Smooth transition */
 }
 
 /* Entry text */
