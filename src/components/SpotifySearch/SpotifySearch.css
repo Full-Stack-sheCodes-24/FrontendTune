@@ -25,6 +25,20 @@
   }
 }
 
+input {
+  color: var(--text-color);
+  border-radius: 4px;
+  border: 1px solid var(--primary-color);
+  height: 100%;
+  padding-left: 40px;
+  padding-right: 6px;
+  background-color: transparent;
+}
+
+input::placeholder {
+  color: var(--text-color);
+}
+
 .spotify-search-results {
   max-height: calc(5 * 45px);
   overflow-y: auto;

@@ -21,7 +21,10 @@
             </div>
         </div>
         <div>
-            <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
+            <div>
+                <i class="material-symbols-outlined">search</i>
+                <input v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
+            </div>
             <div class = "spotify-search-results">
                 <div v-for="track in searchResults"
                     :key = "track.id"
