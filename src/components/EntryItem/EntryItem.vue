@@ -23,9 +23,14 @@
         <p v-text="entry.date.toLocaleString()"></p>
         </div>
         <!-- Trash button -->
-        <button v-if="isOwner" class="btn-delete-entry" @click="$emit('delete', entry.date)">
+        <button v-if="isOwner" class="btn-delete-entry" @click="confirmation" title="Delete Entry">
             <i class="material-symbols-outlined">delete</i>
         </button>
+        <div v-if="showConfirmationDialog" class="confirmation-dialog">
+            <p>Are you sure you want to delete this entry?</p>
+            <button class="confirm-button yes" @click="deleteEntry">Yes</button>
+            <button class="confirm-button no" @click="cancelDelete">No</button>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -49,7 +54,7 @@ watch(audioPlayer, audioPlayer => {
     }
 });
 
-defineProps({
+const props = defineProps({
     entry: {
         type: Object as PropType<Entry>,
         required: true
@@ -59,8 +64,13 @@ defineProps({
         required: true
   },
 });
+
+const emit = defineEmits<{
+    (event: 'delete', entryDate: Date): void;
+}>();
         
 const showPlayback = ref(false);
+const showConfirmationDialog = ref(false);
 
 function togglePlayback() {
     showPlayback.value = !showPlayback.value;
@@ -69,5 +79,16 @@ function togglePlayback() {
 function saveVolumeLevel(event: Event) {
     const audioPlayer = event.target as HTMLAudioElement
     localStorage.setItem('volume_level', audioPlayer.volume.toString());
+}
+
+function confirmation(){
+    showConfirmationDialog.value = true;
+}
+function deleteEntry(){
+    showConfirmationDialog.value = false;
+    props.entry && emit('delete', props.entry.date);
+}
+function cancelDelete(){
+    showConfirmationDialog.value = false;
 }
 </script>
