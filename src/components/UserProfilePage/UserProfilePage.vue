@@ -71,6 +71,7 @@ async function refreshUserState(userId : string) {
             response.entries[i].date = new Date(response.entries[i].date)
         }
         entries.value = response.entries;
+        response.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
     }).catch(error => {
         console.log(error);
     });
