@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="right-column">
-            <Calender v-if="!isPrivate"/>
+            <Calender v-if="!isPrivate" :entries="entries"></Calender>
         </div>
     </div>
 </template>
@@ -45,12 +45,16 @@ const isPrivate = ref();
 
 watch(() => route.params.userId, (newUserId) => {
     refreshUserState(newUserId.toString());
+    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
 });
 
 onMounted(async () => {
     // Get userId from url. Ex: moodz.com/users/ajsdlifjasifj
     const userId = route.params.userId.toString();
     refreshUserState(userId);
+    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
+
+
 });
 
 async function refreshUserState(userId : string) {
@@ -72,6 +76,7 @@ async function refreshUserState(userId : string) {
         }
         response.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
         entries.value = response.entries;
+        response.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
     }).catch(error => {
         console.log(error);
     });

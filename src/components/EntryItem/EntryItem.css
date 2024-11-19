@@ -114,3 +114,10 @@ audio::-webkit-media-controls-panel {
     font-size: 2em; /* Optional: Adjust size for better readability */
     line-height: 1.5; /* Optional: Improve spacing for multiline text */
 }
+
+.highlight {
+  background-color: var(--tertiary-color);
+  box-shadow: 0 0 10px #fff5bd;
+  transition: 0.3s ease; /* Optional smooth transition */
+}
+

@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="right-column">
-            <Calender/>
+            <Calender :entries="userStateStore.entries"/>
         </div>
     </div>
 </template>

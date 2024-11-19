@@ -1,6 +1,6 @@
 <style scoped>@import'./EntryItem.css';</style>
 <template>
-    <div class="entry-container card clickable">
+    <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`">
         <button v-if="isOwner" class="delete-button" @click="confirmation" title="Delete Entry">✖</button>
         <div v-if="showConfirmationDialog" class="confirmation-dialog">
             <p>Are you sure you want to delete this entry?</p>
