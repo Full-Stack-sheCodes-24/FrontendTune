@@ -3,6 +3,7 @@ import type { UserState } from './Models/UserState';
 import type { Entry } from './Models/Entry';
 import { NewAuthTokenClient } from './Clients/NewAuthTokenClient';
 import { HttpStatusCode } from 'axios';
+import { UserStateRefreshClient } from './Clients/UserStateRefreshClient';
 
 export const useUserStateStore = defineStore('userState', {
     state: (): UserState => {
@@ -73,6 +74,16 @@ export const useUserStateStore = defineStore('userState', {
             if (this.settings?.theme != null) {
                 document.body.className = (`${this.settings.theme}-theme`);
             }
+        },
+        refreshUserState() {
+            const client = new UserStateRefreshClient();
+
+            // Do not await, allow refresh to run in the background asynchronously
+            client.execute( this.id ).then(response => {
+                this.$patch(response);
+            }).catch(error => {
+                console.log(error);
+            });
         }
     }
 });
