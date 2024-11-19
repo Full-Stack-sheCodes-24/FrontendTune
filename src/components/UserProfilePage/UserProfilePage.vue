@@ -17,6 +17,7 @@
         </div>
         <div class="right-column">
             <Calender v-if="!isPrivate" :entries="entries"></Calender>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
