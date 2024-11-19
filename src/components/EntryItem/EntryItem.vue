@@ -1,11 +1,15 @@
 <style>@import'./EntryItem.css';</style>
 <template>
     <div class="entry-container card clickable">
-        <h1 v-text="entry.text"></h1>
-        <p v-text="entry.track.name"></p>
-        <p v-text="entry.date.toLocaleString()"></p>
-        <!-- Show delete button only if the user is the owner -->
-        <button v-if="isOwner" class="delete-button" @click="$emit('delete', entry.date)">Delete</button>
+        <div class="entry-content">
+            <h1 v-text="entry.text"></h1>
+            <p v-text="entry.track.name"></p>
+            <p v-text="entry.date.toLocaleString()"></p>
+        </div>
+        <!-- Trash button -->
+        <button v-if="isOwner" class="btn-delete-entry" @click="$emit('delete', entry.date)">
+            <i class="material-symbols-outlined">delete</i>
+        </button>
     </div>
 </template>
 <script setup lang="ts">
