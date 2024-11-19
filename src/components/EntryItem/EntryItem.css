@@ -5,6 +5,10 @@
   display: flex;
   align-items: center;
 }
+.entry-container:hover .btn-delete-entry {
+  display: block; 
+  opacity: 1;
+}
 .entry-content {
   flex-grow: 1; /* Allow content to take up available space */
 }
@@ -80,8 +84,39 @@ audio::-webkit-media-controls-panel {
   line-height: 0;
   padding: 4px;
   background: none;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 
   i {
       color: var(--primary-color);
   }
+}
+
+.confirmation-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 10;
+}
+.confirm-button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+.confirm-button.yes {
+  background-color: red;
+  color: white;
+}
+.confirm-button.no {
+  background-color: gray;
+  color: white;
 }
