@@ -24,8 +24,8 @@
 
 .music-play {
     position: absolute;
-    top: 30%;
-    right: 5%;
+    bottom: 25px;        
+    right: 5%; 
     border-radius: 8px;
     padding: 5px;
     display: flex;
