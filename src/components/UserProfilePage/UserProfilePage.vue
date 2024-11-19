@@ -74,7 +74,6 @@ async function refreshUserState(userId : string) {
         for(let i = 0; i < response.entries.length; i++){
             response.entries[i].date = new Date(response.entries[i].date)
         }
-        response.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
         entries.value = response.entries;
         response.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
     }).catch(error => {
