@@ -5,6 +5,7 @@
     .calendar-title {
         display: flex;
         justify-content: center;
+        align-items: center;
         width: 100%;
 
         .calendar-arrow {
@@ -14,19 +15,20 @@
             border: none;
             cursor: pointer;
             line-height: 0;
-            padding: 12px 4px 0 5px;
+            padding: 4px;
             background: none;
 
         i {
             color:#304674;
         }
 
+        }
+
         .calendar-arrow:hover {
-            background-color: #f0f0f0; /* Slightly darker on hover */
+            background-color: var(--quaternary-color); /* Slightly darker on hover */
             transition: background-color 0.3s; /* Smooth transition */
         }
         
-        }
     }
 
     p {
