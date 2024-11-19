@@ -2,7 +2,7 @@
 <template>
     <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`">
         <div class="entry-content">
-        <h1 class= "output-text" v-text="entry.text"></h1>
+        <pre class= "output-text" v-text="entry.text"></pre>
         <div class="track-info">
             <p class="track-name">{{ entry.track.name }}</p>
             <div 
@@ -13,10 +13,17 @@
             </div>
         </div>
         <div class="music-play" v-if="showPlayback">
+            <img class="song_img" 
+                v-if="entry?.track?.albumImageUrl" 
+                :class="{'pause-animation': isPaused}" 
+                :src="entry?.track?.albumImageUrl" 
+            />
             <audio controls autoplay loop
                 ref="audioPlayer"
                 :src="entry.track.preview_url || undefined"
-                @volumechange="saveVolumeLevel">
+                @volumechange="saveVolumeLevel"
+                @pause="isPaused = true"
+                @play="isPaused = false">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -33,12 +40,14 @@
         </div>
     </div>
 </template>
+
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import type { PropType } from 'vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
+const isPaused = ref(true);
 
 watch(audioPlayer, audioPlayer => {
     if (audioPlayer == null) return
