@@ -1,6 +1,6 @@
 import axios from 'axios';
-import type { UserState } from '../Models/UserState';
 import { useUserStateStore } from '../UserStateStore';
+import type { UserState } from '../Models/UserState';
 
 export class UserStateRefreshClient {
     async execute(userId : string) : Promise<UserState> {
@@ -16,6 +16,7 @@ export class UserStateRefreshClient {
         });
 
         const response = await client.get(`/Users/${userId}/refresh`);
+        delete response.data.auth;  // Remove the auth field
         return response.data;
     }
 }
