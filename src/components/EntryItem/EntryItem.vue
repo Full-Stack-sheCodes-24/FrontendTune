@@ -13,8 +13,7 @@
             </div>
         </div>
         <div class="music-play" v-if="showPlayback">
-            <img 
-                class="song_img" 
+            <img class="song_img" 
                 v-if="entry?.track?.albumImageUrl" 
                 :class="{'pause-animation': isPaused}" 
                 :src="entry?.track?.albumImageUrl" 
@@ -38,13 +37,12 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import type { PropType } from 'vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 const isPaused = ref(true);
-const resetRotation = ref(false);
 
 watch(audioPlayer, audioPlayer => {
     if (audioPlayer == null) return

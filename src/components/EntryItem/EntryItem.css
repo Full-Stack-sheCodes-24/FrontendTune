@@ -9,8 +9,6 @@
   width: 80%;
   max-width: 800px;
   flex-grow: 1; /* Allow content to take up available space */
-
-    
 }
 
 .song_img {
