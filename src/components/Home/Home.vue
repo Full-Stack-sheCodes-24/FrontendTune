@@ -11,7 +11,7 @@
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
-                <div v-for="entry in sortedEntries">
+                <div v-for="entry in entries" :key="entry.date.toISOString">
                     <EntryItem :entry="entry" :is-owner="true" @delete="deleteEntry"></EntryItem>
                 </div>
             </div>
@@ -30,21 +30,18 @@ import Calender from '@/components/Calender/Calender.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { useRouter } from 'vue-router';
 import { DeleteEntryClient } from '@/Shared/Clients/DeleteEntryClient';
-import { computed } from 'vue';
-
-
+import { storeToRefs } from 'pinia';
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
-const entries = userStateStore.getEntriesWithDate
-const sortedEntries = computed(() => {
-    return [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-});
-const deleteEntryClient = new DeleteEntryClient(); //initialize DeleteEntryClient
+const { entries } = storeToRefs(userStateStore);
+userStateStore.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
+const entriesDate = userStateStore.getEntriesWithDate
 
 async function deleteEntry(date: Date) {
     try {
         //execute the client to delete the entry data
+        const deleteEntryClient = new DeleteEntryClient();
         await deleteEntryClient.execute({ date });
         
         const updatedEntries = userStateStore.entries.filter(entry => {
