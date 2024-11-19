@@ -12,7 +12,8 @@ export class SpotifySearchMapper {
                 id: spotifyTrackDTO.id,
                 album: spotifyTrackDTO.album,
                 preview_url: spotifyTrackDTO.preview_url,
-                artist: spotifyTrackDTO.artists
+                artist: spotifyTrackDTO.artists,
+                albumImageUrl: spotifyTrackDTO.album.images[0]?.url
             } as Track);
         });
 
