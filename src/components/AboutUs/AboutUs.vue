@@ -50,7 +50,7 @@
                 <div class="hover-text">Melody Duong</div>
             </div>
             <div class="item" style ="--position: 8">
-                <img src ="/src/assets/pfp.jpg">
+                <img src ="/src/assets/denise.jpg">
                 <div class="hover-text">Denise Thuong</div>
             </div>
             <div class="item" style ="--position: 9">
