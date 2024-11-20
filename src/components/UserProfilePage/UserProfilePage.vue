@@ -7,7 +7,9 @@
                 :profile-pic-url="profilePicUrl"
                 :name="name"
                 :bio-text="bioText"
-                :birthday="birthday">
+                :birthday="birthday"
+                :following="following?.length"
+                :followers="followers?.length">
             </ProfileSection>
             <div class="entries-container">
                 <div v-for="entry in entries">
@@ -33,6 +35,8 @@ const route = useRoute();
 
 const profilePicUrl = ref();
 const name = ref();
+const following = ref();
+const followers = ref();
 const bioText = ref();
 const birthday = ref();
 const entries = ref([] as Entry[]);
@@ -58,6 +62,8 @@ async function refreshUserState(userId : string) {
     await client.execute(userId).then(response => {
         profilePicUrl.value = response.profilePicUrl;
         name.value = response.name;
+        following.value = response.following;
+        followers.value = response.followers;
         if (response.isPrivate) {
             isPrivate.value = true;
             bioText.value = 'This user has their profile privated.';

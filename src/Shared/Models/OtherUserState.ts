@@ -8,4 +8,6 @@ export interface OtherUserState {
     birthday: Date;
     entries: Entry[];
     isPrivate: boolean;
+    following: string[];
+    followers: string[];
 }
