@@ -1,6 +1,6 @@
 <style scoped>@import'./EntryItem.css';</style>
 <template>
-    <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`">
+    <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`" @click="handleEntryClick">
         <div class="entry-content">
         <pre class= "output-text" v-text="entry.text"></pre>
         <div class="track-info">
@@ -48,6 +48,7 @@ import type { Entry } from '@/Shared/Models/Entry';
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 const isPaused = ref(true);
+const activeAudioPlayer = ref<string | null>(null);
 
 watch(audioPlayer, audioPlayer => {
     if (audioPlayer == null) return
@@ -82,7 +83,18 @@ const showPlayback = ref(false);
 const showConfirmationDialog = ref(false);
 
 function togglePlayback() {
+    
     showPlayback.value = !showPlayback.value;
+    activeAudioPlayer.value = `entry-${new Date(props.entry.date).getTime()}`;
+}
+
+function handleEntryClick(event: MouseEvent) {
+    const entryContainer = (event.target as HTMLElement).closest('.entry-container');
+    if (entryContainer && entryContainer.id !== `entry-${new Date(props.entry.date).getTime()}`) {
+        //Clicked outside the current entry, stop audioplayer
+        showPlayback.value = false;
+        activeAudioPlayer.value = null;
+    }
 }
 
 function saveVolumeLevel(event: Event) {
@@ -100,4 +112,17 @@ function deleteEntry(){
 function cancelDelete(){
     showConfirmationDialog.value = false;
 }
+
+onMounted(() => {
+    document.addEventListener('click', (event) => {
+        if (activeAudioPlayer.value) {
+            const entryContainer = document.querySelector(`#${activeAudioPlayer.value}`);
+            if (!entryContainer?.contains(event.target as Node)) {
+                // If the clicked element is outside of the current audio player, stop playback
+                showPlayback.value = false;
+                activeAudioPlayer.value = null;
+            }
+        }
+    });
+});
 </script>
