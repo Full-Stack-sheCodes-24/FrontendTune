@@ -20,18 +20,18 @@
                 </p>
             </div>
         </div>
-        <div>
-            <div>
-                <i class="material-symbols-outlined">search</i>
-                <input v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
-            </div>
-            <div class = "spotify-search-results">
-                <div v-for="track in searchResults"
-                    :key = "track.id"
-                    @click="selectSong(track)"
-                    class = "track-item">
-                    {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
-            </div>
+        <div class="song-searchbar-container">
+            <img v-if="!(isSelected)" src="/favicon.ico" alt="Play Icon"/>
+            <img v-if="isPaused" src="/favicon.ico" alt="Play Icon" :class="{ 'pause-animation': notAudioVisualizing }"/>
+            <img v-else-if="isSelected && !(isPaused)" src="/favicon.ico" alt="Play Icon" class= "favicon-icon" />
+            <input v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
+        </div>
+        <div class = "spotify-search-results">
+            <div v-for="track in searchResults"
+                :key = "track.id"
+                @click="selectSong(track)"
+                class = "track-item">
+                {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
             </div>
         </div>
     </div>
@@ -60,6 +60,7 @@ const selectedTrack = ref();
 const selectedSongImg = ref('');
 const selectedSongPreviewUrl = ref<string | null>(null);
 const isPaused = ref(false);
+const notAudioVisualizing = ref(false);
 const noPreviewUrlMsg = "does not have a preview track.";
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 

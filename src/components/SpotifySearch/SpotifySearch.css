@@ -16,6 +16,15 @@
     }
 }
 
+@keyframes audio-visualizer-wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -25,18 +34,49 @@
   }
 }
 
-input {
+.song-searchbar-container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
   color: var(--text-color);
   border-radius: 4px;
-  border: 1px solid var(--primary-color);
-  height: 100%;
-  padding-left: 40px;
-  padding-right: 6px;
   background-color: transparent;
-}
+  width: 200px;
 
-input::placeholder {
-  color: var(--text-color);
+  input {
+    color: var(--text-color);
+    border-radius: 4px;
+    border: 1px solid var(--primary-color);
+    width: 100%;
+    height: 100%;
+    padding-left: 70px;
+    padding-right: 6px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: transparent;
+  }
+  
+  input::placeholder {
+    color: var(--text-color);
+    padding-top: 10px;
+  }
+
+  img {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .favicon-icon {
+    animation: audio-visualizer-wave 1s infinite ease-in-out;
+  }
+
+  .favicon-icon.pause-animation {
+    animation-play-state: paused;
+  }
+
 }
 
 .spotify-search-results {
