@@ -91,16 +91,19 @@
   border-bottom: 1px solid var(--tertiary-color);
 }
 
-.spotify-search-results div:hover {
-  background-color: var(--background-color);
-}
-
-.track-item{
+.track-item {
   text-overflow: ellipsis;
   overflow: hidden; 
   white-space: nowrap;
   cursor: pointer;
+  background-color: var(--background-color);
 }
+
+.track-item:hover {
+  background-color: var(--quaternary-color);
+  transition: background-color 0.3s;  
+}
+
 ::-webkit-scrollbar{
   width: 20px;
 }

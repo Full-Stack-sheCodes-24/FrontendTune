@@ -3,7 +3,7 @@
 <template>
   <div v-if="isModalOpen" class="entry-modal" @click.self="closeModal">
     <div class="modal-content">
-      <button @click="closeModal" class="close-button">×</button>
+      <button @click="closeModal" class="material-symbols-outlined close-button">close</button>
       <h1>Edit Profile</h1>
       <h4>Profile Picture</h4>
 
