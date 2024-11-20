@@ -25,7 +25,7 @@
                 <div class="hover-text">Erika Ledesma</div>
             </div>
             <div class="item" style ="--position: 2">
-                <img src ="/src/assets/pfp.jpg">
+                <img src ="/src/assets/mo.jpg">
                 <div class="hover-text">Mohraiel Matta</div>
             </div>
             <div class="item" style ="--position: 3">
