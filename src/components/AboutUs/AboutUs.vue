@@ -33,7 +33,7 @@
                 <div class="hover-text">Justin Ha</div>
             </div>
             <div class="item" style ="--position: 4">
-                <img src ="/src/assets/pfp.jpg">
+                <img src ="/src/assets/scott.jpg">
                 <div class="hover-text">Scott Lee</div>
             </div>
             <div class="item" style ="--position: 5">
@@ -46,7 +46,7 @@
                 <div class="hover-text">Louisa A. Auwlia</div>
             </div>
             <div class="item" style ="--position: 7">
-                <img src ="/src/assets/pfp.jpg">
+                <img src ="/src/assets/melody.jpg">
                 <div class="hover-text">Melody Duong</div>
             </div>
             <div class="item" style ="--position: 8">
