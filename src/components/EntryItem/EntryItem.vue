@@ -34,9 +34,13 @@
             <i class="material-symbols-outlined">delete</i>
         </button>
         <div v-if="showConfirmationDialog" class="confirmation-dialog">
-            <p>Are you sure you want to delete this entry?</p>
-            <button class="confirm-button yes" @click="deleteEntry">Yes</button>
-            <button class="confirm-button no" @click="cancelDelete">No</button>
+            <div class="delete-content">
+                <p>Are you sure you want to delete this entry?</p>
+                <div class="button-container">
+                    <button class="confirm-button yes" @click="deleteEntry">Yes</button>
+                    <button class="confirm-button no" @click="cancelDelete">No</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>

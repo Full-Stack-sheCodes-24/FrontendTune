@@ -120,17 +120,16 @@ audio::-webkit-media-controls-panel {
 }
 
 .confirmation-dialog {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid black;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 .confirm-button {
   margin: 0.5rem;
@@ -139,10 +138,36 @@ audio::-webkit-media-controls-panel {
   cursor: pointer;
 }
 .confirm-button.yes {
-  background-color: red;
+  background-color: #4CAF50; 
   color: white;
 }
+
+.confirm-button.yes:hover {
+  background-color: #45A049; /* Darker red on hover */
+}
+ 
 .confirm-button.no {
-  background-color: gray;
+  background-color: #e74c3c; /* Blue for cancel */
   color: white;
+}
+
+.confirm-button.no:hover {
+  background-color: #c0392b; /* Darker blue on hover */
+}
+
+
+.delete-content{
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
 }
