@@ -1,6 +1,6 @@
 <style scoped>@import'./EntryItem.css';</style>
 <template>
-    <div class="entry-container card clickable"  :id="`entry-${new Date(entry.date).getTime()}`">
+    <div class="entry-container card clickable"  :id="id">
         <div class="entry-content">
         <pre class= "output-text" v-text="entry.text"></pre>
         <div class="track-info">
@@ -46,12 +46,25 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { onUnmounted, ref, watch } from 'vue';
 import type { PropType } from 'vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
+const props = defineProps({
+    entry: {
+        type: Object as PropType<Entry>,
+        required: true
+    },
+    isOwner: {
+        type: Boolean,
+        required: true
+  },
+});
+
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 const isPaused = ref(true);
+const activeAudioPlayer = ref<string | null>(null);
+const id = ref(`entry-${new Date(props.entry.date).getTime()}`);
 
 watch(audioPlayer, audioPlayer => {
     if (audioPlayer == null) return
@@ -67,17 +80,6 @@ watch(audioPlayer, audioPlayer => {
     }
 });
 
-const props = defineProps({
-    entry: {
-        type: Object as PropType<Entry>,
-        required: true
-    },
-    isOwner: {
-        type: Boolean,
-        required: true
-  },
-});
-
 const emit = defineEmits<{
     (event: 'delete', entryDate: Date): void;
 }>();
@@ -87,6 +89,14 @@ const showConfirmationDialog = ref(false);
 
 function togglePlayback() {
     showPlayback.value = !showPlayback.value;
+
+    if (showPlayback.value) {
+        document.addEventListener('click', handleOutsideClick);
+        activeAudioPlayer.value = id.value;
+    } else {
+        document.removeEventListener('click', handleOutsideClick);
+        activeAudioPlayer.value = null;
+    }
 }
 
 function saveVolumeLevel(event: Event) {
@@ -104,4 +114,19 @@ function deleteEntry(){
 function cancelDelete(){
     showConfirmationDialog.value = false;
 }
+
+function handleOutsideClick(event: MouseEvent) {
+    if (activeAudioPlayer.value) {
+        const entryContainer = document.querySelector(`#${activeAudioPlayer.value}`);
+        if (!entryContainer?.contains(event.target as Node)) {
+            // If the clicked element is outside of the current audio player, stop playback
+            showPlayback.value = false;
+            activeAudioPlayer.value = null;
+        }
+    }
+}
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleOutsideClick);
+})
 </script>
