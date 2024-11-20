@@ -49,10 +49,10 @@
     border: 1px solid var(--primary-color);
     width: 100%;
     height: 100%;
-    padding-left: 70px;
+    padding-left: 60px;
     padding-right: 6px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background-color: transparent;
   }
   
@@ -65,8 +65,8 @@
     position: absolute;
     left: 10px;
     top: 5px;
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 30px;
   }
 
   .favicon-icon {
