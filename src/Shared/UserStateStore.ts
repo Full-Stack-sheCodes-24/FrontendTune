@@ -36,11 +36,11 @@ export const useUserStateStore = defineStore('userState', {
         getBirthdayAsDate: (state) => new Date(state.birthday),
         getExpiryAsDate: (state) => new Date(state.auth.expiryDate),
         getEntriesWithDate: (state) => {
-            var Entries = state.entries
-            for(let i = 0; i < Entries.length; i++){
-                Entries[i].date = new Date(Entries[i].date)
-            }
-            return Entries
+            const entries = state.entries.map(entry => ({
+                ...entry,
+                date: new Date(entry.date) // date strings are converted back to Date objects in order to use getTime()
+            }));
+            return entries.sort((a, b) => b.date.getTime() - a.date.getTime());
         }
     },
     actions: {

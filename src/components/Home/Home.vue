@@ -11,7 +11,7 @@
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
-                <div v-for="entry in entries" :key="entry.date.toISOString">
+                <div v-for="entry in getEntriesWithDate" :key="entry.date.toISOString">
                     <EntryItem :entry="entry" :is-owner="true" @delete="deleteEntry"></EntryItem>
                 </div>
             </div>
@@ -34,9 +34,8 @@ import { storeToRefs } from 'pinia';
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
-const { entries } = storeToRefs(userStateStore);
-userStateStore.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
-const entriesDate = userStateStore.getEntriesWithDate
+//use entries from getter instead so that date is a date object
+const { getEntriesWithDate } = storeToRefs(userStateStore);
 
 async function deleteEntry(date: Date) {
     try {
@@ -44,7 +43,8 @@ async function deleteEntry(date: Date) {
         const deleteEntryClient = new DeleteEntryClient();
         await deleteEntryClient.execute({ date });
         
-        const updatedEntries = userStateStore.entries.filter(entry => {
+        //delete the entries from userStateStore and update it with the new updatedEntries
+        const updatedEntries = userStateStore.getEntriesWithDate.filter(entry => {
             return entry.date.getTime() !== date.getTime();
         });
         userStateStore.entries = updatedEntries;
