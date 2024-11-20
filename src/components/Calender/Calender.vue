@@ -42,14 +42,18 @@ watchEffect(() => {
 //Finds the first entry that has a date equals the day and passes it to CalenderItem
 const getEntryForDay = (day: number) => {
     if (props.entries != null) {
-        const entry = props.entries.find(e => {
-            const entryDate = new Date(e.date);
-            return entryDate.getFullYear() === currentYear && 
-                   entryDate.getMonth() === currentMonth && 
-                   entryDate.getDate() === day;
-        });
-        return entry; // it returns undefined if no entry value is found
+        for (let i = props.entries.length - 1; i >= 0; i--) {
+            const entry = props.entries[i]
+            const entryDate = new Date(entry.date);
+
+            if (entryDate.getFullYear() === currentYear && 
+                    entryDate.getMonth() === currentMonth && 
+                    entryDate.getDate() === day) {
+                return entry;
+            }
+        }
     }
+    return undefined // it returns undefined if no entry value is found
 }
 
 const monthNames: string[] = [

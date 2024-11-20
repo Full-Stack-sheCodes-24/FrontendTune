@@ -62,7 +62,7 @@ const props = defineProps({
 });
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
-const isPaused = ref(true);
+const isPaused = ref(false);
 const activeAudioPlayer = ref<string | null>(null);
 const id = ref(`entry-${new Date(props.entry.date).getTime()}`);
 
