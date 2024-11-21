@@ -10,24 +10,19 @@
           </div>
       </header>
   </div>
-  <Toast ref="toastRef"
-    :message="errorMessage"
-    :is-error="true">
-  </Toast>
 </template>
 
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import Toast from '@/Shared/Toast/Toast.vue';
+import { useToastStore } from '@/Shared/Toast/ToastStore';
 import { useUserStateStore } from '@/Shared/UserStateStore';
+import { ToastType } from '@/Shared/Toast/Toast';
 
 const route = useRoute();
 const router = useRouter();
 const userStateStore = useUserStateStore();
-
-const toastRef = ref<typeof Toast>();
-const errorMessage = ref<string>();
+const toastStore = useToastStore();
 
 onBeforeMount(() => {
   // If user is logged in, reroute to home page
@@ -37,16 +32,12 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-  const error = route.path.endsWith('/error');
-  if (error) {
-    errorMessage.value = 'Error logging in'
-    toastRef.value!.showToast();
+  if (route.path.endsWith('/error')) {
+    toastStore.addToast('Error logging in', ToastType.error)
   }
 
-  const sessionTimeout = route.path.endsWith('/session-timeout')
-  if (sessionTimeout) {
-    errorMessage.value = 'Session timed out.'
-    toastRef.value!.showToast();
+  if (route.path.endsWith('/session-timeout')) {
+    toastStore.addToast('Session timed out.', ToastType.error)
   }
 });
 
