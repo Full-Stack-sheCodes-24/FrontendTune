@@ -10,7 +10,8 @@
                 :bio-text="bioText"
                 :birthday="birthday"
                 :following="following?.length"
-                :followers="followers?.length">
+                :followers="followers?.length"
+                :is-private="isPrivate">
             </ProfileSection>
             <div class="entries-container">
                 <div v-for="entry in entries">

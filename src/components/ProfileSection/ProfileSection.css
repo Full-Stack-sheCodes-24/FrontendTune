@@ -37,6 +37,7 @@
     }
 
     .btn-container {
+        /* Edit Profile Button */
         .btn-edit-profile {
             border-radius: 50%; /* Circle */
             height: fit-content;
@@ -57,6 +58,7 @@
             transition: background-color 0.3s; /* Smooth transition */
         }
 
+        /* Follow Button */
         .btn-follow {
             cursor: pointer;
             width: 100px;
@@ -72,6 +74,7 @@
             transition: background-color 0.3s;
         }
 
+        /* Unfollow Button */
         .btn-unfollow {
             cursor: pointer;
             width: 100px;
@@ -91,6 +94,30 @@
         }
 
         .btn-unfollow:hover {
+            background-color: var(--background-color);
+            transition: background-color 0.3s;
+        }
+
+        /* Requested Button */
+        .btn-requested {
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--quaternary-color);
+            color: var(--text-color)
+        }
+
+        .btn-requested::after {
+            content: "Requested";
+        }
+
+        .btn-requested:hover::after {
+            content: "Unrequest";
+        }
+
+        .btn-requested:hover {
             background-color: var(--background-color);
             transition: background-color 0.3s;
         }

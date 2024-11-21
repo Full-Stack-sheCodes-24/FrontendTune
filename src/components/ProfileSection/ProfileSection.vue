@@ -18,6 +18,8 @@
       <button v-if="isOwner" class="btn-edit-profile" @click="openEditModal">
         <i class="material-symbols-outlined">edit</i>
       </button>
+      <button v-else-if="hasRequested" class="btn-requested" @click="handleUnrequest">
+      </button>
       <button v-else-if="!isFollowing" class="btn-follow" @click="handleFollow">
         Follow
       </button>
@@ -37,8 +39,10 @@ import EditProfileModal from '@/components/EditProfile/EditProfile.vue';
 import { UserFollowClient } from '@/Shared/Clients/UserFollowClient';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { UserUnfollowClient } from '@/Shared/Clients/UserUnfollowClient';
+import { Status } from '@/Shared/Models/FollowRequest';
+import { UserUnrequestClient } from '@/Shared/Clients/UserUnequestClient';
 
-const { isOwner, userId, name, bioText, birthday, following, followers } = defineProps({
+const { isOwner, userId, name, bioText, birthday, following, followers, isPrivate } = defineProps({
   isOwner: {
     type: Boolean,
     required: true
@@ -49,7 +53,8 @@ const { isOwner, userId, name, bioText, birthday, following, followers } = defin
   bioText: String,
   birthday: Date,
   following: Number,
-  followers: Number
+  followers: Number,
+  isPrivate: Boolean
 });
 
 const userStateStore = useUserStateStore();
@@ -59,6 +64,7 @@ const formattedBirthday = computed(() => birthday ? formatDateToMMDDYYYY(birthda
 const bioTextWithDefault = computed(() => bioText ?? "This person has no bio.");
 const isModalOpen = ref(false);
 const isFollowing = computed(() => userId ? userStateStore.following?.includes(userId) : false);
+const hasRequested = computed(() => userStateStore.followRequests?.find(fr => fr.fromUserId === userStateStore.id && fr.toUserId === userId && fr.status === Status.pending));
 // Props are readonly, so use local offset to change the appearance of followers count instead of fetching new user data
 const followersOffset = ref(0);
 const followersCount = computed(() => (followers ?? 0) + followersOffset.value);
@@ -84,8 +90,12 @@ async function handleFollow() {
   const client = new UserFollowClient();
 
   await client.execute(userId!).then(() => {
-    userStateStore.following.push(userId!);
-    followersOffset.value++;
+    if (isPrivate) {
+      userStateStore.followRequests.push({ fromUserId: userStateStore.id, toUserId: userId!, status: Status.pending });
+    } else {
+      userStateStore.following.push(userId!);
+      followersOffset.value++;
+    }
   });
 }
 
@@ -96,6 +106,14 @@ async function handleUnfollow() {
     userStateStore.following = userStateStore.following.filter(id => id !== userId);
     followersOffset.value--;
   });
+}
+
+async function handleUnrequest() {
+  const client = new UserUnrequestClient();
+  
+  await client.execute(userId!).then(() => {
+    userStateStore.followRequests = userStateStore.followRequests.filter(fr => fr.fromUserId !== userStateStore.id && fr.toUserId !== userId);
+  })
 }
  
 </script>
