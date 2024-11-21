@@ -37,7 +37,7 @@
                 <div class="hover-text">Scott Lee</div>
             </div>
             <div class="item" style ="--position: 5">
-                <img src ="/src/assets/pfp.jpg">
+                <img src ="/src/assets/katie.jpg">
                 <div class="hover-text">Katie Pham</div>
             </div>
 
@@ -54,7 +54,7 @@
                 <div class="hover-text">Denise Thuong</div>
             </div>
             <div class="item" style ="--position: 9">
-                <img src ="/src/assets/pfp.jpg">
+                <img src ="/src/assets/sarah.jpg">
                 <div class="hover-text">Sarah To</div>
             </div>
             <div class="item" style ="--position: 10">
