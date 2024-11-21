@@ -30,6 +30,10 @@
       :isModalOpen="isModalOpen"
       :closeModal="closeModal"
     />
+    <Toast ref="toastRef"
+        :is-error="true"
+        :message="`Unable to ${errorMessage}. Please try again later.`">
+    </Toast>
   </div>
 </template>
 
@@ -41,6 +45,7 @@ import { useUserStateStore } from '@/Shared/UserStateStore';
 import { UserUnfollowClient } from '@/Shared/Clients/UserUnfollowClient';
 import { Status } from '@/Shared/Models/FollowRequest';
 import { UserUnrequestClient } from '@/Shared/Clients/UserUnequestClient';
+import Toast from '@/Shared/Toast/Toast.vue';
 
 const { isOwner, userId, name, bioText, birthday, following, followers, isPrivate } = defineProps({
   isOwner: {
@@ -68,6 +73,8 @@ const hasRequested = computed(() => userStateStore.followRequests?.find(fr => fr
 // Props are readonly, so use local offset to change the appearance of followers count instead of fetching new user data
 const followersOffset = ref(0);
 const followersCount = computed(() => (followers ?? 0) + followersOffset.value);
+const toastRef = ref<typeof Toast>();
+const errorMessage = ref();
 
 const openEditModal = () => {
   isModalOpen.value = true;
@@ -89,31 +96,55 @@ function formatDateToMMDDYYYY(date : Date | undefined) : string | null {
 async function handleFollow() {
   const client = new UserFollowClient();
 
-  await client.execute(userId!).then(() => {
+  if (isPrivate) {
+    userStateStore.followRequests.push({ fromUserId: userStateStore.id, toUserId: userId!, status: Status.pending });
+  } else {
+    userStateStore.following.push(userId!);
+    followersOffset.value++;
+  }
+
+  // If server failed, revert client side status
+  await client.execute(userId!).catch(() => {
     if (isPrivate) {
-      userStateStore.followRequests.push({ fromUserId: userStateStore.id, toUserId: userId!, status: Status.pending });
+      userStateStore.followRequests.pop();
     } else {
-      userStateStore.following.push(userId!);
-      followersOffset.value++;
+      userStateStore.following.pop();
+      followersOffset.value--;
     }
+
+    errorMessage.value = 'follow'
+    toastRef.value!.showToast();
   });
 }
 
 async function handleUnfollow() {
   const client = new UserUnfollowClient();
 
-  await client.execute(userId!).then(() => {
-    userStateStore.following = userStateStore.following.filter(id => id !== userId);
-    followersOffset.value--;
+  userStateStore.following = userStateStore.following.filter(id => id !== userId);
+  followersOffset.value--;
+
+  // If server failed, revert client side status
+  await client.execute(userId!).catch(() => {
+    userStateStore.following.push(userId!);
+    followersOffset.value++;
+
+    errorMessage.value = 'unfollow'
+    toastRef.value!.showToast();
   });
 }
 
 async function handleUnrequest() {
   const client = new UserUnrequestClient();
   
-  await client.execute(userId!).then(() => {
-    userStateStore.followRequests = userStateStore.followRequests.filter(fr => fr.fromUserId !== userStateStore.id && fr.toUserId !== userId);
-  })
+  userStateStore.followRequests = userStateStore.followRequests.filter(fr => fr.fromUserId !== userStateStore.id && fr.toUserId !== userId);
+
+  // If server failed, revert client side status
+  await client.execute(userId!).catch(() => {
+    userStateStore.followRequests.push({ fromUserId: userStateStore.id, toUserId: userId!, status: Status.pending })
+
+    errorMessage.value = 'unrequest'
+    toastRef.value!.showToast();
+  });
 }
  
 </script>
