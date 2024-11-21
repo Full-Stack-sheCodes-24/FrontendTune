@@ -42,6 +42,7 @@
   border-radius: 4px;
   background-color: transparent;
   width: 200px;
+  transition: width 0.3s;
 
   input {
     color: var(--text-color);
@@ -58,12 +59,11 @@
   
   input::placeholder {
     color: var(--text-color);
-    padding-top: 10px;
   }
 
   img {
     position: absolute;
-    left: 10px;
+    left: 20px;
     top: 5px;
     width: 36px;
     height: 30px;
@@ -77,6 +77,11 @@
     animation-play-state: paused;
   }
 
+}
+
+.song-searchbar-container:focus-within {
+  width: 300px;
+  transition: width 0.3s;
 }
 
 .spotify-search-results {

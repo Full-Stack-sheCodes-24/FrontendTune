@@ -22,7 +22,7 @@
         </div>
         <div class="song-searchbar-container">
             <img src="/favicon.ico" alt="Play Icon" :class="{ 'pause-animation': isPaused, 'favicon-icon': !isPaused && isSelected }"/>
-            <input v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
+            <input v-model="inputText" title="Search for song" placeholder="Search for song" id="searchInput" @input="debouncedSearch" >
         </div>
         <div class = "spotify-search-results">
             <div v-for="track in searchResults"
