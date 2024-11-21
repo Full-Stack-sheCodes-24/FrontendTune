@@ -20,15 +20,16 @@
                 </p>
             </div>
         </div>
-        <div>
-            <input type="text" v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
-            <div class = "spotify-search-results">
-                <div v-for="track in searchResults"
-                    :key = "track.id"
-                    @click="selectSong(track)"
-                    class = "track-item">
-                    {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
-            </div>
+        <div class="song-searchbar-container">
+            <img src="/favicon.ico" alt="Play Icon" :class="{ 'pause-animation': isPaused, 'favicon-icon': !isPaused && isSelected }"/>
+            <input v-model="inputText" placeholder="Type in song name" id="searchInput" @input="debouncedSearch" >
+        </div>
+        <div class = "spotify-search-results">
+            <div v-for="track in searchResults"
+                :key = "track.id"
+                @click="selectSong(track)"
+                class = "track-item">
+                {{ track.name }} - {{ track.album.artists.map(artist => artist.name).join(',') }}
             </div>
         </div>
     </div>
@@ -56,7 +57,7 @@ const hasPreviewUrl = ref(true);
 const selectedTrack = ref();
 const selectedSongImg = ref('');
 const selectedSongPreviewUrl = ref<string | null>(null);
-const isPaused = ref(false);
+const isPaused = ref(true);
 const noPreviewUrlMsg = "does not have a preview track.";
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 
