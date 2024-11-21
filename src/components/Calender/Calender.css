@@ -83,7 +83,6 @@
         padding: 10px 20px;
         height: fit-content;
         position: relative; 
-        overflow: visible;
     }
 
     p {
@@ -96,10 +95,10 @@
     }
 
     .day-entry-albumImg {
-        height: 30x;
-        width: 30px;
+        height: 35px;
+        width: 35px;
         cursor: pointer;
-        position: relative;
+        align-self: center;
         
     }
 }
