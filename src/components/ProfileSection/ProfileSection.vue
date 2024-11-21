@@ -11,7 +11,7 @@
           <h1 v-text="name"></h1>
           <p v-text="bioTextWithDefault"></p>
           <p v-if="formattedBirthday" v-text="`Born ${formattedBirthday}`"></p>
-          <p>{{ following }} <strong>Following</strong>&emsp;{{ followers }} <strong>Followers</strong></p>
+          <p>{{ following }} <strong>Following</strong>&emsp;{{ followersCount }} <strong>Followers</strong></p>
       </div>
     </div>
     <div class="btn-container">
@@ -59,6 +59,9 @@ const formattedBirthday = computed(() => birthday ? formatDateToMMDDYYYY(birthda
 const bioTextWithDefault = computed(() => bioText ?? "This person has no bio.");
 const isModalOpen = ref(false);
 const isFollowing = computed(() => userId ? userStateStore.following?.includes(userId) : false);
+// Props are readonly, so use local offset to change the appearance of followers count instead of fetching new user data
+const followersOffset = ref(0);
+const followersCount = computed(() => (followers ?? 0) + followersOffset.value);
 
 const openEditModal = () => {
   isModalOpen.value = true;
@@ -82,6 +85,7 @@ async function handleFollow() {
 
   await client.execute(userId!).then(() => {
     userStateStore.following.push(userId!);
+    followersOffset.value++;
   });
 }
 
@@ -90,6 +94,7 @@ async function handleUnfollow() {
 
   await client.execute(userId!).then(() => {
     userStateStore.following = userStateStore.following.filter(id => id !== userId);
+    followersOffset.value--;
   });
 }
  
