@@ -4,6 +4,7 @@
         <div class="left-column">
             <ProfileSection
                 :is-owner="false"
+                :user-id="userId"
                 :profile-pic-url="profilePicUrl"
                 :name="name"
                 :bio-text="bioText"
@@ -41,17 +42,19 @@ const bioText = ref();
 const birthday = ref();
 const entries = ref([] as Entry[]);
 const isPrivate = ref();
+const userId = ref();
 
 watch(() => route.params.userId, (newUserId) => {
+    userId.value = newUserId;
     refreshUserState(newUserId.toString());
     console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
 });
 
 onMounted(async () => {
     // Get userId from url. Ex: moodz.com/users/ajsdlifjasifj
-    const userId = route.params.userId.toString();
+    userId.value = route.params.userId.toString();
 
-    refreshUserState(userId);
+    refreshUserState(userId.value);
     console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
 
 

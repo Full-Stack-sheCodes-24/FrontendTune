@@ -32,18 +32,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import EditProfileModal from '@/components/EditProfile/EditProfile.vue';
 import { UserFollowClient } from '@/Shared/Clients/UserFollowClient';
-import { useRoute } from 'vue-router';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { UserUnfollowClient } from '@/Shared/Clients/UserUnfollowClient';
 
-const { isOwner, name, bioText, birthday, following, followers } = defineProps({
+const { isOwner, userId, name, bioText, birthday, following, followers } = defineProps({
   isOwner: {
     type: Boolean,
     required: true
   },
+  userId: String,
   profilePicUrl: String,
   name: String,
   bioText: String,
@@ -53,14 +53,12 @@ const { isOwner, name, bioText, birthday, following, followers } = defineProps({
 });
 
 const userStateStore = useUserStateStore();
-const route = useRoute();
-const userId = ref();
 
 const profilePicAltText = computed(() => isOwner ? "Your profile picture" : `Profile picture for ${name}`);
 const formattedBirthday = computed(() => birthday ? formatDateToMMDDYYYY(birthday) : null);
 const bioTextWithDefault = computed(() => bioText ?? "This person has no bio.");
 const isModalOpen = ref(false);
-const isFollowing = computed(() => userStateStore.following?.includes(userId.value));
+const isFollowing = computed(() => userId ? userStateStore.following?.includes(userId) : false);
 
 const openEditModal = () => {
   isModalOpen.value = true;
@@ -82,21 +80,17 @@ function formatDateToMMDDYYYY(date : Date | undefined) : string | null {
 async function handleFollow() {
   const client = new UserFollowClient();
 
-  await client.execute(userId.value).then(() => {
-    userStateStore.following.push(userId.value);
+  await client.execute(userId!).then(() => {
+    userStateStore.following.push(userId!);
   });
 }
 
 async function handleUnfollow() {
   const client = new UserUnfollowClient();
 
-  await client.execute(userId.value).then(() => {
-    userStateStore.following = userStateStore.following.filter(id => id !== userId.value);
+  await client.execute(userId!).then(() => {
+    userStateStore.following = userStateStore.following.filter(id => id !== userId);
   });
 }
-
-onMounted(() => {
-  userId.value = route.params.userId?.toString();
-})
  
 </script>
