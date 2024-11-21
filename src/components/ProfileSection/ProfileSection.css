@@ -25,8 +25,10 @@
 
         .profile-info p {
             margin: 5px 15px ;
-            display: flex;
-            flex-direction: column;
+
+            strong {
+                font-weight: bold;
+            }
         }
 
         .profile-info h1 {
@@ -34,23 +36,63 @@
         }
     }
 
-    .btn-edit-profile {
-        border-radius: 50%; /* Circle */
-        height: fit-content;
-        width: fit-content;
-        border: none;
-        cursor: pointer;
-        line-height: 0;
-        padding: 4px;
-        background: none;
-
-        i {
-            color: var(--text-color);
+    .btn-container {
+        .btn-edit-profile {
+            border-radius: 50%; /* Circle */
+            height: fit-content;
+            width: fit-content;
+            border: none;
+            cursor: pointer;
+            line-height: 0;
+            padding: 4px;
+            background: none;
+    
+            i {
+                color: var(--text-color);
+            }
         }
-    }
+    
+        .btn-edit-profile:hover {
+            background-color: var(--quaternary-color); /* Slightly darker on hover */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
 
-    .btn-edit-profile:hover {
-        background-color: var(--quaternary-color); /* Slightly darker on hover */
-        transition: background-color 0.3s; /* Smooth transition */
+        .btn-follow {
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--background-color);
+            color: var(--text-color)
+        }
+
+        .btn-follow:hover {
+            background-color: var(--quaternary-color);
+            transition: background-color 0.3s;
+        }
+
+        .btn-unfollow {
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--quaternary-color);
+            color: var(--text-color)
+        }
+
+        .btn-unfollow::after {
+            content: "Following";
+        }
+
+        .btn-unfollow:hover::after {
+            content: "Unfollow";
+        }
+
+        .btn-unfollow:hover {
+            background-color: var(--background-color);
+            transition: background-color 0.3s;
+        }
     }
 }

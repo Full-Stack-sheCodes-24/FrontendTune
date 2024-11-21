@@ -4,6 +4,7 @@ import type { Entry } from './Models/Entry';
 import { NewAuthTokenClient } from './Clients/NewAuthTokenClient';
 import { HttpStatusCode } from 'axios';
 import { UserStateRefreshClient } from './Clients/UserStateRefreshClient';
+import type { FollowRequest } from './Models/FollowRequest';
 
 export const useUserStateStore = defineStore('userState', {
     state: (): UserState => {
@@ -28,7 +29,10 @@ export const useUserStateStore = defineStore('userState', {
             birthday: null!,
             entries: [] as Entry[],
             auth: null!,
-            settings: null!
+            settings: null!,
+            followers: [] as string[],
+            following: [] as string[],
+            followRequests: [] as FollowRequest[]
         }
     },
     getters: {

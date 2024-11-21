@@ -7,7 +7,9 @@
                 :profile-pic-url="userStateStore.profilePicUrl"
                 :name="userStateStore.name"
                 :bio-text="userStateStore.bioText"
-                :birthday="userStateStore.getBirthdayAsDate">
+                :birthday="userStateStore.getBirthdayAsDate"
+                :following="userStateStore.following?.length"
+                :followers="userStateStore.followers?.length">
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
