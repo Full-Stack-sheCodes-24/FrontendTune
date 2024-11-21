@@ -16,7 +16,9 @@
         <div class="calender-item-container">    
             <CalenderItem v-for="day in days"
                 :currentDay="day"
-                :entry=getEntryForDay(day)
+                :entriesByDay=getEntryForDay(day)
+                :showEntries="openDay === day"
+                @toggleEntries="toggleOtherDayEntries(day)"
             />
         </div>
     </div>
@@ -25,35 +27,40 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import CalenderItem from './CalenderItem.vue';
+import type { Entry } from '@/Shared/Models/Entry';
 
 const today = new Date();
 let currentMonth = today.getMonth(); // 0 for January, 11 for December
 let currentYear = today.getFullYear();
-import type { Entry } from '@/Shared/Models/Entry';
 
 const props = defineProps<{
     entries: Entry[];
 }>();
+const showEntriesForDay = ref(false);
+const highlightDay = ref(false);
+const openDay = ref();
 
 watchEffect(() => {
     console.log("Entries in Calender.vue:", props.entries); // Debug: Check received entries
 });
 
 //Finds the first entry that has a date equals the day and passes it to CalenderItem
-const getEntryForDay = (day: number) => {
+const getEntryForDay = (day: number): Entry[] => {
     if (props.entries != null) {
-        for (let i = props.entries.length - 1; i >= 0; i--) {
-            const entry = props.entries[i]
+        const entriesByDay : Entry[] = [];
+        for (let i = 0; i < props.entries.length; i++) {
+            const entry = props.entries[i];
             const entryDate = new Date(entry.date);
-
             if (entryDate.getFullYear() === currentYear && 
                     entryDate.getMonth() === currentMonth && 
                     entryDate.getDate() === day) {
-                return entry;
+                entriesByDay.push(entry);
             }
         }
+
+        return entriesByDay;
     }
-    return undefined // it returns undefined if no entry value is found
+    return [] // it returns an empty if no entry value is found
 }
 
 const monthNames: string[] = [
@@ -92,4 +99,9 @@ function getDaysInCurrentMonth(): number {
 
     return lastDayCurrentMonth.getDate(); // Return the day of the month
 }
+
+const toggleOtherDayEntries = (day: number) => {
+    openDay.value = openDay.value === day ? null : day; // Close if already open, otherwise open
+}
+
 </script>

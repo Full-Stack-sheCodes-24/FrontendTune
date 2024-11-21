@@ -64,3 +64,53 @@
         }
     }
 }
+
+.entries-for-day {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(240, 234, 234, 0.126);
+    display: flex;
+    flex-direction: column;
+    height: 85%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: visible;
+
+    .entry-for-day {
+        display: flex;
+        padding: 10px 20px;
+        height: fit-content;
+        position: relative; 
+        overflow: visible;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .entry-time {
+        color: var(--secondary-color);
+        font-size: 12px;
+    }
+
+    .day-entry-albumImg {
+        height: 30x;
+        width: 30px;
+        cursor: pointer;
+        position: relative;
+        
+    }
+}
+
+.go-to-top {
+    padding: 10px;
+}
+
+.textbox {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
