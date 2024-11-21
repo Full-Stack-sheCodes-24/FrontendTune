@@ -7,7 +7,6 @@ export class SpotifyGetTrackClient {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const userId = userState.id;
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
@@ -16,7 +15,7 @@ export class SpotifyGetTrackClient {
             },
         });
 
-        const response = await client.get(`/Spotify/track/${trackId}/${userId}`);
+        const response = await client.get(`/Spotify/track/${trackId}`);
         return response.data;
     }
 }

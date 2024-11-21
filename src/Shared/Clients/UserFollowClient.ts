@@ -6,7 +6,6 @@ export class UserFollowClient {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const userId = userState.id;
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
@@ -15,7 +14,7 @@ export class UserFollowClient {
             },
         });
 
-        const response = await client.put(`/Users/${userId}/follow/${userIdToFollow}`);
+        const response = await client.put(`/Users/follow/${userIdToFollow}`);
         return response.data;
     }
 }

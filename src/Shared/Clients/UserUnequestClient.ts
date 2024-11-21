@@ -6,7 +6,6 @@ export class UserUnrequestClient {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const userId = userState.id;
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
@@ -15,7 +14,7 @@ export class UserUnrequestClient {
             },
         });
 
-        const response = await client.put(`/Users/${userId}/unrequest/${userIdToUnrequest}`);
+        const response = await client.put(`/Users/unrequest/${userIdToUnrequest}`);
         return response.data;
     }
 }

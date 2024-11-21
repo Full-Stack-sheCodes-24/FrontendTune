@@ -6,7 +6,6 @@ export class UserDeclineRequestClient {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const userId = userState.id;
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
@@ -15,7 +14,7 @@ export class UserDeclineRequestClient {
             },
         });
 
-        const response = await client.put(`/Users/${userId}/decline/${userIdToUnrequest}`);
+        const response = await client.put(`/Users/decline/${userIdToUnrequest}`);
         return response.data;
     }
 }

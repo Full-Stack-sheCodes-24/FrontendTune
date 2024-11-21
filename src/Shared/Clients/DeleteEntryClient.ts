@@ -1,5 +1,4 @@
 import axios from 'axios';
-import type { Entry } from '../Models/Entry';
 import { useUserStateStore } from '../UserStateStore';
 
 
@@ -7,7 +6,6 @@ export class DeleteEntryClient { //reference how backend setup API, get userid f
     async execute(request: {date: Date})  {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
-        const userID = userState.id;
         const token = userState.auth.accessToken;
         const date = request.date
 
@@ -23,7 +21,7 @@ export class DeleteEntryClient { //reference how backend setup API, get userid f
             }
         });
 
-        const response = await client.delete(`/Users/${userID}/entries/${date.toISOString()}`);
+        const response = await client.delete(`/Users/entries/${date.toISOString()}`);
         return response.data;
     }
 }
