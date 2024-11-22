@@ -73,7 +73,7 @@
     box-shadow: 0 2px 8px rgba(240, 234, 234, 0.126);
     display: flex;
     flex-direction: column;
-    height: 85%;
+    height: 65%;
     width: 100%;
     overflow-y: auto;
     overflow-x: visible;
