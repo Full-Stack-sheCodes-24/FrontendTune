@@ -41,8 +41,7 @@ const props = defineProps<{
 }>();
 
 const firstEntry = computed(() => props.entriesByDay[props.entriesByDay.length -1]) || null;
-const highlightRemover1 = ref();
-const highlightRemover2 = ref();
+const highlighted = new Map();
 
 const emit = defineEmits(['toggleEntries']);
 
@@ -57,19 +56,24 @@ const goToEntry = (entry: Entry) => {
             element.scrollIntoView({ behavior: 'smooth', block: 'center'});
 
             // Reset highlight remover timers if user clicks again
-            if (highlightRemover1.value) clearTimeout(highlightRemover1.value);
-            if (highlightRemover2.value) clearTimeout(highlightRemover2.value);
+            if(highlighted.has(entry)) {
+                clearTimeout(highlighted.get(entry)[0]);
+                clearTimeout(highlighted.get(entry)[1]);
+            }
 
             element.classList.add('highlight');
 
-            highlightRemover1.value = setTimeout(() => {
+            const timer1 = setTimeout(() => {
                 element.classList.add("highlight-remove");
             }, 1000);  // 1 seconds delay before the highlight disappears
 
-            highlightRemover2.value = setTimeout(() => {
+            const timer2 = setTimeout(() => {
                 element.classList.remove('highlight');
                 element.classList.remove("highlight-remove");
+                highlighted.delete(entry);
             }, 1300);  // 0.3 seconds delay before removing all highlight classes
+
+            highlighted.set(entry, [timer1, timer2]);
 
             console.log("Scrolled to entry:", `entry-${new Date(entry.date).getTime()}`);
         } else {
