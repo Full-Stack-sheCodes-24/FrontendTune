@@ -94,11 +94,19 @@ audio::-webkit-media-controls-panel {
 }
 
 .highlight {
-  background-color: var(--tertiary-color);
-  box-shadow: 0 0 10px #fff5bd;
-  transition: 0.3s ease; /* Optional smooth transition */
+  background-color: var(--quaternary-color);
+  box-shadow: 0 0 10px var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  transition: all 0.3s;
 }
 
+.highlight-remove {
+  /* Revert back to card styling */
+  background-color: var(--background-color);
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
 
 .btn-delete-entry {
   position: absolute; /* Position relative to the entry-container */

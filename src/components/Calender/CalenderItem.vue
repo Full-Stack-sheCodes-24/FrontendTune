@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import type { Entry } from '@/Shared/Models/Entry';
-import { computed, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 
 const fallbackImg = 'https://spiralcute.com/characters/img/characters/thumb_chiikawa.jpg';
 
@@ -41,6 +41,8 @@ const props = defineProps<{
 }>();
 
 const firstEntry = computed(() => props.entriesByDay[props.entriesByDay.length -1]) || null;
+const highlightRemover1 = ref();
+const highlightRemover2 = ref();
 
 const emit = defineEmits(['toggleEntries']);
 
@@ -53,11 +55,21 @@ const goToEntry = (entry: Entry) => {
         const element = document.getElementById(`entry-${new Date(entry.date).getTime()}`);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'center'});
+
+            // Reset highlight remover timers if user clicks again
+            if (highlightRemover1.value) clearTimeout(highlightRemover1.value);
+            if (highlightRemover2.value) clearTimeout(highlightRemover2.value);
+
             element.classList.add('highlight');
 
-            setTimeout(() => {
-                element.classList.remove("highlight");
-            }, 1000);  // 3 seconds delay before the highlight disappears
+            highlightRemover1.value = setTimeout(() => {
+                element.classList.add("highlight-remove");
+            }, 1000);  // 1 seconds delay before the highlight disappears
+
+            highlightRemover2.value = setTimeout(() => {
+                element.classList.remove('highlight');
+                element.classList.remove("highlight-remove");
+            }, 1300);  // 0.3 seconds delay before removing all highlight classes
 
             console.log("Scrolled to entry:", `entry-${new Date(entry.date).getTime()}`);
         } else {
