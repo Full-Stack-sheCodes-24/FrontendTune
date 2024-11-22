@@ -12,21 +12,21 @@
                 <img src="/favicon.ico" alt="Play Icon" class="favicon-icon" />
             </div>
         </div>
-        <div class="music-play" v-if="showPlayback">
-            <img class="song_img" 
-                v-if="entry?.track?.albumImageUrl" 
-                :class="{'pause-animation': isPaused}" 
-                :src="entry?.track?.albumImageUrl" 
-            />
-            <audio controls autoplay loop
-                ref="audioPlayer"
-                :src="entry.track.preview_url || undefined"
-                @volumechange="saveVolumeLevel"
-                @pause="isPaused = true"
-                @play="isPaused = false">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
+        <AudioPlayer
+            class="music-play"
+            :src="entry.track.preview_url || undefined"
+            :auto-play="true"
+            :is-visible="showPlayback"
+            @pause="isPaused = true"
+            @play="isPaused = false">
+            <template v-slot:image>
+                <img class="song_img" 
+                    v-if="entry?.track?.albumImageUrl" 
+                    :class="{'pause-animation': isPaused}" 
+                    :src="entry?.track?.albumImageUrl" 
+                />
+            </template>
+        </AudioPlayer>
         <p v-text="entry.date.toLocaleString()"></p>
         </div>
         <!-- Trash button -->
@@ -46,9 +46,10 @@
 </template>
 
 <script setup lang="ts">
-import { onUnmounted, ref, watch } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import type { PropType } from 'vue';
 import type { Entry } from '@/Shared/Models/Entry';
+import AudioPlayer from '@/Shared/AudioPlayer/AudioPlayer.vue';
 
 const props = defineProps({
     entry: {
@@ -61,29 +62,13 @@ const props = defineProps({
   },
 });
 
-const audioPlayer = ref<HTMLAudioElement | null>(null);
-const isPaused = ref(false);
-const activeAudioPlayer = ref<string | null>(null);
-const id = ref(`entry-${new Date(props.entry.date).getTime()}`);
-
-watch(audioPlayer, audioPlayer => {
-    if (audioPlayer == null) return
-    
-    // Get saved volumed level from local storage
-    const savedVolumeLevel = localStorage.getItem('volume_level');
-
-    // If volume level is saved, set the default volume of the audio player
-    if (savedVolumeLevel != null) {
-        audioPlayer!.volume = Number(savedVolumeLevel);
-    } else {    // Else set the default volume to 0.5
-        audioPlayer!.volume = 0.5;
-    }
-});
-
 const emit = defineEmits<{
     (event: 'delete', entryDate: Date): void;
 }>();
-        
+
+const isPaused = ref(false);
+const activeAudioPlayer = ref<string | null>(null);
+const id = ref(`entry-${new Date(props.entry.date).getTime()}`);
 const showPlayback = ref(false);
 const showConfirmationDialog = ref(false);
 
@@ -97,11 +82,6 @@ function togglePlayback() {
         document.removeEventListener('click', handleOutsideClick);
         activeAudioPlayer.value = null;
     }
-}
-
-function saveVolumeLevel(event: Event) {
-    const audioPlayer = event.target as HTMLAudioElement
-    localStorage.setItem('volume_level', audioPlayer.volume.toString());
 }
 
 function confirmation(){
