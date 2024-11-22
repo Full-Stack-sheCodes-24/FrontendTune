@@ -121,3 +121,29 @@
     border: 0;
     transition: all 0.3s;
 }
+
+.calender-item-wrapper {
+    position: relative;
+}
+
+.expanded-calendar-item {
+    position:absolute;
+    display:none;
+    height: fit-content;
+    width: 150px;
+    top: 0;
+    right: 100%;
+    z-index: 100;
+    padding: 0px;
+    box-shadow: 0 0 10px var(--primary-color);
+    overflow:hidden;
+}
+
+.calender-item-wrapper:hover .expanded-calendar-item {
+    display: block; /* Show on hover */
+}
+
+.expanded-calendar-item:hover {
+    opacity: 0;
+    visibility: hidden; 
+}
