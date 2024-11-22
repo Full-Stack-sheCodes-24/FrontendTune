@@ -10,7 +10,7 @@
                     alt="Moodz logo">
                     <!-- If logged in, do not show login button -->
                     <!-- <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink> -->
-                <SearchForUser v-if="userStateStore.isLoggedIn" ></SearchForUser>
+                <SearchForUser v-if="userStateStore.isLoggedIn" @darken="handleDarken" @lighten="handleLighten" />
              </div>
              <div class="btn-container">
                 <button v-if="userStateStore.isLoggedIn" class="btn-nav">
@@ -37,15 +37,39 @@
              </div>
         </div>
     </nav>
+    <div v-show="darken"
+        class="darken-background"
+        :class="{ 'darken-background-active': isDarkenActive }">
+    </div>
 </template>
 <script setup lang="ts">
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import SearchForUser from '../SearchForUser/SearchForUser.vue';
 import Logout from '../../components/Logout/Logout.vue';
 import { useRouter } from 'vue-router';
+import { nextTick, ref } from 'vue'
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
+
+const darken = ref(false);
+const isDarkenActive = ref(false);
+
+async function handleDarken() {
+    darken.value = true;
+    // Wait for DOM to render darken-background div
+    await nextTick();
+    
+    // Delay the activation of the darken transition to ensure div is ready
+    setTimeout(() => {
+        isDarkenActive.value = true;
+    }, 10);
+}
+
+function handleLighten() {
+    darken.value = false;
+    isDarkenActive.value = false;
+}
 
 function redirectToHome() {
     router.push({ name: "Home" });

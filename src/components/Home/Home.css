@@ -17,7 +17,7 @@
 
     .right-column {
         position: sticky;
-        top: 32px;
+        top: calc(var(--nav-bar-height) + 32px);
         align-self: start; 
         height: auto;
     }
