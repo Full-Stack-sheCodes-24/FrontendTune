@@ -14,7 +14,7 @@
                 :is-private="isPrivate">
             </ProfileSection>
             <div class="entries-container">
-                <div v-for="entry in entries">
+                <div v-for="entry in entries" :key="entry.date.getTime()">
                     <EntryItem :entry="entry" :is-owner="false"></EntryItem>
                 </div>
             </div>
