@@ -58,7 +58,7 @@
                 <div class="hover-text">Sarah To</div>
             </div>
             <div class="item" style ="--position: 10">
-                <img src ="/src/assets/pfp.jpg">
+                <img src ="/src/assets/amber.jpg">
                 <div class="hover-text">Amber Ellis</div>
             </div>
         </div>
