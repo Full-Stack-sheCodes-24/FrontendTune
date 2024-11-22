@@ -28,6 +28,10 @@ body {
   padding: 20px; /* Space inside the box */
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .clickable:hover {
   background-color: var(--quaternary-color); /* Slightly darker on hover */
   transition: background-color 0.3s; /* Smooth transition */

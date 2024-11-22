@@ -18,7 +18,7 @@
             </div>
             <div class="textbox">
                 <p class="track-name">{{ entry.track.name }}</p>
-                <p class="entry-time" v-text="entry.date.toLocaleTimeString()"></p>
+                <p class="entry-time" v-text="entry.date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })"></p>
             </div>
         </div>
     </div>
