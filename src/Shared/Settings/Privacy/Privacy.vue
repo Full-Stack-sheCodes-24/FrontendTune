@@ -11,20 +11,17 @@
             </div>
         </label>
     </div>
-    <Toast ref="toastRef"
-        :is-error="true"
-        message="Error: Failed to update settings. Please try again later.">
-    </Toast>
 </template>
 <script setup lang="ts">
 import { UserSettingsClient } from '@/Shared/Clients/UserSettingsClient';
-import Toast from '@/Shared/Toast/Toast.vue';
+import { ToastType } from '@/Shared/Toast/Toast';
+import { useToastStore } from '@/Shared/Toast/ToastStore';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { ref, watch } from 'vue';
 
 const client = new UserSettingsClient();
-const toastRef = ref<typeof Toast>();
 const userStateStore = useUserStateStore();
+const toastStore = useToastStore();
 const isPrivate = ref(userStateStore?.settings?.isPrivate ?? false);
 
 watch(isPrivate, async newValue => {
@@ -32,7 +29,7 @@ watch(isPrivate, async newValue => {
         userStateStore.settings.isPrivate = newValue;
     }).catch(error => {
         console.log(error);
-        toastRef.value!.showToast();
+        toastStore.addToast('Error: Failed to update settings. Please try again later.', ToastType.error);
         return;
     });
 });

@@ -30,10 +30,6 @@
       :isModalOpen="isModalOpen"
       :closeModal="closeModal"
     />
-    <Toast ref="toastRef"
-        :is-error="true"
-        :message="`Unable to ${errorMessage}. Please try again later.`">
-    </Toast>
   </div>
 </template>
 
@@ -45,7 +41,8 @@ import { useUserStateStore } from '@/Shared/UserStateStore';
 import { UserUnfollowClient } from '@/Shared/Clients/UserUnfollowClient';
 import { Status } from '@/Shared/Models/FollowRequest';
 import { UserUnrequestClient } from '@/Shared/Clients/UserUnequestClient';
-import Toast from '@/Shared/Toast/Toast.vue';
+import { useToastStore } from '@/Shared/Toast/ToastStore';
+import { ToastType } from '@/Shared/Toast/Toast';
 
 const { isOwner, userId, name, bioText, birthday, following, followers, isPrivate } = defineProps({
   isOwner: {
@@ -63,6 +60,7 @@ const { isOwner, userId, name, bioText, birthday, following, followers, isPrivat
 });
 
 const userStateStore = useUserStateStore();
+const toastStore = useToastStore();
 
 const profilePicAltText = computed(() => isOwner ? "Your profile picture" : `Profile picture for ${name}`);
 const formattedBirthday = computed(() => birthday ? formatDateToMMDDYYYY(birthday) : null);
@@ -73,8 +71,6 @@ const hasRequested = computed(() => userStateStore.followRequests?.find(fr => fr
 // Props are readonly, so use local offset to change the appearance of followers count instead of fetching new user data
 const followersOffset = ref(0);
 const followersCount = computed(() => (followers ?? 0) + followersOffset.value);
-const toastRef = ref<typeof Toast>();
-const errorMessage = ref();
 
 const openEditModal = () => {
   isModalOpen.value = true;
@@ -112,8 +108,7 @@ async function handleFollow() {
       followersOffset.value--;
     }
 
-    errorMessage.value = 'follow'
-    toastRef.value!.showToast();
+    toastStore.addToast(`Unable to follow. Please try again later.`, ToastType.error)
   });
 }
 
@@ -128,8 +123,7 @@ async function handleUnfollow() {
     userStateStore.following.push(userId!);
     followersOffset.value++;
 
-    errorMessage.value = 'unfollow'
-    toastRef.value!.showToast();
+    toastStore.addToast(`Unable to unfollow. Please try again later.`, ToastType.error)
   });
 }
 
@@ -142,8 +136,7 @@ async function handleUnrequest() {
   await client.execute(userId!).catch(() => {
     userStateStore.followRequests.push({ fromUserId: userStateStore.id, toUserId: userId!, status: Status.pending })
 
-    errorMessage.value = 'unrequest'
-    toastRef.value!.showToast();
+    toastStore.addToast(`Unable to unrequest. Please try again later.`, ToastType.error)
   });
 }
  
