@@ -8,9 +8,7 @@
                     src="@/assets/logo.png"
                     @click="redirectToHome"
                     alt="Moodz logo">
-                    <!-- If logged in, do not show login button -->
-                    <!-- <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink> -->
-                <SearchForUser v-if="userStateStore.isLoggedIn" @darken="handleDarken" @lighten="handleLighten" />
+                <SearchForUser @darken="handleDarken" @lighten="handleLighten" />
              </div>
              <div class="btn-container">
                 <button v-if="userStateStore.isLoggedIn" class="btn-nav">
@@ -23,7 +21,7 @@
                     <p class ="btn-title">Home</p>
                 </button>
                 <!-- About Us Button -->
-                <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click="redirectToAboutUs">
+                <button class="btn-nav" @click="redirectToAboutUs">
                     <i class="material-symbols-outlined">group</i>
                     <p class ="btn-title">About</p>
                 </button>
@@ -31,6 +29,11 @@
                 <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click="redirectToSettings">
                     <i class="material-symbols-outlined">settings</i>
                     <p class="btn-title">Settings</p>
+                </button>
+                <!-- Login Button -->
+                <button v-if="!userStateStore.isLoggedIn" class="btn-nav" @click="redirectToLogin">
+                    <i class="material-symbols-outlined">login</i>
+                    <p class ="btn-title">Login</p>
                 </button>
                 <!-- Logout Button -->
                 <Logout v-if="userStateStore.isLoggedIn"></Logout>
@@ -71,14 +74,18 @@ function handleLighten() {
     isDarkenActive.value = false;
 }
 
+function redirectToLogin() {
+    router.push({ name: "Login" });
+}
+
 function redirectToHome() {
     router.push({ name: "Home" });
 }
 
 function redirectToAboutUs(){
-    router.push({ name:"About"});
+    router.push({ name: "About" });
 }
 function redirectToSettings(){
-    router.push({ name:"Settings"});
+    router.push({ name: "Settings" });
 }
 </script>
