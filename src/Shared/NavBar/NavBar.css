@@ -6,7 +6,6 @@
     background-color: var(--tertiary-color);
     align-items: center;
     font-size: 16px;
-    padding: 1rem;
     top: 0;
     left: 0;
     z-index: 2;
@@ -18,7 +17,7 @@
         min-width: 1280px;
         padding-left: 2rem;
         padding-right: 2rem;
-        margin: auto;
+        margin: 0 auto;
         justify-content: space-between;
 
         .logo {
@@ -34,7 +33,9 @@
             cursor: pointer;
             border-radius: 50%;
             color: var(--text-color);
-            font-size: 30px;
+            i {
+                font-size: var(--nav-bar-icon-size);
+            }
         }
         .btn-nav:hover {
             color:var(--secondary-color);

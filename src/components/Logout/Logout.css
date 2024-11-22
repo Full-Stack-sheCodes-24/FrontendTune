@@ -4,14 +4,15 @@
   cursor: pointer;
   border-radius: 50%;
   color: var(--text-color);
-  margin-top: 2px;
+  i {
+    font-size: var(--nav-bar-icon-size);
+  }
 }
 .nav-logout-button:hover{
   color:var(--secondary-color);
 }
 .btn-title{
   font-size: 14px;
-  margin-top: 2px;
 }
 .logout-button:hover {
   background-color: #f0f0f0;
