@@ -24,13 +24,6 @@ const router = useRouter();
 const userStateStore = useUserStateStore();
 const toastStore = useToastStore();
 
-onBeforeMount(() => {
-  // If user is logged in, reroute to home page
-  if (userStateStore.isLoggedIn) {
-    router.push({ name: 'Home' });
-  }
-});
-
 onMounted(() => {
   if (route.path.endsWith('/error')) {
     toastStore.addToast('Error logging in', ToastType.error)

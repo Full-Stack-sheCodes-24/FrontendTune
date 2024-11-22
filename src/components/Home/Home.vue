@@ -34,7 +34,6 @@ import { useRouter } from 'vue-router';
 import { DeleteEntryClient } from '@/Shared/Clients/DeleteEntryClient';
 import { storeToRefs } from 'pinia';
 
-const router = useRouter();
 const userStateStore = useUserStateStore();
 //use entries from getter instead so that date is a date object
 const { getEntriesWithDate } = storeToRefs(userStateStore);
@@ -56,12 +55,4 @@ async function deleteEntry(date: Date) {
         console.error("Failed to delete entry:", error);
     }
 };
-
-
-onBeforeMount(() => {
-    // If user is not logged in, reroute to Login page
-    if (!userStateStore.isLoggedIn) {
-        router.push({ name: 'Login' });
-    }
-});
 </script>

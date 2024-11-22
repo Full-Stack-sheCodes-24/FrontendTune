@@ -31,6 +31,21 @@ const router = createRouter({
   routes
 });
 
+router.beforeEach((to, from, next) => {
+  const userState = useUserStateStore();
+  // reroute logged-in-only pages
+  if (!userState.isLoggedIn && (to.name === 'Home' || to.name === 'Settings')) {
+    next({ name: 'Login' });
+  } else {
+    next();
+  }
+
+  // reroute logged-out-only pages
+  if (userState.isLoggedIn && (to.name === 'Callback' || to.path.includes('login'))) {
+    next({ name: 'Home' });
+  }
+});
+
 const pinia = createPinia();
 declare module 'pinia' {
   export interface PiniaCustomProperties {
