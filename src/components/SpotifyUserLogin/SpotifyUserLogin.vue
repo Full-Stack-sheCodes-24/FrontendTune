@@ -29,13 +29,6 @@ const userStateStore = useUserStateStore();
 const toastRef = ref<typeof Toast>();
 const errorMessage = ref<string>();
 
-onBeforeMount(() => {
-  // If user is logged in, reroute to home page
-  if (userStateStore.isLoggedIn) {
-    router.push({ name: 'Home' });
-  }
-});
-
 onMounted(() => {
   const error = route.path.endsWith('/error');
   if (error) {

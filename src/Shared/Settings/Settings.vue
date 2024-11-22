@@ -50,11 +50,4 @@ function handleTabClick(event : MouseEvent) {
     selectedTab.value = Number(div.id);
 }
 
-onBeforeMount(() => {
-    // If user is not logged in, reroute to Login page
-    if (!userStateStore.isLoggedIn) {
-        router.push({ name: 'Login' });
-    }
-});
-
 </script>
