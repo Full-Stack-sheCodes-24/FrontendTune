@@ -11,6 +11,7 @@ import SpotifyCallback from '@/components/SpotifyUserLogin/SpotifyCallback.vue';
 import UserProfilePage from '@/components/UserProfilePage/UserProfilePage.vue';
 import { markRaw } from 'vue'
 import AboutUs from './components/AboutUs/AboutUs.vue';
+import { useUserStateStore } from './Shared/UserStateStore';
 
 const routes = [
   { path: '/user/:userId', name: 'User', component: UserProfilePage },
@@ -18,6 +19,7 @@ const routes = [
   { path: '/home', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
   { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
+  { path: '/login/session-timeout', name: 'LoginSessionTimeout', component: SpotifyUserLogin },
   { path: '/logout', name: 'Logout', component: Logout },
   { path: '/settings', name: 'Settings', component: Settings },
   { path: '/callback', name: 'Callback', component: SpotifyCallback },
@@ -27,6 +29,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  const userState = useUserStateStore();
+  // reroute logged-in-only pages
+  if (!userState.isLoggedIn && (to.name === 'Home' || to.name === 'Settings')) {
+    next({ name: 'Login' });
+  } else {
+    next();
+  }
+
+  // reroute logged-out-only pages
+  if (userState.isLoggedIn && (to.name === 'Callback' || to.path.includes('login'))) {
+    next({ name: 'Home' });
+  }
 });
 
 const pinia = createPinia();
@@ -50,3 +67,9 @@ watch(pinia.state, state => {
 },
 { deep: true}
 );
+
+// If cached login exists, refresh user state in the case that user logged in elsewhere and updated info
+const cache = localStorage.getItem('user_state')
+if(cache != null) {
+  useUserStateStore().refreshUserState();
+}

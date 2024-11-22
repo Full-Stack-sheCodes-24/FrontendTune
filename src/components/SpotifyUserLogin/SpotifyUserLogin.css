@@ -1,13 +1,16 @@
 .container {
     display: flex;
+    position: absolute;
     background-color: var(--tertiary-color);
     border-radius: 15%;
     justify-content: center;
-    height: auto;
     padding-top: 10vh; /* Adjusts the distance from the top */
     padding-bottom: 10vh; /* Adjusts the distance from the top */
-    width: 55%; /* Make sure the container takes full width but not exceeding max-width */
-    margin: 0 auto; /* to keep it centered */
+    width: 650px;
+    height: 650px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
 
     /* Center-left alignment for title, description, and button */
     .page-header {

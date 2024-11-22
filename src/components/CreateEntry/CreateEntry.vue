@@ -1,4 +1,4 @@
-<style src="./CreateEntry.css"></style>
+<style scoped src="./CreateEntry.css"></style>
 <template>
   <div @click="openModal" class="create-entry-container card">
     <h1>Whats your mood today?</h1>
@@ -7,7 +7,7 @@
 
   <div v-if="isModalOpen" class="entry-modal" @click.self="closeModal">
     <div class="modal-content">
-      <button @click="closeModal" class="close-button">×</button>
+      <button @click="closeModal" class="material-symbols-outlined close-button">close</button>
       <h1>Create an Entry</h1>  
       <textarea v-model="entryText" placeholder="Write about your day..." class="entry-textarea"></textarea>
       <SpotifySearch @update-selected-track="updateSelectedTrack"></SpotifySearch>

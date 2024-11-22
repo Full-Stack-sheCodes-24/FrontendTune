@@ -3,6 +3,8 @@ import type { UserState } from './Models/UserState';
 import type { Entry } from './Models/Entry';
 import { NewAuthTokenClient } from './Clients/NewAuthTokenClient';
 import { HttpStatusCode } from 'axios';
+import { UserStateRefreshClient } from './Clients/UserStateRefreshClient';
+import type { FollowRequest } from './Models/FollowRequest';
 
 export const useUserStateStore = defineStore('userState', {
     state: (): UserState => {
@@ -27,7 +29,10 @@ export const useUserStateStore = defineStore('userState', {
             birthday: null!,
             entries: [] as Entry[],
             auth: null!,
-            settings: null!
+            settings: null!,
+            followers: [] as string[],
+            following: [] as string[],
+            followRequests: [] as FollowRequest[]
         }
     },
     getters: {
@@ -35,11 +40,11 @@ export const useUserStateStore = defineStore('userState', {
         getBirthdayAsDate: (state) => new Date(state.birthday),
         getExpiryAsDate: (state) => new Date(state.auth.expiryDate),
         getEntriesWithDate: (state) => {
-            var Entries = state.entries
-            for(let i = 0; i < Entries.length; i++){
-                Entries[i].date = new Date(Entries[i].date)
-            }
-            return Entries
+            const entries = state.entries.map(entry => ({
+                ...entry,
+                date: new Date(entry.date) // date strings are converted back to Date objects in order to use getTime()
+            }));
+            return entries.sort((a, b) => b.date.getTime() - a.date.getTime());
         }
     },
     actions: {
@@ -73,6 +78,16 @@ export const useUserStateStore = defineStore('userState', {
             if (this.settings?.theme != null) {
                 document.body.className = (`${this.settings.theme}-theme`);
             }
+        },
+        refreshUserState() {
+            const client = new UserStateRefreshClient();
+
+            // Do not await, allow refresh to run in the background asynchronously
+            client.execute().then(response => {
+                this.$patch(response);
+            }).catch(error => {
+                console.log(error);
+            });
         }
     }
 });

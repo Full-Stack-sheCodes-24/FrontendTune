@@ -1,9 +1,8 @@
 import axios from 'axios';
-import type { SpotifyTrackDTO } from '../Models/SpotifyTrackDTO';
 import { useUserStateStore } from '../UserStateStore';
 
-export class SpotifyGetTrackClient {
-    async execute(trackId : String) : Promise<SpotifyTrackDTO> {
+export class UserFollowClient {
+    async execute(userIdToFollow : string) {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
@@ -15,7 +14,7 @@ export class SpotifyGetTrackClient {
             },
         });
 
-        const response = await client.get(`/Spotify/track/${trackId}`);
+        const response = await client.put(`/Users/follow/${userIdToFollow}`);
         return response.data;
     }
 }

@@ -16,6 +16,15 @@
     }
 }
 
+@keyframes audio-visualizer-wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -23,6 +32,56 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.song-searchbar-container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  color: var(--text-color);
+  border-radius: 4px;
+  background-color: transparent;
+  width: 200px;
+  transition: width 0.3s;
+
+  input {
+    color: var(--text-color);
+    border-radius: 4px;
+    border: 1px solid var(--primary-color);
+    width: 100%;
+    height: 100%;
+    padding-left: 60px;
+    padding-right: 6px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: transparent;
+  }
+  
+  input::placeholder {
+    color: var(--text-color);
+  }
+
+  img {
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    width: 36px;
+    height: 30px;
+  }
+
+  .favicon-icon {
+    animation: audio-visualizer-wave 1s infinite ease-in-out;
+  }
+
+  .favicon-icon.pause-animation {
+    animation-play-state: paused;
+  }
+
+}
+
+.song-searchbar-container:focus-within {
+  width: 300px;
+  transition: width 0.3s;
 }
 
 .spotify-search-results {
@@ -37,31 +96,15 @@
   border-bottom: 1px solid var(--tertiary-color);
 }
 
-.spotify-search-results div:hover {
-  background-color: var(--background-color);
-}
-
-.track-item{
+.track-item {
   text-overflow: ellipsis;
   overflow: hidden; 
   white-space: nowrap;
   cursor: pointer;
-}
-::-webkit-scrollbar{
-  width: 20px;
-}
-::-webkit-scrollbar-track{
-  background-color: transparent;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--secondary-color);
-  border-radius: 20px;
-  border: 5px solid transparent;
-  background-clip: content-box;
+  background-color: var(--background-color);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--primary-color);
-  cursor: pointer;
+.track-item:hover {
+  background-color: var(--quaternary-color);
+  transition: background-color 0.3s;  
 }

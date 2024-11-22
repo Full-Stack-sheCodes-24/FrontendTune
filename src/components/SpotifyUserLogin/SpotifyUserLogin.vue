@@ -1,4 +1,4 @@
-<style>@import'./SpotifyUserLogin.css';</style>
+<style scoped>@import'./SpotifyUserLogin.css';</style>
 <template>
   <div class="container">
       <header class="page-header">
@@ -10,35 +10,27 @@
           </div>
       </header>
   </div>
-  <Toast ref="toastRef"
-    :message="'Error logging in'"
-    :is-error="true">
-  </Toast>
 </template>
 
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import Toast from '@/Shared/Toast/Toast.vue';
+import { useToastStore } from '@/Shared/Toast/ToastStore';
 import { useUserStateStore } from '@/Shared/UserStateStore';
+import { ToastType } from '@/Shared/Toast/Toast';
 
 const route = useRoute();
 const router = useRouter();
 const userStateStore = useUserStateStore();
-
-const toastRef = ref<typeof Toast>();
-
-onBeforeMount(() => {
-  // If user is logged in, reroute to home page
-  if (userStateStore.isLoggedIn) {
-    router.push({ name: 'Home' });
-  }
-});
+const toastStore = useToastStore();
 
 onMounted(() => {
-  const error = route.path.endsWith('/error');
-  if (error) {
-    toastRef.value!.showToast();
+  if (route.path.endsWith('/error')) {
+    toastStore.addToast('Error logging in', ToastType.error)
+  }
+
+  if (route.path.endsWith('/session-timeout')) {
+    toastStore.addToast('Session timed out.', ToastType.error)
   }
 });
 

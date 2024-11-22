@@ -1,10 +1,11 @@
-<style>@import'./SearchForUser.css';</style>
+<style scoped>@import'./SearchForUser.css';</style>
 <template>
     <div ref="searchUserDiv" class="search-for-user-container">
         <i class="material-symbols-outlined">search</i>
         <input
             ref="inputRef"
             v-model="query"
+            title="Search"
             placeholder="Search"
             @input="debouncedSearch()"
             @keydown.esc="close"
@@ -25,17 +26,16 @@
             <p v-if="query.length === 0">Find a friend by searching for their name</p>
         </div>
     </div>
-    <div v-show="showSearchResults"
-        class="darken-background"
-        :class="{ 'darken-background-active': isDarkenActive }"></div>
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { ref } from 'vue';
 import { UserSearchClient } from '../Clients/UserSearchClient';
 import type { UserState } from '../Models/UserState';
 import { useRouter } from 'vue-router';
 import { useUserStateStore } from '../UserStateStore';
+
+const emit = defineEmits(['darken', 'lighten']);
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
@@ -47,7 +47,6 @@ const debounceTimeout = ref();
 const searchResults = ref([] as UserState[]);
 const noSearchResults = ref(false);
 const showSearchResults = ref(false);
-const isDarkenActive = ref(false);
 // Dictionary for query -> response to store search results and prevent excessive API calls
 // Useful if the user makes a typo or queries the same thing multiple times
 const cache: Record<string, UserState[]> = {};
@@ -108,20 +107,13 @@ function close(event : KeyboardEvent) {
     target.blur();
 }
 
-async function handleFocusIn() {
+function handleFocusIn() {
     showSearchResults.value = true;
-
-    // Wait for DOM to render darken-background div
-    await nextTick();
-    
-    // Delay the activation of the darken transition to ensure div is ready
-    setTimeout(() => {
-        isDarkenActive.value = true;
-    }, 10);
+    emit('darken');
 }
 
 function handleFocusOut() {
     showSearchResults.value = false;
-    isDarkenActive.value = false;
+    emit('lighten');
 }
 </script>

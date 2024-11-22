@@ -9,4 +9,5 @@ export interface Track {
     album: SpotifyAlbumDTO
     preview_url: string | null
     artist: SpotifyArtistDTO[];
+    albumImageUrl: string | null
 }

@@ -3,7 +3,6 @@
     width: 200px;
     transition: width 0.3s;
     color: var(--text-color);
-    z-index: 2;
     margin-left: auto;
 
     i {
@@ -14,6 +13,7 @@
         height: 100%;
         align-content: center;
         padding-left: 10px;
+        font-size: var(--nav-bar-icon-size);
     }
 
     input {
@@ -22,7 +22,7 @@
         border: 1px solid var(--primary-color);
         width: 100%;
         height: 100%;
-        padding-left: 40px;
+        padding-left: 50px;
         padding-right: 6px;
         background-color: transparent;
     }
@@ -64,24 +64,7 @@
     }
 }
 
-.darken-background {
-    position: absolute;
-    display: border-box;
-    top: 76px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 76px);
-    background-color: rgba(0, 0, 0, 0);
-    transition: background-color 1s;
-    z-index: 1;
-}
-
 .search-for-user-container:focus-within {
     width: 300px;
     transition: width 0.3s;
-}
-
-.darken-background-active {
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: background-color 0.3s;
 }

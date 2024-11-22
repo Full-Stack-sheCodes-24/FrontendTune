@@ -1,9 +1,9 @@
 import axios from 'axios';
-import type { SpotifyTrackDTO } from '../Models/SpotifyTrackDTO';
 import { useUserStateStore } from '../UserStateStore';
+import type { UserState } from '../Models/UserState';
 
-export class SpotifyGetTrackClient {
-    async execute(trackId : String) : Promise<SpotifyTrackDTO> {
+export class UserStateRefreshClient {
+    async execute() : Promise<UserState> {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
@@ -15,7 +15,8 @@ export class SpotifyGetTrackClient {
             },
         });
 
-        const response = await client.get(`/Spotify/track/${trackId}`);
+        const response = await client.get(`/Users/refresh`);
+        delete response.data.auth;  // Remove the auth field
         return response.data;
     }
 }

@@ -1,13 +1,19 @@
 .nav-logout-button {
-  color: var(--text-color);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--primary-color);
-  border-radius: 4px;
+  border: none;
   background-color: transparent;
-  cursor: pointer; /* Ensure the button looks clickable */
+  cursor: pointer;
+  border-radius: 50%;
+  color: var(--text-color);
+  i {
+    font-size: var(--nav-bar-icon-size);
+  }
 }
-
+.nav-logout-button:hover{
+  color:var(--secondary-color);
+}
+.btn-title{
+  font-size: 14px;
+}
 .logout-button:hover {
   background-color: #f0f0f0;
 }

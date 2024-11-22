@@ -7,7 +7,6 @@ export class UserUpdateProfileClient {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const userId = userState.id;
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
@@ -16,7 +15,7 @@ export class UserUpdateProfileClient {
             },
         });
 
-        const response = await client.put(`/Users/${userId}/profile`, request);
+        const response = await client.put(`/Users/profile`, request);
         return response.data;
     }
 }

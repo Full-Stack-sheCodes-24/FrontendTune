@@ -1,4 +1,4 @@
-<style>@import'./Display.css';</style>
+<style scoped>@import'./Display.css';</style>
 <template>
     <div class="display-container">
         <h2 class="title">Display Preferences</h2>
@@ -18,20 +18,16 @@
             </div>
         </div>
     </div>
-    <Toast ref="toastRef"
-        :is-error="true"
-        message="Error: Failed to update settings. Please try again later.">
-    </Toast>
 </template>
 <script setup lang="ts">
 import { UserSettingsClient } from '@/Shared/Clients/UserSettingsClient';
-import Toast from '@/Shared/Toast/Toast.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
-import { ref } from 'vue';
+import { useToastStore } from '@/Shared/Toast/ToastStore';
+import { ToastType } from '@/Shared/Toast/Toast';
 
 const client = new UserSettingsClient();
-const toastRef = ref<typeof Toast>();
 const userStateStore = useUserStateStore();
+const toastStore = useToastStore();
 
 async function handleThemeClick(event : MouseEvent) {
     const target = event.target as HTMLElement;
@@ -45,7 +41,7 @@ async function handleThemeClick(event : MouseEvent) {
         userStateStore.updateTheme();
     }).catch(error => {
         console.log(error);
-        toastRef.value!.showToast();
+        toastStore.addToast('Error: Failed to update settings. Please try again later.', ToastType.error);
         return;
     });
 }

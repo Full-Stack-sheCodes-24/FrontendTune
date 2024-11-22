@@ -1,4 +1,5 @@
 import type { Entry } from './Entry'
+import type { FollowRequest } from './FollowRequest';
 
 export interface UserState {
     id: string,
@@ -15,5 +16,9 @@ export interface UserState {
     };
     settings: {
         theme: string;
+        isPrivate: boolean;
     }
+    followers: string[];
+    following: string[];
+    followRequests: FollowRequest[];
 }

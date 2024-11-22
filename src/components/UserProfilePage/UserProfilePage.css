@@ -14,4 +14,11 @@
             gap: 20px;
         }
     }
+
+    .right-column {
+        position: sticky;
+        top: calc(var(--nav-bar-height) + 32px);
+        align-self: start; 
+        height: auto;
+    }
 }

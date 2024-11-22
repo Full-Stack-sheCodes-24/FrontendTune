@@ -1,41 +1,16 @@
-<style>@import'./Toast.css';</style>
+<style scoped>@import'./Toast.css';</style>
 <template>
-  <div
-    v-if="isVisible"
-    class="card toast"
-    :class="{ error: isError }"
-    @click="hideToast">
-    <p>{{ props.message }}</p>
+  <div v-if="toastStore.toasts.length" class="toast-container">
+    <div v-for="toast in toastStore.toasts" :key="toast.id" class="card toast" :class="ToastType[toast.type]"
+      @click="toastStore.removeToast(toast.id)">
+      <p>{{ toast.message }}</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ToastType } from './Toast';
+import { useToastStore } from './ToastStore';
 
-const props = defineProps({
-  message: String,
-  isError: Boolean
-});
-
-const isVisible = ref(false);
-const debounceHide = ref();
-
-function hideToast() {
-    isVisible.value = false;
-}
-
-function showToast() {
-  isVisible.value = true;
-
-  // If waiting to hide toast already, reset the wait
-  if (debounceHide.value) clearTimeout(debounceHide.value);
-
-  // Automatically hide toast after 2s
-  debounceHide.value = setTimeout(() => {
-      hideToast();
-  }, 3000);
-}
-
-defineExpose({ hideToast, showToast });
-
+const toastStore = useToastStore();
 </script>

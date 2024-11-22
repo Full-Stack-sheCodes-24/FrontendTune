@@ -7,6 +7,8 @@
   --quaternary-color: #F5EFEB;
   --transparent-color: #567c8d4a;
   --transparent-hover-color: #567c8d78;
+  --nav-bar-height: 80px;
+  --nav-bar-icon-size: 32px;
 }
 
 *,
@@ -45,6 +47,25 @@ body {
   overflow-y: scroll;   /* Always show vertical scroll bar */
 }
 
+::-webkit-scrollbar{
+  width: 20px;
+}
+::-webkit-scrollbar-track{
+  background-color: var(--background-color);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -77,7 +98,7 @@ body {
 
 .green-theme {
   --background-color: #f0fbf4;
-  --text-color: #4a6b57;
+  --text-color: #3e5c4a;
   --primary-color: #688a76;
   --secondary-color: #8cb09a;
   --tertiary-color: #c3dacd;
@@ -87,7 +108,7 @@ body {
 }
 .purple-theme {
   --background-color: #f3e6f9;
-  --text-color: #6b4c8d;
+  --text-color: #5f437d;
   --primary-color: #8a6b9f;
   --secondary-color: #b29dc9;
   --tertiary-color: #d6b9e0;

@@ -1,8 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
 .entry-container {
-    position: relative;
+  position: relative; /* Allow positioning of child elements relative to this container */
+  display: flex;
+  align-items: center;
 }
+
+.entry-container:hover .btn-delete-entry {
+  display: block; 
+  opacity: 1;
+}
+
+.entry-content {
+  width: 80%;
+  max-width: 800px;
+  flex-grow: 1; /* Allow content to take up available space */
+}
+
+.song_img {
+  margin-right: 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  animation: rotation 6s infinite linear;
+}
+
+img.pause-animation {
+  animation-play-state: paused;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .favicon-container {
     cursor: pointer;
     display: inline-block;
@@ -17,8 +52,8 @@
 
 .music-play {
     position: absolute;
-    top: 30%;
-    right: 5%;
+    bottom: 25px;        
+    right: 5%; 
     border-radius: 8px;
     padding: 5px;
     display: flex;
@@ -34,7 +69,7 @@
 }
 
 audio::-webkit-media-controls-panel {
-    background-color: #e678c5;
+    background-color: #a3a3a3;
   }
   
   audio::-webkit-media-controls-current-time-display {
@@ -42,7 +77,7 @@ audio::-webkit-media-controls-panel {
   }
 
   audio::-webkit-media-controls-timeline {
-    background-color: #a664b3;
+    background-color: #95879c;
     border-radius: 25px;
     margin-left: 10px;
     margin-right: 10px;
@@ -53,5 +88,104 @@ audio::-webkit-media-controls-panel {
     font-weight: 400;
     font-style: normal;
     font-size: 2em; /* Optional: Adjust size for better readability */
-    line-height: 1.5; /* Optional: Improve spacing for multiline text */
+    line-height: 1.2; /* Optional: Improve spacing for multiline text */
+    white-space: pre-wrap;
+    overflow-wrap: break-word; 
+}
+
+.highlight {
+  background-color: var(--quaternary-color);
+  box-shadow: 0 0 10px var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  transition: all 0.3s;
+}
+
+.highlight-remove {
+  /* Revert back to card styling */
+  background-color: var(--background-color);
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.btn-delete-entry {
+  position: absolute; /* Position relative to the entry-container */
+  top: 10px; /* Adjust distance from the top */
+  right: 10px; /* Adjust distance from the right */
+  border-radius: 50%; /* Circle shape */
+  height: fit-content;
+  width: fit-content;
+  border: none;
+  cursor: pointer;
+  line-height: 0;
+  padding: 4px;
+  background-color: transparent;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  i {
+      color: var(--primary-color);
+  }
+}
+
+.btn-delete-entry:hover {
+  i {
+    color: red;
+    transition: color 0.3s;
+  }
+  background-color: var(--background-color);
+  transition: background-color 0.3s;
+}
+
+.confirmation-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.confirm-button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+.confirm-button.yes {
+  background-color: #4CAF50; 
+  color: white;
+}
+
+.confirm-button.yes:hover {
+  background-color: #45A049; /* Darker red on hover */
+}
+ 
+.confirm-button.no {
+  background-color: #e74c3c; /* Blue for cancel */
+  color: white;
+}
+
+.confirm-button.no:hover {
+  background-color: #c0392b; /* Darker blue on hover */
+}
+
+.delete-content{
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
 }

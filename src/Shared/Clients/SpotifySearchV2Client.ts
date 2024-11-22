@@ -8,7 +8,6 @@ export class SpotifySearchV2Client {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const userId = userState.id;
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
@@ -18,7 +17,7 @@ export class SpotifySearchV2Client {
             },
         });
 
-        const response = await client.get(`/Spotify/search/v2/${userId}`);
+        const response = await client.get(`/Spotify/search/v2`);
         return response.data;
     }
 }
