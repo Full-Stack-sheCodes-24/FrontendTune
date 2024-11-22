@@ -5,10 +5,12 @@
   display: flex;
   align-items: center;
 }
+
 .entry-container:hover .btn-delete-entry {
   display: block; 
   opacity: 1;
 }
+
 .entry-content {
   width: 80%;
   max-width: 800px;
@@ -109,7 +111,7 @@ audio::-webkit-media-controls-panel {
   cursor: pointer;
   line-height: 0;
   padding: 4px;
-  background: none;
+  background-color: transparent;
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
@@ -117,6 +119,15 @@ audio::-webkit-media-controls-panel {
   i {
       color: var(--primary-color);
   }
+}
+
+.btn-delete-entry:hover {
+  i {
+    color: red;
+    transition: color 0.3s;
+  }
+  background-color: var(--background-color);
+  transition: background-color 0.3s;
 }
 
 .confirmation-dialog {
@@ -154,7 +165,6 @@ audio::-webkit-media-controls-panel {
 .confirm-button.no:hover {
   background-color: #c0392b; /* Darker blue on hover */
 }
-
 
 .delete-content{
   background: var(--background-color);
