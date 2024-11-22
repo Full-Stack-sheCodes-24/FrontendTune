@@ -64,3 +64,58 @@
         }
     }
 }
+
+.entries-for-day {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(240, 234, 234, 0.126);
+    display: flex;
+    flex-direction: column;
+    height: 85%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: visible;
+
+    .entry-for-day {
+        display: flex;
+        padding: 10px 20px;
+        height: fit-content;
+        position: relative; 
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .entry-time {
+        color: var(--secondary-color);
+        font-size: 12px;
+    }
+
+    .day-entry-albumImg {
+        height: 35px;
+        width: 35px;
+        cursor: pointer;
+        align-self: center; 
+    }
+}
+
+.go-to-top {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.textbox {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px 0 10px;
+}
+
+.highlight {
+    background-color: var(--tertiary-color);
+    transition: background-color 0.3s,
+}
