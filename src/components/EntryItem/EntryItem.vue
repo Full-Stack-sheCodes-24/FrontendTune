@@ -27,7 +27,8 @@
                 />
             </template>
         </AudioPlayer>
-        <p v-text="entry.date.toLocaleString()"></p>
+        <p>{{ dateFormat(entry.date) }}</p>
+
         </div>
         <!-- Trash button -->
         <button v-if="isOwner" class="btn-delete-entry" @click="confirmation" title="Delete Entry">
@@ -104,6 +105,27 @@ function handleOutsideClick(event: MouseEvent) {
             activeAudioPlayer.value = null;
         }
     }
+}
+
+function dateFormat(date: Date): string {
+  const now = new Date();
+  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (seconds < 60) return `${seconds}s ago`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days <= 5) {
+    return `${days}d ago`;
+  } else {
+    // if thime passed is more than 5 days, it will display the full date
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear().toString().slice(-2); 
+    return `${month}/${day}/${year}`;
+  }
 }
 
 onUnmounted(() => {
