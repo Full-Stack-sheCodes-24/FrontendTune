@@ -8,15 +8,32 @@
                     src="@/assets/logo.png"
                     @click="redirectToHome"
                     alt="Moodz logo">
-                <!-- If logged in, do not show login button -->
-                <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink>
-                <RouterLink to="/home" v-if="userStateStore.isLoggedIn">Home</RouterLink>
-                <RouterLink to="/about">About Us</RouterLink>
+                    <!-- If logged in, do not show login button -->
+                    <!-- <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink> -->
+                <SearchForUser></SearchForUser>
              </div>
              <div class="btn-container">
-                <SearchForUser></SearchForUser>
+                <button v-if="userStateStore.isLoggedIn" class="btn-nav">
+                    <i class="material-symbols-outlined">notifications</i>
+                    <p class ="btn-title">Notifications</p>
+                </button>
+                <!-- Home Button -->
+                <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click ="redirectToHome">
+                    <i class="material-symbols-outlined">home</i>
+                    <p class ="btn-title">Home</p>
+                </button>
+                <!-- About Us Button -->
+                <button class="btn-nav" @click="redirectToAboutUs">
+                    <i class="material-symbols-outlined">group</i>
+                    <p class ="btn-title">About</p>
+                </button>
+                <!-- Settings Button -->
+                <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click="redirectToSettings">
+                    <i class="material-symbols-outlined">settings</i>
+                    <p class="btn-title">Settings</p>
+                </button>
+                <!-- Logout Button -->
                 <Logout v-if="userStateStore.isLoggedIn"></Logout>
-                <RouterLink to="/settings" v-if="userStateStore.isLoggedIn">Settings</RouterLink>
              </div>
         </div>
     </nav>
@@ -32,5 +49,12 @@ const userStateStore = useUserStateStore();
 
 function redirectToHome() {
     router.push({ name: "Home" });
+}
+
+function redirectToAboutUs(){
+    router.push({ name:"About"});
+}
+function redirectToSettings(){
+    router.push({ name:"Settings"});
 }
 </script>
