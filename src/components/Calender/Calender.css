@@ -132,7 +132,7 @@
     height: fit-content;
     width: 150px;
     top: 0;
-    right: 100%;
+    left: 100%;
     z-index: 100;
     padding: 0px;
     box-shadow: 0 0 10px var(--primary-color);
