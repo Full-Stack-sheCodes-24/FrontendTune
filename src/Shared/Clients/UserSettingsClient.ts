@@ -7,7 +7,6 @@ export class UserSettingsClient {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const userId = userState.id;
 
         const client = axios.create({
             baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
@@ -16,7 +15,7 @@ export class UserSettingsClient {
             },
         });
 
-        const response = await client.put(`/Users/${userId}/settings`, request);
+        const response = await client.put(`/Users/settings`, request);
         return response.data;
     }
 }

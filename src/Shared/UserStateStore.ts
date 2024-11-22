@@ -83,7 +83,7 @@ export const useUserStateStore = defineStore('userState', {
             const client = new UserStateRefreshClient();
 
             // Do not await, allow refresh to run in the background asynchronously
-            client.execute( this.id ).then(response => {
+            client.execute().then(response => {
                 this.$patch(response);
             }).catch(error => {
                 console.log(error);

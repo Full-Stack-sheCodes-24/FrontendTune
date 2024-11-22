@@ -7,7 +7,6 @@ export class CreateEntryClient { //reference how backend setup API, get userid f
     async execute(request : Entry)  {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
-        const userID = userState.id;
         const token = userState.auth.accessToken;
 
         if (!token) {
@@ -22,7 +21,7 @@ export class CreateEntryClient { //reference how backend setup API, get userid f
             }
         });
 
-        const response = await client.post(`/Users/${userID}/entries`, request);
+        const response = await client.post(`/Users/entries`, request);
         return response.data;
     }
 }

@@ -3,7 +3,7 @@ import { useUserStateStore } from '../UserStateStore';
 import type { UserState } from '../Models/UserState';
 
 export class UserStateRefreshClient {
-    async execute(userId : string) : Promise<UserState> {
+    async execute() : Promise<UserState> {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
@@ -15,7 +15,7 @@ export class UserStateRefreshClient {
             },
         });
 
-        const response = await client.get(`/Users/${userId}/refresh`);
+        const response = await client.get(`/Users/refresh`);
         delete response.data.auth;  // Remove the auth field
         return response.data;
     }
