@@ -4,7 +4,8 @@
     <div class="calender-item card clickable" :class="{ 'highlight': showEntries }" @click="showEntriesForDay()">
         <p class="days-on-calendar">{{ currentDay }}</p>   
         <div v-if="firstEntry != undefined"> 
-            <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"/>
+            <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"
+            :alt="`Album cover image for ${currentMonth} ${currentDay}th`"/>
         </div>
     </div>
 
@@ -14,7 +15,8 @@
         </div>
         <div class="entry-for-day card clickable" v-for="entry in entriesByDay" @click="goToEntry(entry)">
             <div class="day-entry-albumImg">
-                <img :src="entry.track?.albumImageUrl || fallbackImg"/>
+                <img :src="entry.track?.albumImageUrl || fallbackImg"
+                :alt="`Album cover image for entry at ${currentMonth} ${currentDay}th ${entry.date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`"/>
             </div>
             <div class="textbox">
                 <p class="track-name">{{ entry.track.name }}</p>
@@ -27,12 +29,13 @@
 
 <script setup lang="ts">
 import type { Entry } from '@/Shared/Models/Entry';
-import { computed, nextTick, ref, watchEffect } from 'vue';
+import { computed, watchEffect } from 'vue';
 
 const fallbackImg = 'https://spiralcute.com/characters/img/characters/thumb_chiikawa.jpg';
 
 const props = defineProps<{
     currentDay: number;
+    currentMonth: string;
     entriesByDay: Entry[];
     showEntries: boolean;
 }>();

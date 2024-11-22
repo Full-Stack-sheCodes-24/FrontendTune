@@ -97,7 +97,7 @@ body {
 
 .green-theme {
   --background-color: #f0fbf4;
-  --text-color: #4a6b57;
+  --text-color: #3e5c4a;
   --primary-color: #688a76;
   --secondary-color: #8cb09a;
   --tertiary-color: #c3dacd;
@@ -107,7 +107,7 @@ body {
 }
 .purple-theme {
   --background-color: #f3e6f9;
-  --text-color: #6b4c8d;
+  --text-color: #5f437d;
   --primary-color: #8a6b9f;
   --secondary-color: #b29dc9;
   --tertiary-color: #d6b9e0;

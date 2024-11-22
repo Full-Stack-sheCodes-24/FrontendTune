@@ -33,16 +33,14 @@
             background-color: transparent;
             cursor: pointer;
             border-radius: 50%;
-            color:var(--primary-color);
+            color: var(--text-color);
+            font-size: 30px;
         }
         .btn-nav:hover {
             color:var(--secondary-color);
         }
         .btn-nav:hover:active{
             color:var(--secondary-color);
-        }
-        .btn-nav{
-            font-size: 30px;
         }
         .btn-container {
             display: flex;

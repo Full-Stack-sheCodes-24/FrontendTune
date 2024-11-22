@@ -16,6 +16,7 @@
         <div class="calender-item-container">    
             <CalenderItem v-for="day in days" :key="day"
                 :currentDay="day"
+                :currentMonth="month"
                 :entriesByDay=getEntryForDay(day)
                 :showEntries="openDay === day"
                 @toggleEntries="toggleOtherDayEntries(day)"

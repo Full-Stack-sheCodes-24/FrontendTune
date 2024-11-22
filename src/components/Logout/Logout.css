@@ -3,7 +3,7 @@
   background-color: transparent;
   cursor: pointer;
   border-radius: 50%;
-  color:var(--primary-color);
+  color: var(--text-color);
   margin-top: 2px;
 }
 .nav-logout-button:hover{
