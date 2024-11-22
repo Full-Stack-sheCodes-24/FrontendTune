@@ -79,6 +79,11 @@ export const useUserStateStore = defineStore('userState', {
                 document.body.className = (`${this.settings.theme}-theme`);
             }
         },
+        resetTheme() {
+            if (this.settings?.theme != null) {
+                document.body.classList.remove(`${this.settings.theme}-theme`);
+            }
+        },
         refreshUserState() {
             const client = new UserStateRefreshClient();
 

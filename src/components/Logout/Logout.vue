@@ -34,6 +34,7 @@ function closeModal() {
 }
 
 function logout() {
+    userStateStore.resetTheme();
     localStorage.removeItem("user_state");
     userStateStore.$reset();
     router.push({ name: 'Login' });
