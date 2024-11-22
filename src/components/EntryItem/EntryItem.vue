@@ -1,6 +1,6 @@
 <style scoped>@import'./EntryItem.css';</style>
 <template>
-    <div class="entry-container card clickable"  :id="id">
+    <div class="entry-container card clickable" :id="id">
         <div class="entry-content">
         <pre class= "output-text" v-text="entry.text"></pre>
         <div class="track-info">

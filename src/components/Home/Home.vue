@@ -13,9 +13,12 @@
             </ProfileSection>
             <div class="entries-container">
                 <CreateEntry/>
-                <div v-for="entry in getEntriesWithDate" :key="entry.date.toISOString">
-                    <EntryItem :entry="entry" :is-owner="true" @delete="deleteEntry"></EntryItem>
-                </div>
+                <EntryItem v-for="entry in getEntriesWithDate"
+                    :key="entry.date.getTime()"
+                    :entry="entry"
+                    :is-owner="true"
+                    @delete="deleteEntry">
+                </EntryItem>
             </div>
         </div>
         <div class="right-column">
@@ -24,13 +27,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onBeforeMount } from 'vue';
 import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
 import CreateEntry from '@/components/CreateEntry/CreateEntry.vue';
 import EntryItem from '@/components/EntryItem/EntryItem.vue';
 import Calender from '@/components/Calender/Calender.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
-import { useRouter } from 'vue-router';
 import { DeleteEntryClient } from '@/Shared/Clients/DeleteEntryClient';
 import { storeToRefs } from 'pinia';
 

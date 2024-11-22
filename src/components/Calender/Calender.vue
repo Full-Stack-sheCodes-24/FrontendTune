@@ -14,7 +14,7 @@
         </div>
         <p v-text="year"></p>
         <div class="calender-item-container">    
-            <CalenderItem v-for="day in days"
+            <CalenderItem v-for="day in days" :key="day"
                 :currentDay="day"
                 :entry=getEntryForDay(day)
             />
