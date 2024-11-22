@@ -2,6 +2,7 @@
 main {
   max-width: 1280px;
   margin: 0 auto;
+  margin-top: var(--nav-bar-height);
   padding: 2rem;
   font-weight: normal;
 }

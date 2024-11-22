@@ -1,8 +1,11 @@
 <style scoped>@import'./Logout.css';</style>
 <template>
     <!-- Button to trigger logout modal -->
-    <button @click="openLogoutModal" class="nav-logout-button">Logout</button>
-    
+    <!-- <button @click="openLogoutModal" class="nav-logout-button">Logout</button> -->
+    <button @click="openLogoutModal" class="nav-logout-button">
+        <i class="material-symbols-outlined">logout</i>
+        <p class ="btn-title">Logout</p>
+    </button>
     <div v-if="isModalOpen" class="logout-modal" @click.self="closeModal">
         <div class="modal-content">
             <p>Are you sure you want to logout?</p>

@@ -1,9 +1,15 @@
 .navbar {
     display: flex;
+    position: fixed;
+    height: var(--nav-bar-height);
+    width: 100%;
     background-color: var(--tertiary-color);
     align-items: center;
     font-size: 16px;
     padding: 1rem;
+    top: 0;
+    left: 0;
+    z-index: 2;
 
     .navbar-layout {
         display: flex;
@@ -22,20 +28,29 @@
             filter: brightness(.5) contrast(4);
         }
     
-
-        a {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem; /* Add padding inside the border */
-            border: 1px solid var(--primary-color); /* Border around each link */
-            border-radius: 4px; /* Optional rounded corners */
+        .btn-nav {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 50%;
+            color:var(--primary-color);
         }
-
-
+        .btn-nav:hover {
+            color:var(--secondary-color);
+        }
+        .btn-nav:hover:active{
+            color:var(--secondary-color);
+        }
+        .btn-nav{
+            font-size: 30px;
+        }
         .btn-container {
             display: flex;
             flex-direction: row;
-            gap: 2rem;
+            gap: 1rem;
+        }
+        .btn-title{
+            font-size: 14px; 
         }
     }
 
@@ -52,4 +67,19 @@
             box-sizing: border-box;
         }
     }
+}
+
+.darken-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh);
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1;
+}
+
+.darken-background-active {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s;
 }
