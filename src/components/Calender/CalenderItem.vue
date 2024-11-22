@@ -9,7 +9,7 @@
 
     <div class="entries-for-day" v-if="showEntries">
         <div class="go-to-top card clickable" @click="goToTop">
-            <h3>Go to top</h3>
+            <p>Go to top</p>
         </div>
         <div class="entry-for-day card clickable" v-for="entry in entriesByDay" @click="goToEntry(entry)">
             <div class="day-entry-albumImg">

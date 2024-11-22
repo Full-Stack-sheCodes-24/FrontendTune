@@ -104,7 +104,8 @@
 }
 
 .go-to-top {
-    padding: 10px;
+    padding: 8px;
+    cursor: pointer;
 }
 
 .textbox {
@@ -112,4 +113,5 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding-left: 10px;
 }
