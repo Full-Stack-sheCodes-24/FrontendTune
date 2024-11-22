@@ -7,6 +7,25 @@
             <div class="progress" :style="{ width: progress + '%' }"></div>
         </div>
 
+        <!-- Circular Progress Bar -->
+        <div class="circular-progress-container" @click="togglePlay">
+            <slot name="image"></slot>
+            <i v-if="isPlaying" class="material-symbols-outlined">pause</i>
+            <i v-else class="material-symbols-outlined">play_arrow</i>
+            <svg viewBox="0 0 100 100" class="circular-progress">
+                <!-- Background Circle -->
+                <circle cx="50" cy="50" :r="radius" class="progress-bg"/>
+                <!-- Progress Circle -->
+                <circle
+                    cx="50"
+                    cy="50"
+                    :r="radius"
+                    class="progress-bar"
+                    :style="{ strokeDashoffset: progressOffset }"
+                />
+            </svg>
+        </div>
+
         <!-- Volume Control -->
         <div class="volume-control">
             <label for="volume">
@@ -27,25 +46,6 @@
                     :style="{ left: `${volume * 100}%` }">
                 </div>
             </div>
-        </div>
-
-        <!-- Circular Progress Bar -->
-        <div class="circular-progress-container" @click="togglePlay">
-            <slot name="image"></slot>
-            <i v-if="isPlaying" class="material-symbols-outlined">pause</i>
-            <i v-else class="material-symbols-outlined">play_arrow</i>
-            <svg viewBox="0 0 100 100" class="circular-progress">
-                <!-- Background Circle -->
-                <circle cx="50" cy="50" :r="radius" class="progress-bg"/>
-                <!-- Progress Circle -->
-                <circle
-                    cx="50"
-                    cy="50"
-                    :r="radius"
-                    class="progress-bar"
-                    :style="{ strokeDashoffset: progressOffset }"
-                />
-            </svg>
         </div>
     
         <!-- Hidden default audio tag -->

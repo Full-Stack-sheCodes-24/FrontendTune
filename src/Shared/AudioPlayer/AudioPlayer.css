@@ -46,13 +46,14 @@ audio {
 
 .volume-control {
     position: absolute;
-    bottom: -10px;
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
+    height: 40px;
 
     label {
         display: flex;
