@@ -1,6 +1,7 @@
 <style scoped src="./Calender.css"></style>
 <template>
-    <div class="calender-item card clickable" @click="showEntriesForDay()">
+    <div class="calender-item-wrapper">
+    <div class="calender-item card clickable" :class="{ 'highlight': showEntries }" @click="showEntriesForDay()">
         <p class="days-on-calendar">{{ currentDay }}</p>   
         <div v-if="firstEntry != undefined"> 
             <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"/>
@@ -20,6 +21,7 @@
                 <p class="entry-time" v-text="entry.date.toLocaleTimeString()"></p>
             </div>
         </div>
+    </div>
     </div>
 </template>
 

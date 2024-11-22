@@ -36,8 +36,8 @@ let currentYear = today.getFullYear();
 const props = defineProps<{
     entries: Entry[];
 }>();
-const showEntriesForDay = ref(false);
-const highlightDay = ref(false);
+
+
 const openDay = ref();
 
 watchEffect(() => {
