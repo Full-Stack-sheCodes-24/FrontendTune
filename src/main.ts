@@ -12,11 +12,13 @@ import UserProfilePage from '@/components/UserProfilePage/UserProfilePage.vue';
 import { markRaw } from 'vue'
 import AboutUs from './components/AboutUs/AboutUs.vue';
 import { useUserStateStore } from './Shared/UserStateStore';
+import Feed from './components/Feed/Feed.vue';
 
 const routes = [
   { path: '/user/:userId', name: 'User', component: UserProfilePage },
-  { path: '/', redirect: '/home' }, 
-  { path: '/home', name: 'Home', component: Home },
+  { path: '/', redirect: '/feed' }, 
+  { path: '/feed', name: 'Feed', component: Feed },
+  { path: '/me', name: 'Profile', component: Home },
   { path: '/login', name: 'Login', component: SpotifyUserLogin },
   { path: '/login/error', name: 'LoginError', component: SpotifyUserLogin },
   { path: '/login/session-timeout', name: 'LoginSessionTimeout', component: SpotifyUserLogin },
@@ -39,7 +41,7 @@ router.beforeEach((to, from, next) => {
   }
   // reroute logged-out-only pages
   else if (userState.isLoggedIn && (to.name === 'Callback' || to.path.includes('login'))) {
-    next({ name: 'Home' });
+    next({ name: 'Feed' });
   }
   else {
     next();

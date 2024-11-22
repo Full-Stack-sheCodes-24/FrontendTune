@@ -1,0 +1,24 @@
+.home-container {
+    display: grid;
+    grid-template-columns: auto 2fr;
+    gap: 20px;
+
+    .left-column {
+        position: sticky;
+        top: calc(var(--nav-bar-height) + 32px);
+        align-self: start; 
+        height: auto;
+    }
+
+    .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .entries-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}
