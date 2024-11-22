@@ -34,14 +34,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userState = useUserStateStore();
   // reroute logged-in-only pages
-  if (!userState.isLoggedIn && to.name === 'Home' || to.name === 'Settings') {
+  if (!userState.isLoggedIn && (to.name === 'Home' || to.name === 'Settings')) {
     next({ name: 'Login' });
   } else {
     next();
   }
 
   // reroute logged-out-only pages
-  if (userState.isLoggedIn && to.name === 'Callback' || to.path.includes('login')) {
+  if (userState.isLoggedIn && (to.name === 'Callback' || to.path.includes('login'))) {
     next({ name: 'Home' });
   }
 });
