@@ -10,7 +10,7 @@
                     alt="Moodz logo">
                     <!-- If logged in, do not show login button -->
                     <!-- <RouterLink to="/login" v-if="!userStateStore.isLoggedIn">Login</RouterLink> -->
-                <SearchForUser></SearchForUser>
+                <SearchForUser v-if="userStateStore.isLoggedIn" ></SearchForUser>
              </div>
              <div class="btn-container">
                 <button v-if="userStateStore.isLoggedIn" class="btn-nav">
@@ -23,7 +23,7 @@
                     <p class ="btn-title">Home</p>
                 </button>
                 <!-- About Us Button -->
-                <button class="btn-nav" @click="redirectToAboutUs">
+                <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click="redirectToAboutUs">
                     <i class="material-symbols-outlined">group</i>
                     <p class ="btn-title">About</p>
                 </button>
