@@ -1,9 +1,7 @@
 <style scoped>@import'./SpotifyCallback.css';</style>
 
 <template>
-    <div class="loading">
-        <LoadingSpinner/>
-    </div>
+    <LoadingSpinner class="loading-spinner"/>
 </template>
 <script setup lang="ts">
 import { SpotifyLoginClient } from '@/Shared/Clients/SpotifyLoginClient';
