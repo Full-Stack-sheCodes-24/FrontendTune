@@ -4,4 +4,5 @@ export interface Entry {
     track: Track;
     text: string;
     date: Date;
+    isPinned?: boolean;
 }
