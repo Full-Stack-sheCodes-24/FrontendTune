@@ -50,7 +50,7 @@ async function deleteEntry(date: Date) {
             return entry.date.getTime() !== date.getTime();
         });
         userStateStore.entries = updatedEntries;
-        console.log("Entry deleted successfully");
+        //console.log("Entry deleted successfully");
 
     } catch (error) {
         console.error("Failed to delete entry:", error);
