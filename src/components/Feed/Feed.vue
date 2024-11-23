@@ -2,17 +2,6 @@
 <template>
     <div class="home-container">
         <div class="left-column">
-            <ProfileSection
-                :is-owner="true"
-                :profile-pic-url="userState.profilePicUrl"
-                :name="userState.name"
-                :bio-text="userState.bioText"
-                :birthday="userState.getBirthdayAsDate"
-                :following="userState.following?.length"
-                :followers="userState.followers?.length">
-            </ProfileSection>
-        </div>
-        <div class="right-column">
             <div class="entries-container">
                 <CreateEntry/>
                 <FeedEntry v-for="entry in getFeedWithDate"
@@ -25,6 +14,17 @@
                 </div>
             </div>
             <LoadingSpinner v-if="loading"></LoadingSpinner>
+        </div>
+        <div class="right-column">
+            <ProfileSection
+                :is-owner="true"
+                :profile-pic-url="userState.profilePicUrl"
+                :name="userState.name"
+                :bio-text="userState.bioText"
+                :birthday="userState.getBirthdayAsDate"
+                :following="userState.following?.length"
+                :followers="userState.followers?.length">
+            </ProfileSection>
         </div>
     </div>
 </template>
