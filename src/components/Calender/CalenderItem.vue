@@ -3,15 +3,15 @@
     <div class="calender-item-wrapper">
         <div class="calender-item card clickable" :class="{ 'highlight': showEntries }" @click="showEntriesForDay()">
             <p class="days-on-calendar">{{ currentDay }}</p>   
-            <div v-if="firstEntry != undefined"> 
-                <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"
+            <div v-if="displayEntry != undefined"> 
+                <img :src="displayEntry?.track?.albumImageUrl || fallbackImg"
                 :alt="`Album cover image for ${currentMonth} ${currentDay}th`"/>
             </div>
         </div>
 
-        <div v-if="firstEntry != undefined" class="expanded-calendar-item card">
+        <div v-if="displayEntry != undefined" class="expanded-calendar-item card">
             <p class="days-on-calendar">{{ currentDay }}</p>  
-            <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"/>
+            <img :src="displayEntry?.track?.albumImageUrl || fallbackImg"/>
         </div>
     </div>
 
@@ -28,6 +28,9 @@
                 <p class="track-name">{{ entry.track.name }}</p>
                 <p class="entry-time" v-text="entry.date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })"></p>
             </div>
+            <button class="pin-btn" @click="pinEntry(entry)">
+                <i class="material-symbols-outlined">keep</i>
+            </button>
         </div>
     </div>
 </template>
@@ -45,8 +48,15 @@ const props = defineProps<{
     showEntries: boolean;
 }>();
 
-const firstEntry = computed(() => props.entriesByDay[props.entriesByDay.length -1]) || null;
+const firstEntry = computed(() => props.entriesByDay[props.entriesByDay.length-1]);
+const pinnedEntry = ref<Entry | undefined>(undefined);
+const displayEntry = computed(() => pinnedEntry.value || firstEntry.value);
 const highlighted = new Map();
+
+
+// const displayEntry = computed(() => pinnedEntry.value || firstEntry.value);
+ // Use pinnedEntry if available, otherwise fallback to firstEntry
+
 
 const emit = defineEmits(['toggleEntries']);
 
@@ -91,7 +101,7 @@ const goToEntry = (entry: Entry) => {
 };
 
 const showEntriesForDay = () => {
-    goToEntry(firstEntry.value); 
+    goToEntry(displayEntry.value); 
     emit('toggleEntries', props.currentDay);
 }
 
@@ -99,4 +109,20 @@ const goToTop = () => {
     globalThis.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 }
 
+const pinEntry = (entry: Entry) => {
+    if (pinnedEntry.value === entry) {
+        // Unpin the entry if it was already pinned
+        entry.isPinned = undefined;
+        pinnedEntry.value = undefined;
+    } else {
+        // Unpin the currently pinned entry, if any
+        if (pinnedEntry.value) {
+            pinnedEntry.value.isPinned = undefined;
+        }
+
+        // Pin the new entry
+        entry.isPinned = true;
+        pinnedEntry.value = entry;
+    }
+}
 </script>

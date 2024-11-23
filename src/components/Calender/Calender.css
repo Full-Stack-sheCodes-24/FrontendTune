@@ -100,6 +100,33 @@
         cursor: pointer;
         align-self: center; 
     }
+
+    .pin-btn {
+        opacity: 0;
+        position: absolute;
+        background: none;
+        border:none;
+        top: 5px;
+        right: 0;
+        cursor: pointer;
+        border-radius: 50%; /* Circle */
+        height: fit-content;
+        width: fit-content;
+    
+        i {
+            color: var(--text-color);
+            font-size: 20px;
+        }
+    
+        i:hover {
+            color: var(--secondary-color);
+        }
+    }
+    
+    .entry-for-day:hover .pin-btn{
+        opacity: 1;
+        transition: opacity 0.3c ease;
+    }
 }
 
 .go-to-top {
@@ -147,3 +174,4 @@
     opacity: 0;
     visibility: hidden; 
 }
+
