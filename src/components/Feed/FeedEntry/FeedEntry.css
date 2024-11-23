@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
 
 .entry-container {
     position: relative; /* Allow positioning of child elements relative to this container */
@@ -80,11 +80,13 @@ img.pause-animation {
 
 .output-text {
     color: var(--text-color);
-    font-family: "Indie Flower", cursive;
+    font-family: 'max aura', sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 2em; /* Optional: Adjust size for better readability */
+    font-size: 1.6em; /* Optional: Adjust size for better readability */
     line-height: 1.2; /* Optional: Improve spacing for multiline text */
+    margin-top: 10px;
+    margin-bottom: 10px;
     white-space: pre-wrap;
     overflow-wrap: break-word; 
-}
+  } 
