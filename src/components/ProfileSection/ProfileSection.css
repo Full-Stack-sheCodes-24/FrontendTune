@@ -24,6 +24,7 @@
         }
 
         .profile-info p {
+            text-wrap: nowrap;
             margin: 5px 15px ;
 
             strong {

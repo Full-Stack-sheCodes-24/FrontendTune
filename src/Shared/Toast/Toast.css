@@ -12,6 +12,7 @@
     text-align: center;
     line-height: 0;
     align-content: center;
+    z-index: 1000;
 }
 .toast.info {
     background-color: #2196f3;

@@ -1,0 +1,35 @@
+.home-container {
+    display: grid;
+    grid-template-columns: 2fr auto;
+    gap: 20px;
+
+    .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .entries-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .no-friends {
+                text-align: center;
+            }
+        }
+    }
+
+    .right-column {
+        position: sticky;
+        top: calc(var(--nav-bar-height) + 32px);
+        align-self: start; 
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        h2 {
+            text-align: center;
+        }
+    }
+}

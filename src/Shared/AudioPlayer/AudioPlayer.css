@@ -1,6 +1,8 @@
 .circular-progress-container {
     width: 100px;
     height: 100px;
+    cursor: pointer;
+    user-select: none;
 
     i {
         color: var(--background-color);
@@ -9,6 +11,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-variation-settings: 'FILL' 1;
+        user-select: none;
     }
 }
 
@@ -54,6 +57,7 @@ audio {
     justify-content: center;
     transition: all 0.3s;
     height: 40px;
+    user-select: none;
 
     label {
         display: flex;

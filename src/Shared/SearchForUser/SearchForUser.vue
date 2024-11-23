@@ -34,22 +34,25 @@ import { UserSearchClient } from '../Clients/UserSearchClient';
 import type { UserState } from '../Models/UserState';
 import { useRouter } from 'vue-router';
 import { useUserStateStore } from '../UserStateStore';
+import type { OtherUserState } from '../Models/OtherUserState';
+import { useCachedUserStore } from '../CachedUserStore';
 
 const emit = defineEmits(['darken', 'lighten']);
 
 const router = useRouter();
 const userStateStore = useUserStateStore();
+const cachedUser = useCachedUserStore();
 const client = new UserSearchClient();
 
 const inputRef = ref<HTMLElement | null>();
 const query = ref('');
 const debounceTimeout = ref();
-const searchResults = ref([] as UserState[]);
+const searchResults = ref([] as OtherUserState[]);
 const noSearchResults = ref(false);
 const showSearchResults = ref(false);
 // Dictionary for query -> response to store search results and prevent excessive API calls
 // Useful if the user makes a typo or queries the same thing multiple times
-const cache: Record<string, UserState[]> = {};
+const cache: Record<string, OtherUserState[]> = {};
 
 function debouncedSearch() {
     showSearchResults.value = true;
@@ -89,7 +92,8 @@ async function search() {
     });
 }
 
-function redirect(user : UserState) {
+function redirect(user : OtherUserState) {
+    cachedUser.cache.set(user.id, user);
     showSearchResults.value = false;
     inputRef.value!.blur();
     query.value = '';
