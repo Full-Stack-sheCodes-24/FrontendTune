@@ -81,8 +81,7 @@ img.pause-animation {
     font-family: "max aura";
     font-weight: 400;
     font-style: normal;
-    font-size: 2em; /* Optional: Adjust size for better readability */
-    line-height: 1.2; /* Optional: Improve spacing for multiline text */
     white-space: pre-wrap;
     overflow-wrap: break-word; 
+    font-size: 35px;
 }
