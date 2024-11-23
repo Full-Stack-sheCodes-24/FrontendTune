@@ -1,0 +1,39 @@
+/* Button styles */
+.btn-nav {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--text-color);
+  }
+  
+  .btn-nav i {
+    font-size: var(--nav-bar-icon-size);
+  }
+  
+  .btn-nav:hover {
+    color: var(--primary-color);
+  }
+  
+  /* Pop-out notification styles */
+  .popout-notification {
+    position: fixed;
+    top: 70px; /* Adjust to position the pop-out correctly */
+    right: 320px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    width: auto;
+    max-width: 300px;
+  }
+  
+  .popout-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  

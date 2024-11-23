@@ -17,10 +17,7 @@
                     <p class ="btn-title">Home</p>
                 </button>
                 <!-- Notifications Button -->
-                <button v-if="userStateStore.isLoggedIn" class="btn-nav">
-                    <i class="material-symbols-outlined">notifications</i>
-                    <p class ="btn-title">Notifications</p>
-                </button>
+                <Notifications v-if="userStateStore.isLoggedIn"></Notifications>
                 <!-- About Us Button -->
                 <button class="btn-nav" @click="redirectToAboutUs">
                     <i class="material-symbols-outlined">group</i>
@@ -55,6 +52,7 @@
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import SearchForUser from '../SearchForUser/SearchForUser.vue';
 import Logout from '../../components/Logout/Logout.vue';
+import Notifications from '../../components/Notifications/Notifications.vue';
 import { useRouter } from 'vue-router';
 import { nextTick, ref } from 'vue'
 
