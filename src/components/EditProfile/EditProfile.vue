@@ -6,8 +6,9 @@
       <button @click="closeModal" class="material-symbols-outlined close-button">close</button>
       <h1>Edit Profile</h1>
       <h4>Profile Picture</h4>
-
-      <img class="edit-profile-picture" :src="newProfilePicUrl">
+      <div class="edit-profile-picture-wrapper">
+        <img class="edit-profile-picture" :src="newProfilePicUrl">
+      </div>
       <br>
       <AddImage @fileSelected="handleFileSelected"/>
 
