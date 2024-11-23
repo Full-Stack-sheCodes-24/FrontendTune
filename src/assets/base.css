@@ -19,6 +19,11 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: 'max aura';
+  src: url('@/assets/MaxAura-Regular.woff');
+}
+
 body {
   min-height: 100%;
   color: var(--text-color);
