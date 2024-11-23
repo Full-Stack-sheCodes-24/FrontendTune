@@ -35,6 +35,14 @@
         .profile-info h1 {
             margin-left: 10px ;
         }
+
+        .profile-info span {
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            align-items: center;
+            gap: 10px;
+        }
     }
 
     .btn-container {

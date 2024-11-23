@@ -8,7 +8,10 @@
           :alt="profilePicAltText">
       </div>
       <div class ="profile-info">
-          <h1 v-text="name"></h1>
+          <span>
+            <h1 v-text="name"></h1>
+            <i v-if="isPrivate" class="material-symbols-outlined">lock</i>
+          </span>
           <p v-text="bioTextWithDefault"></p>
           <p v-if="formattedBirthday" v-text="`Born ${formattedBirthday}`"></p>
           <p>{{ following }} <strong>Following</strong>&emsp;{{ followersCount }} <strong>Followers</strong></p>
