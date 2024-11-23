@@ -2,16 +2,17 @@
 <template>
     <div class="entry-container card" :id="id">
         <div class="entry-content">
-        <pre class= "output-text" v-text="entry.text"></pre>
         <div class="track-info">
-            <p class="track-name">{{ entry.track.name }}</p>
+            
             <div 
                 v-if="entry.track.preview_url" 
                 class="favicon-container" 
                 @click="togglePlayback">
                 <img src="/favicon.ico" alt="Play Icon" class="favicon-icon" />
             </div>
+            <p class="track-name">{{ entry.track.name }}</p>
         </div>
+        <pre class= "output-text" v-text="entry.text"></pre>
         <AudioPlayer
             class="music-play"
             :src="entry.track.preview_url || undefined"
@@ -27,7 +28,7 @@
                 />
             </template>
         </AudioPlayer>
-        <p>{{ dateFormat(entry.date) }}</p>
+        <div class="date-text"><p>{{ dateFormat(entry.date) }}</p></div>
 
         </div>
         <!-- Trash button -->

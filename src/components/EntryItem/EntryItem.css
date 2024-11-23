@@ -1,4 +1,6 @@
+@import url('https://fonta.vercel.app/api/host/7999578d-11de-4a4d-88bb-33d5fd87b4ab');
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
 
 .entry-container {
   position: relative; /* Allow positioning of child elements relative to this container */
@@ -12,7 +14,7 @@
 }
 
 .entry-content {
-  width: 80%;
+  width: 90%;
   max-width: 800px;
   flex-grow: 1; /* Allow content to take up available space */
 }
@@ -54,11 +56,10 @@ img.pause-animation {
 }
 
 .music-play {
-    position: absolute;
-    bottom: 25px;        
-    right: 5%; 
+    position: absolute;   
+    top:-9px;
+    right: 5%;
     border-radius: 8px;
-    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,15 +70,18 @@ img.pause-animation {
     align-items: center;
     gap: 10px;
     margin: 5px 0;
+    font-size: 1.5em;
 }
 
 .output-text {
   color: var(--text-color);
-  font-family: "Indie Flower", cursive;
+  font-family: 'max aura', sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 2em; /* Optional: Adjust size for better readability */
+  font-size: 1.6em; /* Optional: Adjust size for better readability */
   line-height: 1.2; /* Optional: Improve spacing for multiline text */
+  margin-top: 10px;
+  margin-bottom: 10px;
   white-space: pre-wrap;
   overflow-wrap: break-word; 
 }
@@ -163,6 +167,9 @@ img.pause-animation {
   background-color: #c0392b; /* Darker blue on hover */
 }
 
+.date-text {
+  font-size: 0.9em;
+}
 .delete-content{
   background: var(--background-color);
   padding: 20px;
