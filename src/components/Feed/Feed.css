@@ -8,6 +8,7 @@
         top: calc(var(--nav-bar-height) + 32px);
         align-self: start; 
         height: auto;
+        z-index: 1;
     }
 
     .right-column {
