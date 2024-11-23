@@ -1,6 +1,6 @@
 .home-container {
     display: grid;
-    grid-template-columns: auto 2fr;
+    grid-template-columns: 2fr auto;
     gap: 20px;
 
     .left-column {
