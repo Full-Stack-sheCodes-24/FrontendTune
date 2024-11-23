@@ -4,6 +4,9 @@
         <div class="left-column">
             <div class="entries-container">
                 <CreateEntry/>
+                <div v-if="loading" class="refreshing-container card">
+                    <p>Refreshing feed...</p>
+                </div>
                 <FeedEntry v-for="entry in getFeedWithDate"
                     :key="entry.date.getTime()"
                     :entry="entry">

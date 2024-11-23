@@ -33,6 +33,12 @@
         }
     }
 }
+.refreshing-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+}
 
 .loading-spinner {
     position: fixed;
