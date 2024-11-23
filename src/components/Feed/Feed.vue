@@ -25,6 +25,15 @@
                 :following="userState.following?.length"
                 :followers="userState.followers?.length">
             </ProfileSection>
+            <div class="card">
+                <h2>Following</h2>
+            </div>
+            <ContactCard v-for="contact in contacts" :key="contact.id"
+                :id="contact.id"
+                :profile-pic-url="contact.profilePicUrl"
+                :name="contact.name"
+                :bio-text="contact.bioText">
+            </ContactCard>
         </div>
     </div>
 </template>
@@ -40,18 +49,25 @@ import { useFeedStore } from './FeedStore';
 import LoadingSpinner from '@/Shared/LoadingSpinner/LoadingSpinner.vue';
 import { useToastStore } from '@/Shared/Toast/ToastStore';
 import { ToastType } from '@/Shared/Toast/Toast';
+import { UserGetClient } from '@/Shared/Clients/UserGetClient';
+import ContactCard from '../ContactCard/ContactCard.vue';
+import type { Contact } from '@/Shared/Models/Contact';
+import { useCachedUserStore } from '@/Shared/CachedUserStore';
+import type { OtherUserState } from '@/Shared/Models/OtherUserState';
 
 const userState = useUserStateStore();
 const feedStore = useFeedStore();
+const cachedUser = useCachedUserStore();
 const toast = useToastStore();
 // use entries from getter instead so that date is a date object
 const { getFeedWithDate } = storeToRefs(feedStore);
 const loading = ref(true);
+const contacts = ref<Contact[]>([]);
 
 onMounted(async () => {
     const client = new UserGetFeedClient();
     // Get feed
-    await client.execute().then(response => {
+    client.execute().then(response => {
         feedStore.feed = response;
     }).catch(error => {
         console.log(error);
@@ -59,5 +75,30 @@ onMounted(async () => {
     }).finally(() => {
         loading.value = false;
     });
+
+    // Get contacts and get/set cache
+    const getClient = new UserGetClient();
+    for (const id of userState.following) {
+        if (cachedUser.cache.has(id)) {
+            const user = cachedUser.cache.get(id) as OtherUserState;
+            addContact(user);
+        } else {
+            getClient.execute(id).then(response => {
+                addContact(response);
+                cachedUser.cache.set(response.id, response);
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    }
 });
+
+function addContact(user : OtherUserState) {
+    contacts.value.push({
+        id: user.id,
+        profilePicUrl: user.profilePicUrl,
+        name: user.name,
+        bioText: user.bioText
+    });
+}
 </script>

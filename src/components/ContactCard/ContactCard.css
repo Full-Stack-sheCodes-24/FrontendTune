@@ -1,0 +1,20 @@
+.entry-container {
+    position: relative; /* Allow positioning of child elements relative to this container */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .profile-picture {
+        height: 60px;
+        width: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        line-height: 1;
+    }
+}

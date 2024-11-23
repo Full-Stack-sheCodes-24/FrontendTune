@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import type { Entry } from '@/Shared/Models/Entry';
-import { computed, ref, watchEffect } from 'vue';
+import { computed } from 'vue';
 
 const fallbackImg = 'https://spiralcute.com/characters/img/characters/thumb_chiikawa.jpg';
 
@@ -44,10 +44,6 @@ const firstEntry = computed(() => props.entriesByDay[props.entriesByDay.length -
 const highlighted = new Map();
 
 const emit = defineEmits(['toggleEntries']);
-
-watchEffect(() => {
-    console.log("Entries in CalenderItem.vue:", props.entriesByDay); // Debug: Check received entries
-});
 
 const goToEntry = (entry: Entry) => {
     if (entry != undefined) {

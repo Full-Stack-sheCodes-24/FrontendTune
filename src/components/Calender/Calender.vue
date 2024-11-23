@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import CalenderItem from './CalenderItem.vue';
 import type { Entry } from '@/Shared/Models/Entry';
 
@@ -40,10 +40,6 @@ const props = defineProps<{
 
 
 const openDay = ref();
-
-watchEffect(() => {
-    console.log("Entries in Calender.vue:", props.entries); // Debug: Check received entries
-});
 
 //Finds the first entry that has a date equals the day and passes it to CalenderItem
 const getEntryForDay = (day: number): Entry[] => {

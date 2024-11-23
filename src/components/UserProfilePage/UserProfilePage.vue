@@ -32,8 +32,11 @@ import Calender from '@/components/Calender/Calender.vue';
 import type { Entry } from '@/Shared/Models/Entry';
 import { UserGetClient } from '@/Shared/Clients/UserGetClient';
 import { useRoute } from 'vue-router';
+import { useCachedUserStore } from '@/Shared/CachedUserStore';
+import type { OtherUserState } from '@/Shared/Models/OtherUserState';
 
 const route = useRoute();
+const cachedUser = useCachedUserStore();
 
 const profilePicUrl = ref();
 const name = ref();
@@ -47,43 +50,52 @@ const userId = ref();
 
 watch(() => route.params.userId, (newUserId) => {
     userId.value = newUserId;
-    refreshUserState(newUserId.toString());
-    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
+    if (cachedUser.cache.has(userId.value)) {
+        const user = cachedUser.cache.get(userId.value) as OtherUserState;
+        setUserState(user);
+    } else {
+        refreshUserState(userId.value);
+    }
 });
 
 onMounted(async () => {
     // Get userId from url. Ex: moodz.com/users/ajsdlifjasifj
     userId.value = route.params.userId.toString();
-
-    refreshUserState(userId.value);
-    console.log("Entries in Calender.vue:", entries); // Debug: Check received entrie
-
-
+    if (cachedUser.cache.has(userId.value)) {
+        const user = cachedUser.cache.get(userId.value) as OtherUserState;
+        setUserState(user);
+    } else {
+        refreshUserState(userId.value);
+    }
 });
 
 async function refreshUserState(userId : string) {
     const client = new UserGetClient();
     await client.execute(userId).then(response => {
-        profilePicUrl.value = response.profilePicUrl;
-        name.value = response.name;
-        following.value = response.following;
-        followers.value = response.followers;
-        if (response.isPrivate) {
+        setUserState(response);
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
+function setUserState(user : OtherUserState) {
+    profilePicUrl.value = user.profilePicUrl;
+        name.value = user.name;
+        following.value = user.following;
+        followers.value = user.followers;
+        if (user.isPrivate) {
             isPrivate.value = true;
             bioText.value = 'This user has their profile privated.';
             birthday.value = null;
             entries.value = [] as Entry[];
             return;
         }
-        bioText.value = response.bioText;
-        birthday.value = new Date(response.birthday);
-        for(let i = 0; i < response.entries.length; i++){
-            response.entries[i].date = new Date(response.entries[i].date)
+        bioText.value = user.bioText;
+        birthday.value = new Date(user.birthday);
+        for(let i = 0; i < user.entries.length; i++){
+            user.entries[i].date = new Date(user.entries[i].date)
         }
-        entries.value = response.entries;
-        response.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
-    }).catch(error => {
-        console.log(error);
-    });
+        entries.value = user.entries;
+        user.entries.sort((a, b) => b.date.getTime() - a.date.getTime());
 }
 </script>
