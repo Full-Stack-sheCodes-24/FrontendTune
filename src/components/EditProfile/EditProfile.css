@@ -78,11 +78,21 @@
     background-color: var(--primary-color);
 }
 
+.edit-profile-picture-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%; 
+    overflow: hidden; 
+    display: flex; 
+    margin-top: 10px;
+    align-self: center; 
+    justify-self: center; 
+}
+
 .edit-profile-picture {
     width: 100px;
     height: 100px;
-    border-radius: 50%; /* Makes the picture circular */
-    margin-left: 0px;
+    object-fit: cover;
 }
 
 /* This is for if anyone wants to make the click on profile picture to add image,
