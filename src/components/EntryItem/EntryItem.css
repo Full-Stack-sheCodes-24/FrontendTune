@@ -25,6 +25,7 @@
   left: 50%;
   border-radius: 50%;
   animation: rotation 6s infinite linear;
+  user-select: none;
 }
 
 img.pause-animation {

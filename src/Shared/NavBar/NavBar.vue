@@ -11,19 +11,25 @@
                 <SearchForUser @darken="handleDarken" @lighten="handleLighten" />
              </div>
              <div class="btn-container">
-                <button v-if="userStateStore.isLoggedIn" class="btn-nav">
-                    <i class="material-symbols-outlined">notifications</i>
-                    <p class ="btn-title">Notifications</p>
-                </button>
                 <!-- Home Button -->
                 <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click ="redirectToHome">
                     <i class="material-symbols-outlined">home</i>
                     <p class ="btn-title">Home</p>
                 </button>
+                <!-- Notifications Button -->
+                <button v-if="userStateStore.isLoggedIn" class="btn-nav">
+                    <i class="material-symbols-outlined">notifications</i>
+                    <p class ="btn-title">Notifications</p>
+                </button>
                 <!-- About Us Button -->
                 <button class="btn-nav" @click="redirectToAboutUs">
                     <i class="material-symbols-outlined">group</i>
                     <p class ="btn-title">About</p>
+                </button>
+                <!-- Profile Button -->
+                <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click ="redirectToProfile">
+                    <i class="material-symbols-outlined">person</i>
+                    <p class ="btn-title">Profile</p>
                 </button>
                 <!-- Settings Button -->
                 <button v-if="userStateStore.isLoggedIn" class="btn-nav" @click="redirectToSettings">
@@ -79,12 +85,17 @@ function redirectToLogin() {
 }
 
 function redirectToHome() {
-    router.push({ name: "Home" });
+    router.push({ name: "Feed" });
+}
+
+function redirectToProfile() {
+    router.push({ name: "Profile" });
 }
 
 function redirectToAboutUs(){
     router.push({ name: "About" });
 }
+
 function redirectToSettings(){
     router.push({ name: "Settings" });
 }

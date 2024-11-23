@@ -1,11 +1,17 @@
 <style scoped src="./Calender.css"></style>
 <template>
     <div class="calender-item-wrapper">
-    <div class="calender-item card clickable" :class="{ 'highlight': showEntries }" @click="showEntriesForDay()">
-        <p class="days-on-calendar">{{ currentDay }}</p>   
-        <div v-if="firstEntry != undefined"> 
-            <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"
-            :alt="`Album cover image for ${currentMonth} ${currentDay}th`"/>
+        <div class="calender-item card clickable" :class="{ 'highlight': showEntries }" @click="showEntriesForDay()">
+            <p class="days-on-calendar">{{ currentDay }}</p>   
+            <div v-if="firstEntry != undefined"> 
+                <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"
+                :alt="`Album cover image for ${currentMonth} ${currentDay}th`"/>
+            </div>
+        </div>
+
+        <div v-if="firstEntry != undefined" class="expanded-calendar-item card">
+            <p class="days-on-calendar">{{ currentDay }}</p>  
+            <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"/>
         </div>
     </div>
 
@@ -24,12 +30,11 @@
             </div>
         </div>
     </div>
-    </div>
 </template>
 
 <script setup lang="ts">
 import type { Entry } from '@/Shared/Models/Entry';
-import { computed, ref, watchEffect } from 'vue';
+import { computed } from 'vue';
 
 const fallbackImg = 'https://spiralcute.com/characters/img/characters/thumb_chiikawa.jpg';
 
@@ -44,10 +49,6 @@ const firstEntry = computed(() => props.entriesByDay[props.entriesByDay.length -
 const highlighted = new Map();
 
 const emit = defineEmits(['toggleEntries']);
-
-watchEffect(() => {
-    console.log("Entries in CalenderItem.vue:", props.entriesByDay); // Debug: Check received entries
-});
 
 const goToEntry = (entry: Entry) => {
     if (entry != undefined) {

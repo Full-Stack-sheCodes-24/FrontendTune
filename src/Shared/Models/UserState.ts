@@ -1,4 +1,5 @@
 import type { Entry } from './Entry'
+import type { FeedEntry } from './FeedEntry';
 import type { FollowRequest } from './FollowRequest';
 
 export interface UserState {
