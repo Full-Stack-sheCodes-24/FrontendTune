@@ -1,11 +1,17 @@
 <style scoped src="./Calender.css"></style>
 <template>
     <div class="calender-item-wrapper">
-    <div class="calender-item card clickable" :class="{ 'highlight': showEntries }" @click="showEntriesForDay()">
-        <p class="days-on-calendar">{{ currentDay }}</p>   
-        <div v-if="firstEntry != undefined"> 
-            <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"
-            :alt="`Album cover image for ${currentMonth} ${currentDay}th`"/>
+        <div class="calender-item card clickable" :class="{ 'highlight': showEntries }" @click="showEntriesForDay()">
+            <p class="days-on-calendar">{{ currentDay }}</p>   
+            <div v-if="firstEntry != undefined"> 
+                <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"
+                :alt="`Album cover image for ${currentMonth} ${currentDay}th`"/>
+            </div>
+        </div>
+
+        <div v-if="firstEntry != undefined" class="expanded-calendar-item card">
+            <p class="days-on-calendar">{{ currentDay }}</p>  
+            <img :src="firstEntry?.track?.albumImageUrl || fallbackImg"/>
         </div>
     </div>
 
@@ -23,7 +29,6 @@
                 <p class="entry-time" v-text="entry.date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })"></p>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
