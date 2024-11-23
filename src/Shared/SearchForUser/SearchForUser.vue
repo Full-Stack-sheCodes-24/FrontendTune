@@ -1,7 +1,7 @@
 <style scoped>@import'./SearchForUser.css';</style>
 <template>
     <div ref="searchUserDiv" class="search-for-user-container">
-        <i class="material-symbols-outlined">search</i>
+        <i class="material-symbols-outlined search-icon">search</i>
         <input
             ref="inputRef"
             v-model="query"
@@ -17,10 +17,14 @@
             <div class="search-result-item-container clickable"
                 v-if="query.length !== 0"
                 v-for="result in searchResults"
+                :key="result.id"
                 @click="redirect(result)"
                 @mousedown.prevent>
                 <img class="profile-pic" :src="result.profilePicUrl"></img>
-                <p>{{result.name}}</p>
+                <span>
+                    <p>{{result.name}}</p>
+                    <i v-if="result.isPrivate" class="material-symbols-outlined">lock</i>
+                </span>
             </div>
             <p v-if="query.length !==0 && noSearchResults">No search results</p>
             <p v-if="query.length === 0">Find a friend by searching for their name</p>
@@ -31,7 +35,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { UserSearchClient } from '../Clients/UserSearchClient';
-import type { UserState } from '../Models/UserState';
 import { useRouter } from 'vue-router';
 import { useUserStateStore } from '../UserStateStore';
 import type { OtherUserState } from '../Models/OtherUserState';
