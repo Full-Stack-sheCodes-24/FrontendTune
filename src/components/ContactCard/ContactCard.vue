@@ -1,6 +1,6 @@
 <style scoped src="./ContactCard.css"></style>
 <template>
-    <div class="entry-container card clickable" @click="redirectToUserProfile">
+    <div class="entry-container" @click="redirectToUserProfile">
         <img class="profile-picture"
             :src="profilePicUrl"
             :alt="`Profile picture for ${name}`"

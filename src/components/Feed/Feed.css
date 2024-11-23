@@ -32,6 +32,7 @@
         }
     }
 }
+
 .refreshing-container {
     display: flex;
     flex-direction: row;
@@ -53,6 +54,10 @@
 .contact-list {
     max-height: 40vh;
     overflow-y: auto;
+    background-color: var(--background-color);
+    margin-top: 20px;
+    padding: 0;
+    padding-top: 10px;
 }
 
 .contact-list div {

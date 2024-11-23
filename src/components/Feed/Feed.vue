@@ -27,10 +27,8 @@
                 :following="userState.following?.length"
                 :followers="userState.followers?.length">
             </ProfileSection>
-            <div class="card title">
+            <div class="contact-list card">
                 <h2>Following</h2>
-            </div>
-            <div class="contact-list">
                 <ContactCard class="contact-item" v-for="contact in contacts" :key="contact.id"
                     :id="contact.id"
                     :profile-pic-url="contact.profilePicUrl"

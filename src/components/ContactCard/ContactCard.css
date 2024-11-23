@@ -3,6 +3,9 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    background-color: var(--background-color);
+    cursor: pointer;
+    border-radius: 4px;
 
     .profile-picture {
         height: 60px;
@@ -17,4 +20,9 @@
         gap: 4px;
         line-height: 1;
     }
+}
+
+.entry-container:hover {
+    background-color: var(--quaternary-color);
+    transition: all 0.3s;
 }
