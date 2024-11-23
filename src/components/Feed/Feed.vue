@@ -21,7 +21,7 @@
                 </FeedEntry>
                 <div class="no-friends card" v-if="!loading && getFeedWithDate.length === 0">
                     <h2>Uh Oh! You're not following anyone yet!</h2>
-                    <p>Search for your friends and follow them to see them here.</p>
+                    <p>Search for your friends and follow them to see their posts here.</p>
                 </div>
             </div>
             <LoadingSpinner v-if="loading"></LoadingSpinner>
