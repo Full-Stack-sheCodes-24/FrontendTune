@@ -13,6 +13,7 @@ import { markRaw } from 'vue'
 import AboutUs from './components/AboutUs/AboutUs.vue';
 import { useUserStateStore } from './Shared/UserStateStore';
 import Feed from './components/Feed/Feed.vue';
+import Notifications from './components/Notifications/Notifications.vue';
 
 const routes = [
   { path: '/user/:userId', name: 'User', component: UserProfilePage },
@@ -25,7 +26,8 @@ const routes = [
   { path: '/logout', name: 'Logout', component: Logout },
   { path: '/settings', name: 'Settings', component: Settings },
   { path: '/callback', name: 'Callback', component: SpotifyCallback },
-  { path: '/about', name: 'About', component: AboutUs }
+  { path: '/about', name: 'About', component: AboutUs },
+  { path: '/notifs', name: 'Notifications', component: Notifications}
 ];
 
 const router = createRouter({
