@@ -48,7 +48,7 @@
 }
 
 .contact-list {
-    max-height: calc(5 * 45px);
+    max-height: calc(5 * 60px);
     overflow-y: auto;
 }
 
