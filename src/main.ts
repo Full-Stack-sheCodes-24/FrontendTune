@@ -72,6 +72,6 @@ watch(pinia.state, state => {
 
 // If cached login exists, refresh user state in the case that user logged in elsewhere and updated info
 const cache = localStorage.getItem('user_state')
-if(cache != null) {
+if(cache != null && JSON.parse(cache).id != null) {
   useUserStateStore().refreshUserState();
 }

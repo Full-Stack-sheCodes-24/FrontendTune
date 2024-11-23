@@ -30,7 +30,7 @@ onBeforeMount(async () => {
             userStateStore.updateExpiryDate();
             userStateStore.updateTheme();
             // Redirect home
-            router.push({ name: 'Home' });
+            router.push({ name: 'Feed' });
         }).catch(error => {
             // If error, reroute to login page and print error to console
             console.log(error);
