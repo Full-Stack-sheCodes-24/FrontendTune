@@ -30,12 +30,14 @@
             <div class="card">
                 <h2>Following</h2>
             </div>
-            <ContactCard v-for="contact in contacts" :key="contact.id"
-                :id="contact.id"
-                :profile-pic-url="contact.profilePicUrl"
-                :name="contact.name"
-                :bio-text="contact.bioText">
-            </ContactCard>
+            <div class="contact-list">
+                <ContactCard class="contact-item" v-for="contact in contacts" :key="contact.id"
+                    :id="contact.id"
+                    :profile-pic-url="contact.profilePicUrl"
+                    :name="contact.name"
+                    :bio-text="contact.bioText">
+                </ContactCard>
+            </div>
         </div>
     </div>
 </template>

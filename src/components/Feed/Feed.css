@@ -46,3 +46,21 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.contact-list {
+    max-height: calc(5 * 45px);
+    overflow-y: auto;
+}
+
+.contact-list div {
+    padding: 10px;
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.contact-item {
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    cursor: pointer;
+    background-color: var(--background-color);
+}
