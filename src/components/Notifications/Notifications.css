@@ -1,20 +1,16 @@
-/* Button styles */
 .btn-nav {
     border: none;
     background-color: transparent;
     cursor: pointer;
     border-radius: 50%;
     color: var(--text-color);
-  }
-  
-  .btn-nav i {
-    font-size: var(--nav-bar-icon-size);
-  }
-  
-  .btn-nav:hover {
-    color: var(--primary-color);
-  }
-  
+    i {
+        font-size: var(--nav-bar-icon-size);
+    }
+}
+.btn-nav:hover {
+    color:var(--primary-color);
+}
   /* Pop-out notification styles */
   .popout-notification {
     position: fixed;
