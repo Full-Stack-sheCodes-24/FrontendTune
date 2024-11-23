@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { useUserStateStore } from '../UserStateStore';
-
+import type { UpdateEntryClientRequest } from './UpdateEntryClientRequest';
 
 export class UpdateEntryClient { //reference how backend setup API, get userid from local storage
-    async execute(request: {date: Date})  {
+    async execute(request: UpdateEntryClientRequest)  {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
         const token = userState.auth.accessToken;
-        const date = request.date
 
         if (!token) {
             console.error("Token not found in user state");
@@ -21,7 +20,7 @@ export class UpdateEntryClient { //reference how backend setup API, get userid f
             }
         });
 
-        const response = await client.put(`/Users/entries/${date.toISOString()}`);
+        const response = await client.put(`/Users/entries`, request);
         return response.data;
     }
 }
