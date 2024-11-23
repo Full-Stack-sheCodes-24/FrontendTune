@@ -9,7 +9,7 @@
                     :alt="`Profile picture for ${entry.name}`"
                 />
                 <div class="profile-info">
-                    <h1 class="clickable" v-text="entry.name" @click="redirectToUserProfile"></h1>
+                    <h1 v-text="entry.name" @click="redirectToUserProfile"></h1>
                     <div class="track-info">
                         <p class="track-name">{{ entry.track.name }}</p>
                         <div 
