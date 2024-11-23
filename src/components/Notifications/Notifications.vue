@@ -3,11 +3,11 @@
     <button @click="toggleNotification" class="btn-nav">
       <i class="material-symbols-outlined">notifications</i>
       <p class="btn-title">Notifications</p>
+      <!-- Pop-out notification -->
+      <div :class="['popout-notification', { show: isNotificationVisible }]" @click.self="closeNotification">
+        <p>No new notifications</p>
+      </div>
     </button>
-    <!-- Pop-out notification -->
-    <div :class="['popout-notification', { show: isNotificationVisible }]" @click.self="closeNotification">
-      <p>No new notifications</p>
-    </div>
   </template>
   
   <script setup lang="ts">
