@@ -38,7 +38,6 @@
             </ContactCard>
         </div>
     </div>
-    <LoadingSpinner v-if="loading" class="loading-spinner"></LoadingSpinner>
 </template>
 <script setup lang="ts">
 import ProfileSection from '@/components/ProfileSection/ProfileSection.vue';
@@ -49,7 +48,6 @@ import FeedEntry from './FeedEntry/FeedEntry.vue';
 import { onMounted, ref } from 'vue';
 import { UserGetFeedClient } from '@/Shared/Clients/UserGetFeedClient';
 import { useFeedStore } from './FeedStore';
-import LoadingSpinner from '@/Shared/LoadingSpinner/LoadingSpinner.vue';
 import { useToastStore } from '@/Shared/Toast/ToastStore';
 import { ToastType } from '@/Shared/Toast/Toast';
 import { UserGetClient } from '@/Shared/Clients/UserGetClient';
