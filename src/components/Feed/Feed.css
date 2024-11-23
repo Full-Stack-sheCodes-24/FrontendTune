@@ -20,6 +20,10 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+
+            .no-friends {
+                text-align: center;
+            }
         }
     }
 }
