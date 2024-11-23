@@ -38,11 +38,11 @@
             }
         }
         .btn-nav:hover {
-            color:var(--secondary-color);
+            color:var(--primary-color);
         }
-        .btn-nav:hover:active{
+        /* .btn-nav:hover:active{
             color:var(--secondary-color);
-        }
+        } */
         .btn-container {
             display: flex;
             flex-direction: row;
