@@ -18,12 +18,12 @@ onBeforeMount(async () => {
     const code = route.query.code?.toString()!;
     const state = route.query.state?.toString()!;
     if (sessionStorage.getItem('spotify_state') === state) {
-        console.log(code);
+        //console.log(code);
         //send code to our backend
         const client = new SpotifyLoginClient();
         await client.execute({ authorizationCode: code }).then(response => {
 
-            console.log(response);
+            //console.log(response);
             
             // Save userState in pinia store to allow home page to update
             userStateStore.$patch(response!);

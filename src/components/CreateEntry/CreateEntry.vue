@@ -48,7 +48,7 @@ function updateSelectedTrack(newTrack : Track) {
 async function postEntry() {
   // Check if there's any content to post
   if (!entryText.value.trim()) {
-    console.log("Empty entry.");
+    //console.log("Empty entry.");
     return;
   }
 
@@ -63,7 +63,7 @@ async function postEntry() {
     //execute the client to send the entry data
     await createEntryClient.execute(newEntry);
     
-    console.log("Entry posted successfully");
+    //console.log("Entry posted successfully");
 
     userStateStore.entries.push(newEntry);  // Update the store to reflect the new entry
 

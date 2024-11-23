@@ -58,7 +58,7 @@ const submitForm = async () => {
     && newBioText.value == userStateStore.bioText
     && newBirthday.value == userStateStore.getBirthdayAsDate.toISOString().slice(0, 10)
   ) {
-    console.log("Nothing edited, not sending an API request")
+    //console.log("Nothing edited, not sending an API request")
     props.closeModal();
     return;
   }
@@ -78,7 +78,7 @@ const submitForm = async () => {
         birthday: new Date(newBirthday.value)
     })
 
-    console.log('Profile updated successfully:');
+    //console.log('Profile updated successfully:');
     props.closeModal();
   } catch (error) {
     console.error('Error updating profile:', error);

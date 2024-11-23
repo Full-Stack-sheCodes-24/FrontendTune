@@ -76,13 +76,13 @@ const goToEntry = (entry: Entry) => {
 
             highlighted.set(entry, [timer1, timer2]);
 
-            console.log("Scrolled to entry:", `entry-${new Date(entry.date).getTime()}`);
+            //console.log("Scrolled to entry:", `entry-${new Date(entry.date).getTime()}`);
         } else {
             console.warn("Element not found for entry ID:", `entry-${new Date(entry.date).getTime()}`);
         }
     }
     else {
-        console.log("No entries for this day");
+        //console.log("No entries for this day");
     }
 };
 
