@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useUserStateStore } from '../UserStateStore';
 
 
-export class DeleteEntryClient { //reference how backend setup API, get userid from local storage
+export class UpdateEntryClient { //reference how backend setup API, get userid from local storage
     async execute(request: {date: Date})  {
         const userState = useUserStateStore();
         await userState.checkAccessToken();
