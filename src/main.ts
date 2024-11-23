@@ -36,7 +36,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userState = useUserStateStore();
   // reroute logged-in-only pages
-  if (!userState.isLoggedIn && (to.name === 'Home' || to.name === 'Settings')) {
+  if (!userState.isLoggedIn && (to.name === 'Feed' || to.name === 'Settings' || to.name === 'Profile')) {
     next({ name: 'Login' });
   }
   // reroute logged-out-only pages
