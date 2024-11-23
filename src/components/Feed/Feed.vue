@@ -27,7 +27,7 @@
                 :following="userState.following?.length"
                 :followers="userState.followers?.length">
             </ProfileSection>
-            <div class="card">
+            <div class="card title">
                 <h2>Following</h2>
             </div>
             <div class="contact-list">

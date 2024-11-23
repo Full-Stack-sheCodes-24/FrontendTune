@@ -26,7 +26,6 @@
         height: auto;
         display: flex;
         flex-direction: column;
-        gap: 20px;
 
         h2 {
             text-align: center;
@@ -47,8 +46,12 @@
     transform: translate(-50%, -50%);
 }
 
+.title {
+    margin-top: 20px;
+}
+
 .contact-list {
-    max-height: calc(5 * 60px);
+    max-height: 40vh;
     overflow-y: auto;
 }
 
@@ -61,6 +64,4 @@
     text-overflow: ellipsis;
     overflow: hidden; 
     white-space: nowrap;
-    cursor: pointer;
-    background-color: var(--background-color);
 }
