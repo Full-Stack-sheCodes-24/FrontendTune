@@ -13,15 +13,12 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import { useToastStore } from '@/Shared/Toast/ToastStore';
-import { useUserStateStore } from '@/Shared/UserStateStore';
 import { ToastType } from '@/Shared/Toast/Toast';
 
 const route = useRoute();
-const router = useRouter();
-const userStateStore = useUserStateStore();
 const toastStore = useToastStore();
 
 onMounted(() => {
