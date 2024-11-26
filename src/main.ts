@@ -37,8 +37,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const userState = useUserStateStore();
+  // If route does not match any route
+  if (to.matched.length === 0) {
+    if (userState.isLoggedIn) {
+      next({ name: 'Feed' });
+    }
+    else {
+      next({ name: 'Login' });
+    }
+  }
   // If not logged in, reroute all pages to login except for pages that don't require login
-  if (!userState.isLoggedIn && (to.name !== 'User' && to.name !== 'Callback' && !to.path.includes('login') && to.name !== 'About')) {
+  else if (!userState.isLoggedIn && (to.name !== 'User' && to.name !== 'Callback' && !to.path.includes('login') && to.name !== 'About')) {
     next({ name: 'Login' });
   }
   // reroute logged-out-only pages
