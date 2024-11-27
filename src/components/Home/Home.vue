@@ -34,8 +34,10 @@ import Calender from '@/components/Calender/Calender.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import { DeleteEntryClient } from '@/Shared/Clients/DeleteEntryClient';
 import { storeToRefs } from 'pinia';
+import { useFeedStore } from '../Feed/FeedStore';
 
 const userStateStore = useUserStateStore();
+const feedStore = useFeedStore();
 //use entries from getter instead so that date is a date object
 const { getEntriesWithDate } = storeToRefs(userStateStore);
 
@@ -51,6 +53,9 @@ async function deleteEntry(date: Date) {
         });
         userStateStore.entries = updatedEntries;
         //console.log("Entry deleted successfully");
+
+        // Remove entry from feed
+        feedStore.feed = feedStore.getFeedWithDate.filter(entry => (entry.id != userStateStore.id && entry.date != date));
 
     } catch (error) {
         console.error("Failed to delete entry:", error);

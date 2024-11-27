@@ -24,8 +24,10 @@ import SpotifySearch from '@/components/SpotifySearch/SpotifySearch.vue';
 import { useUserStateStore } from '@/Shared/UserStateStore';
 import type { Entry } from '@/Shared/Models/Entry';
 import type { Track } from '@/Shared/Models/Track';
+import { useFeedStore } from '../Feed/FeedStore';
 
 const userStateStore = useUserStateStore();
+const feedStore = useFeedStore();
 const createEntryClient = new CreateEntryClient(); //initialize CreateEntryClient
 
 const isModalOpen = ref(false);
@@ -66,6 +68,17 @@ async function postEntry() {
     //console.log("Entry posted successfully");
 
     userStateStore.entries.push(newEntry);  // Update the store to reflect the new entry
+    
+    // Add entry to the top of the feed
+    feedStore.feed.push({
+      id: userStateStore.id,
+      profilePicUrl: userStateStore.profilePicUrl,
+      name: userStateStore.name,
+      text: newEntry.text,
+      track: newEntry.track,
+      likes: 0,
+      date: newEntry.date
+    });
 
     // Clear entry text and close the modal after successful submission
     entryText.value = '';

@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useFeedStore = defineStore('feedStore', {
     state: () => ({
-        feed: [] as FeedEntry[]
+        feed: <FeedEntry[]>[]
     }),
     getters: {
         getFeedWithDate: (state) => {
