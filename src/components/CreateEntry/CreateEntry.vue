@@ -70,7 +70,7 @@ async function postEntry() {
     userStateStore.entries.push(newEntry);  // Update the store to reflect the new entry
     
     // Add entry to the top of the feed
-    feedStore.feed.push({
+    feedStore.feed.unshift({
       id: userStateStore.id,
       profilePicUrl: userStateStore.profilePicUrl,
       name: userStateStore.name,
